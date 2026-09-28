@@ -3,27 +3,28 @@
 محاكاة إدارة دولة وبناء حضارة — **إنتاج MGN STUDIO**.
 
 لعبة أندرويد (Flutter) تعمل **بلا إنترنت بالكامل**: لا سيرفر، لا صلاحيات شبكة،
-تخزين محلي فقط. الرسومات كلها مكتوبة كـ كود (SVG / CustomPainter) بلا أي ملفات
-صور خارجية.
+تخزين محلي فقط. الرسومات مكتوبة كـ كود بلا أي ملفات صور خارجية.
+
+> الأجهزة المستهدفة: **Android 15+ فقط (minSdk 35)**. لا دعم للإصدارات الأقدم.
 
 ---
 
-## حالة التنفيذ
+## Current Status (v0.2.0)
 
 | المرحلة | المحتوى | الحالة |
 |---|---|---|
-| 1 | إعداد المشروع + كل الـ Models + Hive | ✅ مكتملة |
-| 2 | Economy Calculator + Event Engine + Diplomacy Engine + Turn Engine | ✅ مكتملة |
-| 3 | مكتبة SVG (أيقونات، أعلام، معالم) + Painters | ⏳ الألوان والخطوط فقط |
-| 4 | كتابة كل المحتوى (أحداث، معالم، دول، إنجازات) | ✅ مكتملة |
-| 5 | شاشات اللعبة (Dashboard، Decision، Diplomacy، Landmarks، Sectors) | ⏳ شاشة مؤقتة تشغّل الحلقة كاملة |
-| 6 | شاشة إعداد الدولة + Settings | ⏳ لم تبدأ |
-| 7 | حفظ/تحميل + ضبط توازن | ✅ الحفظ يعمل • ✅ تمرير توازن أول |
-| 8 | تلميع وانيميشن | ⏳ لم تبدأ |
-| 9 | تجهيز نشر Google Play | ⏳ لم تبدأ |
+| 1 | Models + Hive | ✅ مكتملة |
+| 2 | Economy + Event + Diplomacy + Turn engines | ✅ مكتملة |
+| 3 | Theme (ألوان/خطوط) | ✅ أساسي يعمل (SVG/Painters لاحقًا) |
+| 4 | المحتوى (68 حدث، 15 معلم، 10 دول، 18 إنجاز) | ✅ مكتملة |
+| 5 | شاشات اللعبة | ✅ مكتملة وظيفيًا: الرئيسية، القرارات، القطاعات، الدبلوماسية، المعالم |
+| 6 | إعداد الدولة + Settings | ✅ مكتملة |
+| 7 | حفظ/تحميل + توازن | ✅ حفظ متين + 25 اختبارًا + محاكاة 120 دورًا |
+| 8 | تلميع وانيميشن | ⏳ أساسي فقط (الأولوية للوظيفة) |
+| 9 | نشر Google Play | ⏳ لاحقًا (التوقيع الإنتاجي عند الحاجة) |
 
-طبقة المنطق (Models + Engine) **مكتملة ومُختبَرة** قبل بناء الشاشات، كما ينص
-مستند التصميم.
+اللعبة **قابلة للعب فعليًا**: تأسيس دولة ← دور ← قرارات ← قطاعات ←
+دبلوماسية ← معالم ← تقارير سنوية ← استفتاء ← نصر/انهيار/استمرار.
 
 ---
 
@@ -31,43 +32,35 @@
 
 ```
 lib/
-  main.dart                    # نقطة البداية: Hive + Riverpod + RTL
-  models/                      # GameState, GameEvent, Landmark, DiplomacyState, ...
-  engine/
-    balance_config.dart        # كل أرقام التوازن في مكان واحد — لا أرقام سحرية في أي ملف آخر
-    economy_calculator.dart    # الدخل/المصروفات، النمو، المجتمع، السكان
-    event_engine.dart          # اختيار الأحداث (weighted + cooldown + أولوية الأزمات)
-    diplomacy_engine.dart      # العلاقات، المعاهدات، العقوبات، الحروب
-    construction_engine.dart   # بناء المعالم
-    turn_engine.dart           # تنسيق الدور الواحد بترتيب ثابت
-  data/                        # كل المحتوى: أحداث، معالم، دول، إنجازات
-  storage/hive_boxes.dart      # تخزين محلي (Hive، خرائط بسيطة بلا code-gen)
-  graphics/theme/              # palette.dart + typography.dart (هوية MGN)
-  state/game_provider.dart     # Riverpod: الواجهة الوحيدة بين الشاشات والمحركات
-  screens/boot_screen.dart     # شاشة مؤقتة تشغّل الحلقة كاملة
-test/                          # 22 اختبارًا: منطق + محتوى + توازن + حفظ
-tool/balance_sim.dart          # أداة محاكاة لضبط التوازن
+  main.dart                    # Hive + Riverpod + RTL → AppShell
+  models/                      # GameState (+isCollapsed/hasWon), GameEvent, Landmark, ...
+  engine/                      # balance_config, economy, event, diplomacy, construction, turn
+  data/                        # أحداث، معالم، دول، إنجازات
+  storage/hive_boxes.dart      # تخزين محلي متين (معالجة save فاسد + history محدود 400)
+  graphics/theme/              # palette + typography (هوية MGN)
+  state/game_provider.dart     # الواجهة الوحيدة بين الشاشات والمحركات
+  screens/
+    app_shell.dart             # تبويب سفلي: رئيسية/قرارات/قطاعات/دبلوماسية/معالم/المزيد
+    setup_screen.dart          # تأسيس الدولة (اسم، لقب، طول الدور، راية، توجهات)
+    dashboard_screen.dart      # نظرة عامة + الدور القادم + التقارير + المؤشرات
+    decision_screen.dart       # القرارات المعلقة + استبدال بالجواهر
+    sectors_screen.dart        # ضرائب/عسكر/دعم + استثمار + قروض
+    diplomacy_screen.dart      # علاقات + معاهدات + حرب + مواقف
+    landmarks_screen.dart      # كتالوج + قيد البناء + تسريع بالجواهر
+    settings_screen.dart       # إعدادات + إنجازات + سجل + حذف الحفظ
+  widgets/common.dart          # Panel/IndicatorBar/StatChip مشتركة
+test/                          # 25 اختبارًا
+tool/balance_sim.dart          # محاكاة التوازن
+.github/workflows/android-build.yml  # بناء APK على GitHub
 ```
 
-### قواعد ثابتة في الكود
+### قواعد ثابتة
 
-- **كل رقم توازن** في `engine/balance_config.dart` فقط. أي تعديل توازن = تغيير رقم واحد.
-- **صفر ملفات صور** (PNG/JPG). كل رسم = كود.
-- **صفر شبكة**: الـ release manifest يحذف صلاحية `INTERNET` صراحةً عبر `tools:node="remove"`.
-- الحفظ بخرائط عادية (بلا `build_runner`)، فتغيير المحتوى لا يُفسد حفظًا قديمًا.
-
----
-
-## المحتوى الجاهز
-
-| العنصر | العدد |
-|---|---|
-| أحداث كلاسيكية | 29 |
-| أحداث عصر حديث | 29 |
-| أحداث أزمات كبرى | 10 |
-| معالم قابلة للبناء | 15 (7 ثقافية + 8 حديثة) |
-| دول AI | 10 |
-| إنجازات | 18 |
+- كل رقم توازن في `engine/balance_config.dart` فقط.
+- صفر ملفات صور (PNG/JPG).
+- صفر شبكة: الـ release manifest يحذف `INTERNET` عبر `tools:node="remove"`.
+- الحفظ بخرائط عادية بلا `build_runner`.
+- `minSdk = 35` صريح، Java 17، Flutter stable حديث.
 
 ---
 
@@ -75,18 +68,47 @@ tool/balance_sim.dart          # أداة محاكاة لضبط التوازن
 
 ```bash
 flutter pub get
-flutter run                       # تشغيل التطبيق
-flutter test                      # 22 اختبارًا
-dart run tool/balance_sim.dart 120 42   # محاكاة 120 دورًا لمراجعة التوازن
+flutter run
+flutter test                      # 25 اختبارًا
+flutter analyze
+dart run tool/balance_sim.dart 120 42
 ```
+
+## بناء APK
+
+```bash
+flutter build apk --release
+# build/app/outputs/flutter-apk/app-release.apk
+```
+
+**البناء الرسمي يتم على GitHub Actions** (انظر أدناه). لا يُبنى APK محليًا
+ثم يُرفع — GitHub نفسه هو بيئة البناء.
+
+## GitHub Actions
+
+- الملف: `.github/workflows/android-build.yml`
+- Runner: `ubuntu-latest` (GitHub-hosted)
+- Flutter: `3.47.5` stable — Java: Temurin `17`
+- الخطوات: checkout ← setup-java ← setup-flutter ← pub get ← analyze ←
+  test ← build apk --release ← verify ← upload artifact ← release عند tag
+- Artifact: **Termgn-Android-APK** (`app-release.apk`)
+- Release: يُنشأ تلقائيًا عند push tag `v*` ويُرفق به الـ APK (عبر `GITHUB_TOKEN`)
+- التشغيل: push على `main` / pull request / تشغيل يدوي / tag
+
+الحصول على الـ APK: صفحة Actions ← آخر run أخضر ← Artifacts ←
+`Termgn-Android-APK`، أو صفحة Releases عند وجود tag.
 
 ---
 
-## ملاحظات التوازن (بعد التمرير الأول)
+## التوازن (محاكاة 120 دورًا، بذرة 42)
 
-محاكاة لاعب متوسط الكفاءة على 4 بذور عشوائية، 120 دورًا (10 سنوات داخل اللعبة):
+- التقييم ~43 → ~82 مع لعب معقول، بلا انهيار وبلا تشبّع مبكر.
+- الخزينة موجبة والدين صفر مع إدارة معقولة (فائض ~14.8M/دور في المحاكاة).
+- الجواهر نادرة: فقط التقارير السنوية والإنجازات.
 
-- تقييم الدولة يبدأ ~43 ويصل 82-96 مع لعب جيد، بلا انهيار وبلا تشبّع مبكر.
-- الخزينة تبقى موجبة والدين صفر مع إدارة معقولة.
-- للقطاعات **حد أدنى للإعاشة** فلا تسقط الدولة في دوامة لا رجعة منها.
-- الجواهر نادرة: لا يمنحها أي نشاط اقتصادي، فقط التقارير السنوية والإنجازات.
+## Known Limitations
+
+- الأيقونة لا تزال قالب Flutter الافتراضي.
+- توقيع الـ Release بمفاتيح debug (تجريبي — التوقيع الإنتاجي عند مرحلة Play).
+- لا SVG/Painters مخصصة بعد — الرايات presets لونية.
+- لا طبقة ترجمة منفصلة — النصوص عربية داخل الشاشات.
