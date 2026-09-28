@@ -4,12 +4,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'graphics/theme/palette.dart';
 import 'graphics/theme/typography.dart';
-import 'screens/boot_screen.dart';
+import 'screens/app_shell.dart';
 import 'storage/hive_boxes.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await GameStorage.init();
+  try {
+    await GameStorage.init();
+  } catch (_) {
+    // Storage failure must not prevent the app from launching; the shell
+    // will simply start with no save.
+  }
   runApp(const ProviderScope(child: MgnApp()));
 }
 
@@ -37,7 +42,7 @@ class MgnApp extends StatelessWidget {
           child: child ?? const SizedBox.shrink(),
         ),
       ),
-      home: const BootScreen(),
+      home: const AppShell(),
     );
   }
 }
