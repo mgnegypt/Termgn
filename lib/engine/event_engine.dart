@@ -1,3 +1,4 @@
+// ignore_for_file: prefer_initializing_formals
 import 'dart:math' as math;
 
 import '../models/diplomacy_state.dart';
