@@ -1,10 +1,10 @@
 name: mgn
 description: MGN — Nation simulation game by MGN STUDIO. Fully offline.
 publish_to: "none"
-version: 0.1.0+1
+version: 0.2.0+2
 
 environment:
-  sdk: ">=3.4.0 <4.0.0"
+  sdk: ">=3.13.0 <4.0.0"
 
 dependencies:
   flutter:

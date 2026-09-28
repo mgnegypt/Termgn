@@ -170,6 +170,8 @@ class TurnEngine {
   // ── Legitimacy, reports, achievements ─────────────────────────────────────
 
   void _updateLegitimacy(GameState state) {
+    // Exponential moving average toward (satisfaction*0.6 + score*0.4):
+    // legitimacy += target - legitimacy*0.1  ==  (target*10 - legitimacy)*0.1
     final double target =
         (state.publicSatisfaction * BalanceConfig.legitimacySatisfactionWeight) +
             (state.nationScore * BalanceConfig.legitimacyScoreWeight);

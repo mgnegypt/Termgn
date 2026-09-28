@@ -81,14 +81,19 @@ class GameController extends Notifier<GameSession?> {
 
   @override
   GameSession? build() {
-    final GameState? saved = GameStorage.hasSave ? GameStorage.loadGame() : null;
-    if (saved == null) return null;
-    return GameSession(
-      state: saved,
-      lastReport: null,
-      pendingEvents: const <GameEvent>[],
-      lastResolution: null,
-    );
+    try {
+      final GameState? saved =
+          GameStorage.hasSave ? GameStorage.loadGame() : null;
+      if (saved == null) return null;
+      return GameSession(
+        state: saved,
+        lastReport: null,
+        pendingEvents: const <GameEvent>[],
+        lastResolution: null,
+      );
+    } catch (_) {
+      return null;
+    }
   }
 
   // ── Lifecycle ─────────────────────────────────────────────────────────────

@@ -6,6 +6,9 @@ linter:
     always_declare_return_types: true
 
 analyzer:
+  exclude:
+    - build/**
+    - android/**
   language:
     strict-casts: true
     strict-raw-types: true

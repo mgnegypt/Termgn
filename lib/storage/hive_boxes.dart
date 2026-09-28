@@ -48,17 +48,26 @@ abstract final class GameStorage {
   }
 
   static GameState? loadGame() {
-    final Object? raw = _game.get(_currentSaveKey);
-    if (raw == null) return null;
+    try {
+      final Object? raw = _game.get(_currentSaveKey);
+      if (raw == null) return null;
 
-    final Map<String, Object?> map =
-        Map<String, Object?>.from(raw as Map<Object?, Object?>);
-    final GameState state = GameState.fromMap(
-      map,
-      landmarkResolver: LandmarksData.byId,
-    );
-    state.history.addAll(loadHistory());
-    return state;
+      final Map<String, Object?> map =
+          Map<String, Object?>.from(raw as Map<Object?, Object?>);
+      final GameState state = GameState.fromMap(
+        map,
+        landmarkResolver: LandmarksData.byId,
+      );
+      state.history.addAll(loadHistory());
+      // Keep in-memory history bounded like the box.
+      if (state.history.length > historyLimit) {
+        state.history.removeRange(0, state.history.length - historyLimit);
+      }
+      return state;
+    } catch (_) {
+      // Corrupt save must never crash the app: treat as no save.
+      return null;
+    }
   }
 
   static Future<void> deleteSave() async {
@@ -69,7 +78,16 @@ abstract final class GameStorage {
   // ── History ───────────────────────────────────────────────────────────────
 
   static Future<void> _saveHistory(List<HistoryEntry> entries) async {
-    // Only append what is new; trim the oldest beyond the limit.
+    // Robust append: if the box is longer than memory (e.g. after a trim or
+    // an older save), rewrite it instead of appending at a wrong offset.
+    if (entries.length < _history.length) {
+      await _history.clear();
+      final Iterable<HistoryEntry> capped = entries.length > historyLimit
+          ? entries.skip(entries.length - historyLimit)
+          : entries;
+      await _history.addAll(capped.map((HistoryEntry e) => e.toMap()));
+      return;
+    }
     if (entries.length > _history.length) {
       final Iterable<HistoryEntry> fresh = entries.skip(_history.length);
       await _history.addAll(
@@ -82,12 +100,16 @@ abstract final class GameStorage {
   }
 
   static List<HistoryEntry> loadHistory() {
-    return <HistoryEntry>[
-      for (final Object? raw in _history.values)
-        HistoryEntry.fromMap(
-          Map<String, Object?>.from(raw! as Map<Object?, Object?>),
-        ),
-    ];
+    try {
+      return <HistoryEntry>[
+        for (final Object? raw in _history.values)
+          HistoryEntry.fromMap(
+            Map<String, Object?>.from(raw! as Map<Object?, Object?>),
+          ),
+      ];
+    } catch (_) {
+      return <HistoryEntry>[];
+    }
   }
 
   // ── Achievements (persist across saves) ───────────────────────────────────

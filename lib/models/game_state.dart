@@ -248,6 +248,28 @@ class GameState {
     return Season.winter;
   }
 
+  // ── Game status (victory / collapse) ────────────────────────────────────
+  //
+  // Thresholds are deliberately forgiving: collapse requires simultaneous
+  // political, social and fiscal failure, while victory needs a sustained
+  // high score plus legitimacy. The game continues after either so the
+  // player can keep playing or start over.
+
+  /// Total collapse: no legitimacy, no public support, and broke.
+  bool get isCollapsed =>
+      legitimacy < 10 && publicSatisfaction < 15 && treasuryCash <= 0;
+
+  /// Grand victory: excellent nation score with a solid mandate, after the
+  /// opening phase.
+  bool get hasWon =>
+      turnNumber > 24 && nationScore >= 85 && legitimacy >= 60;
+
+  String get statusLabel {
+    if (isCollapsed) return 'انهيار الدولة';
+    if (hasWon) return 'نصر عظيم';
+    return 'مستمرة';
+  }
+
   // ── Keyed access (used by event effects) ──────────────────────────────────
 
   /// Reads any numeric field by its [StateKeys] key.
