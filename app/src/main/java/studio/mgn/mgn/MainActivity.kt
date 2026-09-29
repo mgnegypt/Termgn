@@ -3,42 +3,34 @@ package studio.mgn.mgn
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import kotlinx.coroutines.flow.map
+import studio.mgn.design.MgnTheme
+import studio.mgn.mgn.nav.MgnNav
 
 /**
- * PLAN 1 placeholder entry point: a dark screen writing "MGN".
- * Real screens arrive in later plans; game logic lives in :core:engine.
+ * PLAN 2 entry point. Reads reduce-motion once per composition and
+ * auto-saves the active session onStop.
  */
 class MainActivity : ComponentActivity() {
+
+    private val app: MgnApp get() = application as MgnApp
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { MgnPlaceholder() }
+        setContent {
+            MgnTheme {
+                val reduceMotion by app.settings.reduceMotion.collectAsState(
+                    initial = false,
+                )
+                MgnNav(app = app, reduceMotion = reduceMotion)
+            }
+        }
     }
-}
 
-@Composable
-fun MgnPlaceholder() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFF07070A)),
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(text = "MGN", color = Color(0xFFD4AF37), fontSize = 30.sp)
+    override fun onStop() {
+        app.saveNow()
+        super.onStop()
     }
-}
-
-@Preview
-@Composable
-fun MgnPlaceholderPreview() {
-    MgnPlaceholder()
 }

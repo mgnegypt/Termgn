@@ -1,4 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MGN</string>
+
+    <!-- Splash -->
+    <string name="splash_studio">MGN STUDIO</string>
+    <string name="splash_loading">جارٍ تجهيز الدولة…</string>
+
+    <!-- Menu -->
+    <string name="menu_new_game">لعبة جديدة</string>
+    <string name="menu_continue">متابعة</string>
+    <string name="menu_achievements">الإنجازات</string>
+    <string name="menu_settings">الإعدادات</string>
+    <string name="menu_turn_label">الدور %1$d • %2$s</string>
+    <string name="menu_overwrite_title">حذف الحفظ الحالي؟</string>
+    <string name="menu_overwrite_message">توجد دولة محفوظة (%1$s). بدء لعبة جديدة سيحذفها نهائيًا.</string>
+    <string name="menu_overwrite_confirm">احذف وابدأ جديدًا</string>
+    <string name="menu_cancel">إلغاء</string>
+    <string name="menu_corrupt_title">ملف الحفظ تالف</string>
+    <string name="menu_corrupt_message">تعذّر قراءة الحفظ. يمكنك حذفه والبدء من جديد.</string>
+    <string name="menu_corrupt_delete">حذف الحفظ</string>
+    <string name="menu_recovered_message">استُعيدت نسخة احتياطية سليمة أخيرة.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">الإعدادات</string>
+    <string name="settings_music">الموسيقى</string>
+    <string name="settings_sfx">المؤثرات الصوتية</string>
+    <string name="settings_vibration">الاهتزاز</string>
+    <string name="settings_reduce_motion">تقليل الحركة</string>
+    <string name="settings_graphics">جودة الرسوم</string>
+    <string name="settings_graphics_low">منخفضة</string>
+    <string name="settings_graphics_medium">متوسطة</string>
+    <string name="settings_graphics_high">عالية</string>
+    <string name="settings_delete_save">حذف الحفظ</string>
+    <string name="settings_delete_title">حذف الحفظ نهائيًا؟</string>
+    <string name="settings_delete_message">سيُحذف تقدّم دولتك بالكامل. هذا الإجراء لا يمكن التراجع عنه.</string>
+    <string name="settings_delete_confirm">نعم، احذف كل شيء</string>
+    <string name="settings_delete_next">متابعة الحذف</string>
+    <string name="settings_about_title">حول</string>
+    <string name="settings_about_body">MGN — محاكاة إدارة دولة وبناء حضارة. إنتاج MGN STUDIO. تعمل أوفلاين بالكامل.</string>
+    <string name="settings_version">الإصدار %1$s</string>
+
+    <!-- Achievements -->
+    <string name="achievements_title">الإنجازات</string>
+    <string name="achievements_progress">%1$d من %2$d (%3$d%%)</string>
+    <string name="achievements_locked">مقفول</string>
+    <string name="achievements_unlocked">مفتوح</string>
+
+    <!-- Setup wizard -->
+    <string name="setup_title">تأسيس الدولة</string>
+    <string name="setup_next">التالي</string>
+    <string name="setup_back">السابق</string>
+    <string name="setup_confirm">إعلان قيام الدولة</string>
+    <string name="setup_step_name">اسم الدولة</string>
+    <string name="setup_name_hint">مثال: المجد</string>
+    <string name="setup_step_title">لقب الحاكم</string>
+    <string name="setup_ruler_hint">مثال: رئيس</string>
+    <string name="setup_step_flag">الراية</string>
+    <string name="setup_step_turn">طول الدور</string>
+    <string name="setup_turn_day">يوم</string>
+    <string name="setup_turn_week">أسبوع</string>
+    <string name="setup_turn_month">شهر</string>
+    <string name="setup_step_axes">التوجهات</string>
+    <string name="setup_axis_economic">اقتصادي</string>
+    <string name="setup_axis_social">اجتماعي</string>
+    <string name="setup_axis_foreign">خارجي</string>
+    <string name="setup_axis_state">حكومي</string>
+    <string name="setup_axis_market">سوق</string>
+    <string name="setup_axis_open">منفتح</string>
+    <string name="setup_axis_closed">منغلق</string>
+    <string name="setup_step_review">إعلان قيام الدولة</string>
+    <string name="setup_review_line">باسم الشعب، تُعلن قيام دولة %1$s بقيادة %2$s.</string>
+    <string name="setup_empty_error">أدخل قيمة أولًا للمتابعة</string>
+
+    <!-- Game placeholder -->
+    <string name="game_title">ساحة الحكم</string>
+    <string name="game_welcome">أهلًا بك في %1$s</string>
+    <string name="game_turn">الدور %1$d</string>
+    <string name="game_autosave_note">يُحفظ تقدّمك تلقائيًا نهاية كل دور.</string>
+    <string name="game_full_coming">شاشة اللعبة الكاملة تصل في الخطة 3.</string>
 </resources>

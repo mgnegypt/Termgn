@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "studio.mgn.design"
+    namespace = "studio.mgn.setup"
     compileSdk = 35
 
     defaultConfig {
@@ -27,10 +27,19 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:model"))
+    implementation(project(":core:data"))
+    implementation(project(":design"))
+
     val composeBom = platform(libs.compose.bom)
     implementation(composeBom)
     implementation(libs.compose.ui)
     implementation(libs.compose.material3)
-    implementation(libs.compose.ui.tooling.preview)
     implementation(libs.activity.compose)
+    implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.coroutines.android)
+}
+
+tasks.withType<Test> {
+    useJUnit()
 }

@@ -4,6 +4,7 @@
     <!-- MGN is fully offline: no INTERNET permission is declared anywhere. -->
 
     <application
+        android:name=".MgnApp"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.MGN">
