@@ -89,7 +89,10 @@ class GameRepositoryTest {
 
     @Test
     fun `corrupt current falls back to backup`() = runTest {
-        repo.newGame(GameSetup("المجد", "رئيس"))
+        var state = repo.newGame(GameSetup("المجد", "رئيس"))
+        state = state.copy(turnNumber = 2)
+        repo.save(state)
+        // Corrupt only the current row; the shifted backup must rescue us.
         db.saveDao().upsert(
             db.saveDao().get(CURRENT_SAVE_ID)!!.copy(payloadJson = "{broken"),
         )
@@ -97,6 +100,7 @@ class GameRepositoryTest {
         val loaded = repo.load()
         assertIs<LoadResult.RecoveredFromBackup>(loaded)
         assertEquals("المجد", loaded.state.countryName)
+        assertEquals(1, loaded.state.turnNumber)
     }
 
     @Test

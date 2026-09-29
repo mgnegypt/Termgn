@@ -50,18 +50,17 @@ class SettingsViewModel(
         settings.vibrationEnabled,
         settings.reduceMotion,
         settings.graphicsQuality,
-        dialogs,
-        hasSave,
-    ) { music, sfx, vibration, reduceMotion, graphics, dialogs, hasSave ->
+        combine(dialogs, hasSave, ::DialogsWithSave),
+    ) { music, sfx, vibration, reduceMotion, graphics, extra ->
         SettingsUiState(
             music = music,
             sfx = sfx,
             vibration = vibration,
             reduceMotion = reduceMotion,
             graphics = graphics,
-            hasSave = hasSave,
-            showDeleteFirst = dialogs.first,
-            showDeleteSecond = dialogs.second,
+            hasSave = extra.hasSave,
+            showDeleteFirst = extra.dialogs.first,
+            showDeleteSecond = extra.dialogs.second,
         )
     }.stateIn(viewModelScope, SharingStarted.Eagerly, SettingsUiState())
 
@@ -102,4 +101,6 @@ class SettingsViewModel(
     }
 
     private data class Dialogs(val first: Boolean = false, val second: Boolean = false)
+
+    private data class DialogsWithSave(val dialogs: Dialogs, val hasSave: Boolean)
 }

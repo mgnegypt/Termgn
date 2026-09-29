@@ -51,6 +51,8 @@ dependencies {
     implementation(project(":content"))
     implementation(project(":feature:setup"))
 
+    implementation(libs.room.runtime)
+
     val composeBom = platform(libs.compose.bom)
     implementation(composeBom)
     implementation(libs.compose.ui)
