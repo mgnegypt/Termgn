@@ -19,7 +19,7 @@ class MissionEngineTest {
 
     @Test
     fun `missions load and progress is measurable`() {
-        assertTrue(pack.missions.size in 4..10)
+        assertTrue(pack.missions.size in 10..20)
         val state = newGame()
         for (mission in pack.missions) {
             val progress = MissionEngine.progress(state, mission)
