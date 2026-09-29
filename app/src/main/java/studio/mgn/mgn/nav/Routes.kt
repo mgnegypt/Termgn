@@ -8,4 +8,7 @@ object Routes {
     const val ACHIEVEMENTS = "achievements"
     const val SETUP = "setup"
     const val GAME = "game"
+    const val ECONOMY = "economy"
+    const val DIPLOMACY = "diplomacy"
+    const val DEVELOPMENT = "development"
 }

@@ -73,6 +73,28 @@ fun CommandScreen(
         )
         return
     }
+    ui.ending?.let { ending ->
+        EndingScreen(
+            ending = ending,
+            state = state,
+            summary = ReignSummary(
+                turns = state.turnNumber,
+                score = state.nationScore,
+                achievements = state.unlockedAchievements.size,
+                achievementsTotal = content.achievements.size,
+                bestDecisionTitle = viewModel.bestDecision()?.event?.title,
+                worstDecisionTitle = viewModel.worstDecision()?.event?.title,
+                bestTurn = viewModel.bestTurnInfo(),
+                worstTurn = viewModel.worstTurnInfo(),
+            ),
+            strings = strings.ending,
+            canContinue = ending != GameEndingScreen.COLLAPSE,
+            onMenu = { viewModel.onEvent(CommandEvent.GoToMenu) },
+            onNewGame = { viewModel.onEvent(CommandEvent.GoToMenu) },
+            onContinue = { viewModel.onEvent(CommandEvent.DismissEnding) },
+        )
+        return
+    }
     CommandContent(
         ui = ui,
         content = content,
@@ -80,8 +102,8 @@ fun CommandScreen(
         reduceMotion = reduceMotion,
         onEvent = viewModel::onEvent,
     )
-    if (ui.showReport) {
-        ui.lastReport?.let { report ->
+    when (ui.overlays.firstOrNull()) {
+        ReportOverlay.REPORT -> ui.lastReport?.let { report ->
             TurnReportSheet(
                 report = report,
                 before = ui.previous,
@@ -89,6 +111,25 @@ fun CommandScreen(
                 onClose = { viewModel.onEvent(CommandEvent.DismissReport) },
             )
         }
+        ReportOverlay.YEARLY -> ui.lastReport?.yearlyReport?.let { yearly ->
+            YearlyReportSheet(
+                report = yearly,
+                best = viewModel.bestDecision(),
+                worst = viewModel.worstDecision(),
+                strings = strings.yearly,
+                onClose = { viewModel.onEvent(CommandEvent.DismissReport) },
+            )
+        }
+        ReportOverlay.REFERENDUM -> ui.lastReport?.referendum?.let { referendum ->
+            ReferendumSheet(
+                result = referendum,
+                threshold = ui.referendumThreshold,
+                animate = !reduceMotion,
+                strings = strings.referendum,
+                onClose = { viewModel.onEvent(CommandEvent.DismissReport) },
+            )
+        }
+        null -> Unit
     }
     ui.selectedIndicator?.let { key ->
         IndicatorSheet(
@@ -189,6 +230,13 @@ private fun WideCommand(
                         .verticalScroll(rememberScrollState()),
                     verticalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
+                    if (ui.showUnlockToast && ui.overlays.isEmpty()) {
+                        UnlockToast(
+                            count = (ui.lastReport?.newAchievements?.size ?: 0) +
+                                (ui.lastReport?.newMissions?.size ?: 0),
+                            strings = strings,
+                        )
+                    }
                     CityScene(
                         state = state,
                         positions = content.landmarkPositions,
@@ -257,6 +305,21 @@ private fun WideCommand(
                         },
                     )
                 }
+            } else if (ui.section == CommandSection.HISTORY) {
+                HistoryScreen(
+                    history = state.history,
+                    strings = strings.history,
+                    onBack = { onEvent(CommandEvent.SelectSection(CommandSection.DASHBOARD)) },
+                    modifier = Modifier.weight(2.4f),
+                )
+            } else if (ui.section == CommandSection.ACHIEVEMENTS) {
+                AchievementsGrid(
+                    achievements = content.achievements,
+                    unlocked = state.unlockedAchievements,
+                    strings = strings.achievementsGrid,
+                    onBack = { onEvent(CommandEvent.SelectSection(CommandSection.DASHBOARD)) },
+                    modifier = Modifier.weight(2.4f),
+                )
             } else {
                 SectionPlaceholder(
                     section = ui.section,
@@ -357,6 +420,21 @@ private fun CompactCommand(
                     )
                 }
             }
+        } else if (ui.section == CommandSection.HISTORY) {
+            HistoryScreen(
+                history = state.history,
+                strings = strings.history,
+                onBack = { onEvent(CommandEvent.SelectSection(CommandSection.DASHBOARD)) },
+                modifier = Modifier.weight(1f),
+            )
+        } else if (ui.section == CommandSection.ACHIEVEMENTS) {
+            AchievementsGrid(
+                achievements = content.achievements,
+                unlocked = state.unlockedAchievements,
+                strings = strings.achievementsGrid,
+                onBack = { onEvent(CommandEvent.SelectSection(CommandSection.DASHBOARD)) },
+                modifier = Modifier.weight(1f),
+            )
         } else {
             SectionPlaceholder(
                 section = ui.section,
@@ -370,6 +448,18 @@ private fun CompactCommand(
             strings = strings,
             reduceMotion = reduceMotion,
             onEndTurn = { onEvent(CommandEvent.EndTurn) },
+        )
+    }
+}
+
+@Composable
+private fun UnlockToast(count: Int, strings: CommandStrings) {
+    if (count <= 0) return
+    GoldFramePanel(elevated = true) {
+        Text(
+            text = "◆ ${strings.unlocksLabel} (+$count)",
+            style = MgnTheme.typography.titleMedium,
+            color = MgnTheme.colors.goldPrimary,
         )
     }
 }

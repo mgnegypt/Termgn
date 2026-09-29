@@ -110,7 +110,7 @@ class ContentValidatorTest {
 
     @Test
     fun `missions are valid and measurable`() {
-        assertTrue(pack.missions.size in 4..10, "expected a small mission set")
+        assertTrue(pack.missions.size in 10..20, "expected a full mission set")
         val ids = pack.missions.map { it.id }
         assertEquals(ids.size, ids.toSet().size, "duplicate mission id")
         for (mission in pack.missions) {

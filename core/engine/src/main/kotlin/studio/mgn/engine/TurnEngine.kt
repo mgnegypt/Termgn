@@ -3,6 +3,7 @@ package studio.mgn.engine
 import studio.mgn.model.Achievement
 import studio.mgn.model.GameEvent
 import studio.mgn.model.GameState
+import studio.mgn.model.HISTORY_CHART_LIMIT
 import studio.mgn.model.HistoryEntry
 import studio.mgn.model.HistoryTag
 import studio.mgn.model.LandmarkDef
@@ -68,6 +69,9 @@ class TurnEngine(
         state: GameState,
         stances: Map<String, WarStance> = emptyMap(),
     ): TurnReport {
+        // Explicit per-turn stances win; otherwise use the persisted ones.
+        // Either way they are single-use and cleared below.
+        val effectiveStances = stances.ifEmpty { state.warStances }
         val previousYear = state.inGameDate.year
 
         var next = advanceCalendar(state)
@@ -88,7 +92,7 @@ class TurnEngine(
 
         val diplomacyOutcome = diplomacyEngine.advanceTurn(
             next,
-            stances = stances,
+            stances = effectiveStances,
             debtStressed = debtStressed,
         )
         next = diplomacyOutcome.state
@@ -117,6 +121,11 @@ class TurnEngine(
             MissionEngine.checkCompletions(next, missions)
         next = afterMissions.copy(
             rulerXp = afterMissions.rulerXp + BalanceConfig.RULER_XP_PER_TURN,
+            treasuryHistory = (afterMissions.treasuryHistory + afterMissions.treasuryCash)
+                .takeLast(HISTORY_CHART_LIMIT),
+            scoreHistory = (afterMissions.scoreHistory + afterMissions.nationScore)
+                .takeLast(HISTORY_CHART_LIMIT),
+            warStances = emptyMap(),
         )
 
         next = next.clamped()

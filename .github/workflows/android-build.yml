@@ -37,6 +37,9 @@ jobs:
       - name: Balance simulation (120 turns, seed 42)
         run: ./gradlew :tools:balance-sim:run --args="120 42" --console=plain
 
+      - name: Bot playthrough (5 seeds x 120 turns x 3 behaviors)
+        run: ./gradlew :tools:balance-sim:balanceBot --console=plain
+
       - name: Assemble release APK
         run: ./gradlew :app:assembleRelease --console=plain
 

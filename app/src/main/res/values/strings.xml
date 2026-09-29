@@ -156,4 +156,102 @@
     <string name="key_industry">الصناعة</string>
     <string name="key_debt">الدين</string>
     <string name="key_gems">الجواهر</string>
+
+    <string name="cmd_unlocks">مكافآت جديدة</string>
+
+    <!-- Economy -->
+    <string name="eco_title">الاقتصاد</string>
+    <string name="eco_dials">السياسات</string>
+    <string name="eco_tax">الضرائب</string>
+    <string name="eco_military">الإنفاق العسكري</string>
+    <string name="eco_subsidy">الدعم</string>
+    <string name="eco_income">الدخل</string>
+    <string name="eco_expenses">الإنفاق</string>
+    <string name="eco_net">الصافي</string>
+    <string name="eco_preview">المعاينة</string>
+    <string name="eco_confirm">تأكيد السياسات</string>
+    <string name="eco_invest">الاستثمار في القطاعات</string>
+    <string name="eco_invest_blocked">لا يكفي الرصيد للاستثمار</string>
+    <string name="eco_loan">القروض</string>
+    <string name="eco_loan_hint">المبلغ</string>
+    <string name="eco_borrow">اقتراض</string>
+    <string name="eco_repay">سداد</string>
+    <string name="eco_debt">الدين</string>
+    <string name="eco_interest">فائدة الدور</string>
+    <string name="eco_debt_warning">الدين يقترب من حد الخطر — سدد قبل تفاقم الفوائد</string>
+    <string name="eco_chart">تاريخ الخزينة والتقييم</string>
+    <string name="eco_chart_empty">بعد دورين يظهر المخطط هنا</string>
+
+    <!-- Diplomacy -->
+    <string name="dip_title">الدبلوماسية</string>
+    <string name="dip_relation">العلاقة</string>
+    <string name="dip_treaties">المعاهدات</string>
+    <string name="dip_no_treaties">لا معاهدات</string>
+    <string name="dip_sign">توقيع</string>
+    <string name="dip_break">فسخ</string>
+    <string name="dip_war">إعلان حرب</string>
+    <string name="dip_war_title">إعلان حرب؟</string>
+    <string name="dip_war_msg">الحرب تكلف الخزينة كل دور وتستنزف الجيش والاقتصاد والسكان حتى الحسم أو التفاوض.</string>
+    <string name="dip_war_ok">أعلنها</string>
+    <string name="dip_cancel">إلغاء</string>
+    <string name="dip_stance">موقف الحرب</string>
+    <string name="dip_defensive">دفاعي</string>
+    <string name="dip_offensive">هجومي</string>
+    <string name="dip_negotiate">تفاوضي</string>
+    <string name="dip_at_war">في حالة حرب</string>
+    <string name="dip_sanctioned">عقوبات مفروضة عليك</string>
+    <string name="dip_war_cost">تكلفة الدور الواحد</string>
+
+    <!-- Development -->
+    <string name="dev_title">التطوير والمعالم</string>
+    <string name="dev_available">المتاحة</string>
+    <string name="dev_building">قيد البناء</string>
+    <string name="dev_built">المكتملة</string>
+    <string name="dev_empty_available">لا معالم متاحة حاليًا — طوّر المؤشرات المطلوبة</string>
+    <string name="dev_empty_building">لا بناء جارٍ — ابدأ معلمًا من المتاحة</string>
+    <string name="dev_empty_built">لا معالم مكتملة بعد</string>
+    <string name="dev_build">ابنِ الآن</string>
+    <string name="dev_rush">تسريع</string>
+    <string name="dev_built_done">مكتمل</string>
+    <string name="dev_remaining">دور متبقٍ</string>
+    <string name="dev_cost">التكلفة</string>
+    <string name="dev_duration">المدة (أدوار)</string>
+    <string name="dev_requires">يتطلب</string>
+
+    <!-- History -->
+    <string name="hist_title">السجل</string>
+    <string name="hist_empty">لا سجل بعد</string>
+    <string name="hist_turn">الدور</string>
+    <string name="hist_back">رجوع</string>
+    <string name="hist_all">الكل</string>
+    <string name="hist_economy">اقتصاد</string>
+    <string name="hist_diplomacy">دبلوماسية</string>
+    <string name="hist_events">أحداث</string>
+
+    <!-- Yearly / referendum -->
+    <string name="yr_title">التقرير السنوي</string>
+    <string name="yr_score">التقييم</string>
+    <string name="yr_gems">الجواهر</string>
+    <string name="yr_best">أفضل قرار</string>
+    <string name="yr_worst">أسوأ قرار</string>
+    <string name="yr_close">إغلاق</string>
+    <string name="ref_title">استفتاء الشرعية</string>
+    <string name="ref_passed">تم تجديد الثقة</string>
+    <string name="ref_failed">فشل الاستفتاء — تراجعت الشرعية</string>
+    <string name="ref_close">إغلاق</string>
+
+    <!-- Endings -->
+    <string name="end_victory">نصر عظيم</string>
+    <string name="end_collapse">انهيار الدولة</string>
+    <string name="end_continuation">عقد من الحكم</string>
+    <string name="end_turns">الأدوار</string>
+    <string name="end_score">التقييم</string>
+    <string name="end_achievements">الإنجازات</string>
+    <string name="end_best">أفضل قرار</string>
+    <string name="end_worst">أسوأ قرار</string>
+    <string name="end_best_turn">أفضل دور</string>
+    <string name="end_worst_turn">أسوأ دور</string>
+    <string name="end_menu">القائمة</string>
+    <string name="end_new">لعبة جديدة</string>
+    <string name="end_continue">متابعة اللعب</string>
 </resources>

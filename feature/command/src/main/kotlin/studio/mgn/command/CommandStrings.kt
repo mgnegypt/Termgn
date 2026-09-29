@@ -20,6 +20,7 @@ data class CommandStrings(
     val reportNewEvents: String,
     val reportAchievements: String,
     val reportMissions: String,
+    val unlocksLabel: String,
     val decisionsTitle: String,
     val decisionsEmpty: String,
     val reroll: String,
@@ -42,4 +43,9 @@ data class CommandStrings(
     /** Arabic label per state key / section / cell. */
     val keyLabels: Map<String, String>,
     val sectionLabels: Map<String, String>,
+    val history: HistoryStrings,
+    val achievementsGrid: AchievementsGridStrings,
+    val yearly: YearlyStrings,
+    val referendum: ReferendumStrings,
+    val ending: EndingStrings,
 )

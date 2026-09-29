@@ -9,6 +9,15 @@ import kotlin.math.roundToInt
 /** Maximum chronicle entries kept in memory and in saves. */
 const val HISTORY_LIMIT = 400
 
+/** Maximum points kept in the treasury/score chart series. */
+const val HISTORY_CHART_LIMIT = 30
+
+/** Ending markers persisted on [GameState.ended]. */
+object GameEnding {
+    const val VICTORY = "victory"
+    const val COLLAPSE = "collapse"
+}
+
 /**
  * The complete state of one save file. Fully immutable: every engine
  * operation returns a new instance via [copy].
@@ -75,6 +84,20 @@ data class GameState(
     val completedMissions: Set<String> = emptySet(),
     /** Ruler experience: +RULER_XP_PER_TURN each turn, level every RULER_XP_PER_LEVEL. */
     val rulerXp: Int = 0,
+    /**
+     * Ending once reached: "victory" or "collapse", null while ongoing.
+     * A collapsed save cannot be played without a restart.
+     */
+    val ended: String? = null,
+    /** Last ≤30 end-of-turn treasury values, for the economy chart. */
+    val treasuryHistory: List<Double> = emptyList(),
+    /** Last ≤30 end-of-turn nation scores, for the economy chart. */
+    val scoreHistory: List<Double> = emptyList(),
+    /**
+     * War stances chosen by the player, consumed by the next turn.
+     * Cleared after every turn (same as the legacy controller behavior).
+     */
+    val warStances: Map<String, WarStance> = emptyMap(),
     /** Event id -> turn it last fired, for cooldown checks. */
     val lastEventTurns: Map<String, Int>,
     val firedOnceEvents: Set<String>,

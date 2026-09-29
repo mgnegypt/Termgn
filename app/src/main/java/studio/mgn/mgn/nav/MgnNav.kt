@@ -156,11 +156,59 @@ fun MgnNav(app: MgnApp, reduceMotion: Boolean) {
                     },
                 )
             }
+            androidx.compose.runtime.LaunchedEffect(vm) {
+                vm.signals.collect { signal ->
+                    when (signal) {
+                        studio.mgn.command.CommandSignal.DecisionsOpened -> Unit
+                        studio.mgn.command.CommandSignal.NavigateMenu -> {
+                            nav.navigate(Routes.MENU) {
+                                popUpTo(Routes.GAME) { inclusive = true }
+                            }
+                        }
+                        studio.mgn.command.CommandSignal.NavigateEconomy ->
+                            nav.navigate(Routes.ECONOMY)
+                        studio.mgn.command.CommandSignal.NavigateDiplomacy ->
+                            nav.navigate(Routes.DIPLOMACY)
+                        studio.mgn.command.CommandSignal.NavigateDevelopment ->
+                            nav.navigate(Routes.DEVELOPMENT)
+                        studio.mgn.command.CommandSignal.NavigateSettings ->
+                            nav.navigate(Routes.SETTINGS)
+                    }
+                }
+            }
             CommandScreen(
                 viewModel = vm,
                 content = app.content,
                 strings = rememberCommandStrings(app),
                 reduceMotion = reduceMotion,
+            )
+        }
+        composable(Routes.ECONOMY) {
+            val vm: studio.mgn.economy.EconomyViewModel = viewModel {
+                studio.mgn.economy.EconomyViewModel(app.repository, app.content)
+            }
+            studio.mgn.economy.EconomyScreen(
+                viewModel = vm,
+                strings = rememberEconomyStrings(app),
+                reduceMotion = reduceMotion,
+            )
+        }
+        composable(Routes.DIPLOMACY) {
+            val vm: studio.mgn.diplomacy.DiplomacyViewModel = viewModel {
+                studio.mgn.diplomacy.DiplomacyViewModel(app.repository, app.content)
+            }
+            studio.mgn.diplomacy.DiplomacyScreen(
+                viewModel = vm,
+                strings = rememberDiplomacyStrings(app),
+            )
+        }
+        composable(Routes.DEVELOPMENT) {
+            val vm: studio.mgn.development.DevelopmentViewModel = viewModel {
+                studio.mgn.development.DevelopmentViewModel(app.repository, app.content)
+            }
+            studio.mgn.development.DevelopmentScreen(
+                viewModel = vm,
+                strings = rememberDevelopmentStrings(app),
             )
         }
     }
@@ -190,6 +238,7 @@ private fun rememberCommandStrings(app: MgnApp): CommandStrings {
             reportNewEvents = s(studio.mgn.mgn.R.string.cmd_report_new_events),
             reportAchievements = s(studio.mgn.mgn.R.string.cmd_report_achievements),
             reportMissions = s(studio.mgn.mgn.R.string.cmd_report_missions),
+            unlocksLabel = s(studio.mgn.mgn.R.string.cmd_unlocks),
             decisionsTitle = s(studio.mgn.mgn.R.string.cmd_decisions),
             decisionsEmpty = s(studio.mgn.mgn.R.string.cmd_decisions_empty),
             reroll = s(studio.mgn.mgn.R.string.cmd_reroll),
@@ -250,6 +299,181 @@ private fun rememberCommandStrings(app: MgnApp): CommandStrings {
                 "ACHIEVEMENTS" to s(studio.mgn.mgn.R.string.section_achievements),
                 "SETTINGS" to s(studio.mgn.mgn.R.string.section_settings),
             ),
+            history = studio.mgn.command.HistoryStrings(
+                title = s(studio.mgn.mgn.R.string.hist_title),
+                empty = s(studio.mgn.mgn.R.string.hist_empty),
+                turnLabel = s(studio.mgn.mgn.R.string.hist_turn),
+                back = s(studio.mgn.mgn.R.string.hist_back),
+                filterAll = s(studio.mgn.mgn.R.string.hist_all),
+                filterEconomy = s(studio.mgn.mgn.R.string.hist_economy),
+                filterDiplomacy = s(studio.mgn.mgn.R.string.hist_diplomacy),
+                filterEvents = s(studio.mgn.mgn.R.string.hist_events),
+            ),
+            achievementsGrid = studio.mgn.command.AchievementsGridStrings(
+                title = s(studio.mgn.mgn.R.string.section_achievements),
+                empty = s(studio.mgn.mgn.R.string.hist_empty),
+                close = s(studio.mgn.mgn.R.string.yr_close),
+                gemsSuffix = s(studio.mgn.mgn.R.string.cmd_gems),
+                progress = { a, b ->
+                    res.getString(
+                        studio.mgn.mgn.R.string.achievements_progress,
+                        a,
+                        b,
+                        if (b == 0) 0 else a * 100 / b,
+                    )
+                },
+            ),
+            yearly = studio.mgn.command.YearlyStrings(
+                title = s(studio.mgn.mgn.R.string.yr_title),
+                score = s(studio.mgn.mgn.R.string.yr_score),
+                gems = s(studio.mgn.mgn.R.string.yr_gems),
+                bestDecision = s(studio.mgn.mgn.R.string.yr_best),
+                worstDecision = s(studio.mgn.mgn.R.string.yr_worst),
+                close = s(studio.mgn.mgn.R.string.yr_close),
+            ),
+            referendum = studio.mgn.command.ReferendumStrings(
+                title = s(studio.mgn.mgn.R.string.ref_title),
+                passed = s(studio.mgn.mgn.R.string.ref_passed),
+                failed = s(studio.mgn.mgn.R.string.ref_failed),
+                close = s(studio.mgn.mgn.R.string.ref_close),
+            ),
+            ending = studio.mgn.command.EndingStrings(
+                victoryTitle = s(studio.mgn.mgn.R.string.end_victory),
+                collapseTitle = s(studio.mgn.mgn.R.string.end_collapse),
+                continuationTitle = s(studio.mgn.mgn.R.string.end_continuation),
+                turnsLabel = s(studio.mgn.mgn.R.string.end_turns),
+                scoreLabel = s(studio.mgn.mgn.R.string.end_score),
+                achievementsLabel = s(studio.mgn.mgn.R.string.end_achievements),
+                bestDecision = s(studio.mgn.mgn.R.string.end_best),
+                worstDecision = s(studio.mgn.mgn.R.string.end_worst),
+                bestTurn = s(studio.mgn.mgn.R.string.end_best_turn),
+                worstTurn = s(studio.mgn.mgn.R.string.end_worst_turn),
+                menu = s(studio.mgn.mgn.R.string.end_menu),
+                newGame = s(studio.mgn.mgn.R.string.end_new),
+                continuePlaying = s(studio.mgn.mgn.R.string.end_continue),
+            ),
+        )
+    }
+}
+
+@Composable
+private fun rememberEconomyStrings(app: MgnApp): studio.mgn.economy.EconomyStrings {
+    val res = app.resources
+    fun s(id: Int): String = res.getString(id)
+    val keyLabels = mapOf(
+        "agriculture" to s(studio.mgn.mgn.R.string.key_agriculture),
+        "industry" to s(studio.mgn.mgn.R.string.key_industry),
+        "energy" to s(studio.mgn.mgn.R.string.key_energy),
+        "technology" to s(studio.mgn.mgn.R.string.key_technology),
+        "tourism" to s(studio.mgn.mgn.R.string.key_tourism),
+        "health" to s(studio.mgn.mgn.R.string.key_health),
+        "education" to s(studio.mgn.mgn.R.string.key_education),
+    )
+    return remember {
+        studio.mgn.economy.EconomyStrings(
+            title = s(studio.mgn.mgn.R.string.eco_title),
+            dialsTitle = s(studio.mgn.mgn.R.string.eco_dials),
+            taxLabel = s(studio.mgn.mgn.R.string.eco_tax),
+            militaryLabel = s(studio.mgn.mgn.R.string.eco_military),
+            subsidyLabel = s(studio.mgn.mgn.R.string.eco_subsidy),
+            incomeLabel = s(studio.mgn.mgn.R.string.eco_income),
+            expensesLabel = s(studio.mgn.mgn.R.string.eco_expenses),
+            netLabel = s(studio.mgn.mgn.R.string.eco_net),
+            previewLabel = s(studio.mgn.mgn.R.string.eco_preview),
+            confirmDials = s(studio.mgn.mgn.R.string.eco_confirm),
+            investTitle = s(studio.mgn.mgn.R.string.eco_invest),
+            investBlocked = s(studio.mgn.mgn.R.string.eco_invest_blocked),
+            loanTitle = s(studio.mgn.mgn.R.string.eco_loan),
+            loanAmountHint = s(studio.mgn.mgn.R.string.eco_loan_hint),
+            borrowAction = s(studio.mgn.mgn.R.string.eco_borrow),
+            repayAction = s(studio.mgn.mgn.R.string.eco_repay),
+            debtLabel = s(studio.mgn.mgn.R.string.eco_debt),
+            interestLabel = s(studio.mgn.mgn.R.string.eco_interest),
+            debtWarning = s(studio.mgn.mgn.R.string.eco_debt_warning),
+            chartTitle = s(studio.mgn.mgn.R.string.eco_chart),
+            chartEmpty = s(studio.mgn.mgn.R.string.eco_chart_empty),
+            keyLabels = keyLabels,
+        )
+    }
+}
+
+@Composable
+private fun rememberDiplomacyStrings(app: MgnApp): studio.mgn.diplomacy.DiplomacyStrings {
+    val res = app.resources
+    fun s(id: Int): String = res.getString(id)
+    return remember {
+        studio.mgn.diplomacy.DiplomacyStrings(
+            title = s(studio.mgn.mgn.R.string.dip_title),
+            relationLabel = s(studio.mgn.mgn.R.string.dip_relation),
+            treatiesLabel = s(studio.mgn.mgn.R.string.dip_treaties),
+            noTreaties = s(studio.mgn.mgn.R.string.dip_no_treaties),
+            signTreaty = s(studio.mgn.mgn.R.string.dip_sign),
+            breakTreaty = s(studio.mgn.mgn.R.string.dip_break),
+            declareWar = s(studio.mgn.mgn.R.string.dip_war),
+            warConfirmTitle = s(studio.mgn.mgn.R.string.dip_war_title),
+            warConfirmMessage = s(studio.mgn.mgn.R.string.dip_war_msg),
+            warConfirmOk = s(studio.mgn.mgn.R.string.dip_war_ok),
+            cancel = s(studio.mgn.mgn.R.string.dip_cancel),
+            stanceLabel = s(studio.mgn.mgn.R.string.dip_stance),
+            stanceDefensive = s(studio.mgn.mgn.R.string.dip_defensive),
+            stanceOffensive = s(studio.mgn.mgn.R.string.dip_offensive),
+            stanceNegotiate = s(studio.mgn.mgn.R.string.dip_negotiate),
+            atWarLabel = s(studio.mgn.mgn.R.string.dip_at_war),
+            sanctionedLabel = s(studio.mgn.mgn.R.string.dip_sanctioned),
+            warCostNote = s(studio.mgn.mgn.R.string.dip_war_cost),
+            treatyNames = mapOf(
+                "TRADE" to s(studio.mgn.mgn.R.string.treaty_TRADE),
+                "DEFENSIVE" to s(studio.mgn.mgn.R.string.treaty_DEFENSIVE),
+                "NON_AGGRESSION" to s(studio.mgn.mgn.R.string.treaty_NON_AGGRESSION),
+                "EMBASSY" to s(studio.mgn.mgn.R.string.treaty_EMBASSY),
+            ),
+            stanceNames = mapOf(
+                "DEFENSIVE" to s(studio.mgn.mgn.R.string.dip_defensive),
+                "OFFENSIVE" to s(studio.mgn.mgn.R.string.dip_offensive),
+                "NEGOTIATE" to s(studio.mgn.mgn.R.string.dip_negotiate),
+            ),
+        )
+    }
+}
+
+@Composable
+private fun rememberDevelopmentStrings(app: MgnApp): studio.mgn.development.DevelopmentStrings {
+    val res = app.resources
+    fun s(id: Int): String = res.getString(id)
+    val keyLabels = mapOf(
+        "economy" to s(studio.mgn.mgn.R.string.key_economy),
+        "publicSatisfaction" to s(studio.mgn.mgn.R.string.key_publicSatisfaction),
+        "culture" to s(studio.mgn.mgn.R.string.key_culture),
+        "education" to s(studio.mgn.mgn.R.string.key_education),
+        "technology" to s(studio.mgn.mgn.R.string.key_technology),
+        "tourism" to s(studio.mgn.mgn.R.string.key_tourism),
+        "health" to s(studio.mgn.mgn.R.string.key_health),
+        "energy" to s(studio.mgn.mgn.R.string.key_energy),
+        "agriculture" to s(studio.mgn.mgn.R.string.key_agriculture),
+        "industry" to s(studio.mgn.mgn.R.string.key_industry),
+        "foodSecurity" to s(studio.mgn.mgn.R.string.key_foodSecurity),
+        "environment" to s(studio.mgn.mgn.R.string.key_environment),
+        "militarySecurity" to s(studio.mgn.mgn.R.string.key_militarySecurity),
+        "digitalOpinion" to s(studio.mgn.mgn.R.string.key_digitalOpinion),
+    )
+    return remember {
+        studio.mgn.development.DevelopmentStrings(
+            title = s(studio.mgn.mgn.R.string.dev_title),
+            tabAvailable = s(studio.mgn.mgn.R.string.dev_available),
+            tabBuilding = s(studio.mgn.mgn.R.string.dev_building),
+            tabBuilt = s(studio.mgn.mgn.R.string.dev_built),
+            emptyAvailable = s(studio.mgn.mgn.R.string.dev_empty_available),
+            emptyBuilding = s(studio.mgn.mgn.R.string.dev_empty_building),
+            emptyBuilt = s(studio.mgn.mgn.R.string.dev_empty_built),
+            buildNow = s(studio.mgn.mgn.R.string.dev_build),
+            rushLabel = s(studio.mgn.mgn.R.string.dev_rush),
+            builtLabel = s(studio.mgn.mgn.R.string.dev_built_done),
+            remainingTurns = s(studio.mgn.mgn.R.string.dev_remaining),
+            costLabel = s(studio.mgn.mgn.R.string.dev_cost),
+            durationLabel = s(studio.mgn.mgn.R.string.dev_duration),
+            requiresLabel = s(studio.mgn.mgn.R.string.dev_requires),
+            gemsSuffix = s(studio.mgn.mgn.R.string.cmd_gems),
+            keyLabels = keyLabels,
         )
     }
 }
