@@ -63,6 +63,24 @@ private fun <T> awaitValue(
     return value
 }
 
+private fun <T> awaitFuture(
+    future: java.util.concurrent.Future<T>,
+    timeoutMs: Long = 8000,
+): T {
+    val deadline = System.currentTimeMillis() + timeoutMs
+    while (!future.isDone) {
+        idleMain()
+        Thread.sleep(15)
+        check(System.currentTimeMillis() < deadline) { "timed out waiting for event" }
+    }
+    return future.get()
+}
+
+private fun <T> collectFirstAsync(flow: kotlinx.coroutines.flow.Flow<T>) =
+    java.util.concurrent.Executors.newSingleThreadExecutor().submit<T> {
+        kotlinx.coroutines.runBlocking { flow.first() }
+    }
+
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [35])
 class AppViewModelsTest {
@@ -120,8 +138,7 @@ class AppViewModelsTest {
     fun `menu shows save summary and guards overwrite`() = runTest {
         repo.newGame(GameSetup("المجد", "رئيس"))
         val vm = MenuViewModel(repo)
-        val navEvents = mutableListOf<MenuNav>()
-        backgroundScope.launch { vm.nav.collect { navEvents.add(it) } }
+        val navFuture = collectFirstAsync(vm.nav)
 
         val loaded = awaitValue(vm.state) { !it.isLoading && it.summary != null }
         assertEquals("المجد", loaded.summary!!.countryName)
@@ -131,7 +148,7 @@ class AppViewModelsTest {
 
         vm.onEvent(MenuEvent.OverwriteConfirmed)
         awaitValue(vm.state) { !it.isLoading && it.summary == null }
-        assertTrue(navEvents.contains(MenuNav.SETUP))
+        assertEquals(MenuNav.SETUP, awaitFuture(navFuture))
     }
 
     @Test
@@ -203,15 +220,9 @@ class AppViewModelsTest {
         vm.onEvent(SetupEvent.Next)
         assertEquals(SetupStep.REVIEW, vm.state.value.step)
 
-        var done = false
-        backgroundScope.launch { vm.done.collect { done = true } }
+        val done = collectFirstAsync(vm.done)
         vm.onEvent(SetupEvent.Confirm)
-        val deadline = System.currentTimeMillis() + 8000
-        while (!done) {
-            idleMain()
-            Thread.sleep(15)
-            check(System.currentTimeMillis() < deadline) { "confirm timed out" }
-        }
+        awaitFuture(done)
         assertTrue(repo.hasSave())
         assertEquals("المجد", repo.peekSummary()!!.countryName)
     }
