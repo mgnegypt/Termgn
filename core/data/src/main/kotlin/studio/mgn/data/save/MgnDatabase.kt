@@ -10,7 +10,11 @@ import androidx.sqlite.db.SupportSQLiteDatabase
  * date_iso, saved_at).
  * v2: adds playtime_seconds (default 0).
  */
-@Database(entities = [SaveSlot::class], version = DB_SCHEMA_VERSION)
+@Database(
+    entities = [SaveSlot::class],
+    version = DB_SCHEMA_VERSION,
+    exportSchema = false,
+)
 abstract class MgnDatabase : RoomDatabase() {
     abstract fun saveDao(): SaveDao
 }

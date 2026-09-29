@@ -29,12 +29,10 @@ class SettingsStoreTest {
         store.setReduceMotion(true)
         store.setGraphicsQuality(GraphicsQuality.HIGH)
 
-        first(store.musicEnabled).let { assertEquals(false, it) }
-        first(store.sfxEnabled).let { assertEquals(false, it) }
-        first(store.vibrationEnabled).let { assertEquals(false, it) }
-        first(store.reduceMotion).let { assertEquals(true, it) }
-        first(store.graphicsQuality).let {
-            assertEquals(GraphicsQuality.HIGH, it)
-        }
+        assertEquals(false, store.musicEnabled.first())
+        assertEquals(false, store.sfxEnabled.first())
+        assertEquals(false, store.vibrationEnabled.first())
+        assertEquals(true, store.reduceMotion.first())
+        assertEquals(GraphicsQuality.HIGH, store.graphicsQuality.first())
     }
 }
