@@ -3,10 +3,8 @@ package studio.mgn.mgn.more
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import studio.mgn.data.GameRepository
 import studio.mgn.data.settings.GraphicsQuality
@@ -44,29 +42,44 @@ class SettingsViewModel(
     private val dialogs = MutableStateFlow(Dialogs())
     private val hasSave = MutableStateFlow(false)
 
-    val state: StateFlow<SettingsUiState> = combine(
-        settings.musicEnabled,
-        settings.sfxEnabled,
-        settings.vibrationEnabled,
-        settings.reduceMotion,
-        settings.graphicsQuality,
-        combine(dialogs, hasSave, ::DialogsWithSave),
-    ) { music, sfx, vibration, reduceMotion, graphics, extra ->
-        SettingsUiState(
-            music = music,
-            sfx = sfx,
-            vibration = vibration,
-            reduceMotion = reduceMotion,
-            graphics = graphics,
-            hasSave = extra.hasSave,
-            showDeleteFirst = extra.dialogs.first,
-            showDeleteSecond = extra.dialogs.second,
-        )
-    }.stateIn(viewModelScope, SharingStarted.Eagerly, SettingsUiState())
+    private val _state = MutableStateFlow(SettingsUiState())
+    val state: StateFlow<SettingsUiState> = _state.asStateFlow()
 
     init {
         viewModelScope.launch {
             hasSave.value = repository.hasSave()
+        }
+        viewModelScope.launch {
+            settings.musicEnabled.collect { _state.value = _state.value.copy(music = it) }
+        }
+        viewModelScope.launch {
+            settings.sfxEnabled.collect { _state.value = _state.value.copy(sfx = it) }
+        }
+        viewModelScope.launch {
+            settings.vibrationEnabled.collect {
+                _state.value = _state.value.copy(vibration = it)
+            }
+        }
+        viewModelScope.launch {
+            settings.reduceMotion.collect {
+                _state.value = _state.value.copy(reduceMotion = it)
+            }
+        }
+        viewModelScope.launch {
+            settings.graphicsQuality.collect {
+                _state.value = _state.value.copy(graphics = it)
+            }
+        }
+        viewModelScope.launch {
+            dialogs.collect {
+                _state.value = _state.value.copy(
+                    showDeleteFirst = it.first,
+                    showDeleteSecond = it.second,
+                )
+            }
+        }
+        viewModelScope.launch {
+            hasSave.collect { _state.value = _state.value.copy(hasSave = it) }
         }
     }
 
@@ -101,6 +114,4 @@ class SettingsViewModel(
     }
 
     private data class Dialogs(val first: Boolean = false, val second: Boolean = false)
-
-    private data class DialogsWithSave(val dialogs: Dialogs, val hasSave: Boolean)
 }
