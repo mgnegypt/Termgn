@@ -78,4 +78,82 @@
     <string name="game_turn">الدور %1$d</string>
     <string name="game_autosave_note">يُحفظ تقدّمك تلقائيًا نهاية كل دور.</string>
     <string name="game_full_coming">شاشة اللعبة الكاملة تصل في الخطة 3.</string>
+
+    <!-- Command screen -->
+    <string name="cmd_ruler_prefix">رئيس</string>
+    <string name="cmd_level">مستوى</string>
+    <string name="cmd_turn">الدور</string>
+    <string name="cmd_end_turn">إنهاء الدور</string>
+    <string name="cmd_processing">جارٍ معالجة الدور…</string>
+    <string name="cmd_decisions_pending">قرارات معلقة</string>
+    <string name="cmd_council">اجتماع مجلس الأمن</string>
+    <string name="cmd_council_open">افتح القرارات</string>
+    <string name="cmd_latest_events">آخر الأحداث</string>
+    <string name="cmd_indicators">مؤشرات الدولة</string>
+    <string name="cmd_missions">المهام</string>
+    <string name="cmd_show_all">عرض الكل</string>
+    <string name="cmd_report">تقرير الدور</string>
+    <string name="cmd_report_close">إغلاق</string>
+    <string name="cmd_report_treasury">الخزينة</string>
+    <string name="cmd_report_new_events">أحداث جديدة</string>
+    <string name="cmd_report_achievements">إنجازات</string>
+    <string name="cmd_report_missions">مهام منجزة</string>
+    <string name="cmd_decisions">القرارات المعلقة</string>
+    <string name="cmd_decisions_empty">لا قرارات معلقة</string>
+    <string name="cmd_reroll">استبدال</string>
+    <string name="cmd_gems">جواهر</string>
+    <string name="cmd_not_enough_gems">جواهر غير كافية</string>
+    <string name="cmd_result">النتيجة</string>
+    <string name="cmd_continue">متابعة</string>
+    <string name="cmd_build">ابنِ الآن</string>
+    <string name="cmd_rush">تسريع</string>
+    <string name="cmd_built">مكتمل</string>
+    <string name="cmd_under_construction">قيد البناء</string>
+    <string name="cmd_locked_soon">قريبًا</string>
+    <string name="cmd_placeholder_plan4">تصل في الخطة 4</string>
+    <string name="cmd_relation">العلاقة</string>
+    <string name="cmd_treaties">المعاهدات</string>
+    <string name="cmd_no_treaties">لا معاهدات</string>
+    <string name="cmd_remaining">دور متبقٍ</string>
+    <string name="cmd_cost">التكلفة</string>
+    <string name="cmd_effects">الأثر المتوقع</string>
+
+    <!-- Sections -->
+    <string name="section_dashboard">القيادة</string>
+    <string name="section_economy">الاقتصاد</string>
+    <string name="section_diplomacy">الدبلوماسية</string>
+    <string name="section_development">التطوير</string>
+    <string name="section_research">البحث</string>
+    <string name="section_intel">المخابرات</string>
+    <string name="section_history">السجل</string>
+    <string name="section_achievements">الإنجازات</string>
+    <string name="section_settings">الإعدادات</string>
+
+    <!-- Treaties -->
+    <string name="treaty_TRADE">تجارية</string>
+    <string name="treaty_DEFENSIVE">دفاعية</string>
+    <string name="treaty_NON_AGGRESSION">عدم اعتداء</string>
+    <string name="treaty_EMBASSY">سفارة</string>
+
+    <!-- Indicator labels -->
+    <string name="key_treasuryCash">الخزينة</string>
+    <string name="key_population">السكان</string>
+    <string name="key_legitimacy">الشرعية</string>
+    <string name="key_militarySecurity">العسكرية</string>
+    <string name="key_economy">الاقتصاد</string>
+    <string name="key_technology">التقنية</string>
+    <string name="key_culture">الثقافة</string>
+    <string name="key_publicSatisfaction">رضا الشعب</string>
+    <string name="key_digitalOpinion">الرأي الرقمي</string>
+    <string name="key_cyberSecurity">الأمن السيبراني</string>
+    <string name="key_environment">البيئة</string>
+    <string name="key_foodSecurity">الأمن الغذائي</string>
+    <string name="key_energy">الطاقة</string>
+    <string name="key_tourism">السياحة</string>
+    <string name="key_health">الصحة</string>
+    <string name="key_education">التعليم</string>
+    <string name="key_agriculture">الزراعة</string>
+    <string name="key_industry">الصناعة</string>
+    <string name="key_debt">الدين</string>
+    <string name="key_gems">الجواهر</string>
 </resources>

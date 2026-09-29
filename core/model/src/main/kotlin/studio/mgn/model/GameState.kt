@@ -71,6 +71,10 @@ data class GameState(
     // ── Log ──
     val history: List<HistoryEntry>,
     val unlockedAchievements: Set<String>,
+    /** Completed mission ids (rewards granted once). */
+    val completedMissions: Set<String> = emptySet(),
+    /** Ruler experience: +RULER_XP_PER_TURN each turn, level every RULER_XP_PER_LEVEL. */
+    val rulerXp: Int = 0,
     /** Event id -> turn it last fired, for cooldown checks. */
     val lastEventTurns: Map<String, Int>,
     val firedOnceEvents: Set<String>,
@@ -118,6 +122,17 @@ data class GameState(
             hasWon -> "نصر عظيم"
             else -> "مستمرة"
         }
+
+    /**
+     * Ruler level shown in the top bar (cosmetic progression).
+     * The divisor must stay equal to BalanceConfig.RULER_XP_PER_LEVEL
+     * (model cannot depend on engine; locked by an engine test).
+     */
+    val rulerLevel: Int get() = 1 + rulerXp / 100
+
+    /** Progress toward the next ruler level, 0..1. */
+    val rulerLevelProgress: Float
+        get() = (rulerXp % 100) / 100f
 
     // ── Keyed access (used by event effects and conditions) ──
 

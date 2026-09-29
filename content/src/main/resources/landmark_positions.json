@@ -1,0 +1,40 @@
+[
+  {
+    "id": "presidential_palace",
+    "x": 0.5,
+    "y": 0.3,
+    "decor": true,
+    "noteAr": "القصر الرئاسي — مشهد زخرفي، بلا مقابل في المحرك بعد"
+  },
+  {
+    "id": "national_university",
+    "x": 0.24,
+    "y": 0.55,
+    "decor": false
+  },
+  {
+    "id": "solar_farm",
+    "x": 0.76,
+    "y": 0.62,
+    "decor": false
+  },
+  {
+    "id": "industrial_park",
+    "x": 0.7,
+    "y": 0.34,
+    "decor": false
+  },
+  {
+    "id": "national_museum",
+    "x": 0.3,
+    "y": 0.72,
+    "decor": false
+  },
+  {
+    "id": "seaport",
+    "x": 0.86,
+    "y": 0.82,
+    "decor": true,
+    "noteAr": "الميناء البحري — مشهد زخرفي، بلا مقابل في المحرك بعد"
+  }
+]

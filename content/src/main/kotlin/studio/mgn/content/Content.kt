@@ -18,6 +18,7 @@ import studio.mgn.model.EventChoice
 import studio.mgn.model.GameEvent
 import studio.mgn.model.LandmarkDef
 import studio.mgn.model.LandmarkKind
+import studio.mgn.model.MissionDef
 
 /** Raw event JSON shape (conditions stay as JSON until mapped). */
 @Serializable
@@ -82,12 +83,33 @@ data class AchievementDto(
     val condition: JsonObject,
 )
 
+@Serializable
+data class MissionDto(
+    val id: String,
+    val titleAr: String,
+    val descriptionAr: String,
+    val goalKey: String,
+    val goalValue: Double,
+    val gemReward: Int = 0,
+)
+
+@Serializable
+data class LandmarkPositionDto(
+    val id: String,
+    val x: Double,
+    val y: Double,
+    val decor: Boolean = false,
+    val noteAr: String = "",
+)
+
 /** Full content pack handed to the engines. */
 data class ContentPack(
     val events: List<GameEvent>,
     val landmarks: List<LandmarkDef>,
     val countries: List<CountryDto>,
     val achievements: List<Achievement>,
+    val missions: List<MissionDef>,
+    val landmarkPositions: List<LandmarkPosition>,
 ) {
     val landmarkCatalog: Map<String, LandmarkDef> get() = landmarks.associateBy { it.id }
 
@@ -128,6 +150,32 @@ object ConditionMapper {
         return Condition.Cmp(key, op, value)
     }
 }
+
+/** A building sign on the city scene: relative 0..1 coords, or pure decor. */
+data class LandmarkPosition(
+    val id: String,
+    val x: Double,
+    val y: Double,
+    val decor: Boolean = false,
+    val noteAr: String = "",
+)
+
+fun MissionDto.toModel(): MissionDef = MissionDef(
+    id = id,
+    titleAr = titleAr,
+    descriptionAr = descriptionAr,
+    goalKey = goalKey,
+    goalValue = goalValue,
+    gemReward = gemReward,
+)
+
+fun LandmarkPositionDto.toModel(): LandmarkPosition = LandmarkPosition(
+    id = id,
+    x = x,
+    y = y,
+    decor = decor,
+    noteAr = noteAr,
+)
 
 fun EventDto.toModel(): GameEvent = GameEvent(
     id = id,
@@ -195,6 +243,11 @@ object ContentLoader {
         val countries = json.decodeFromString<List<CountryDto>>(read("countries.json"))
         val achievements = json.decodeFromString<List<AchievementDto>>(read("achievements.json"))
             .map { it.toModel() }
-        return ContentPack(events, landmarks, countries, achievements)
+        val missions = json.decodeFromString<List<MissionDto>>(read("missions.json"))
+            .map { it.toModel() }
+        val positions =
+            json.decodeFromString<List<LandmarkPositionDto>>(read("landmark_positions.json"))
+                .map { it.toModel() }
+        return ContentPack(events, landmarks, countries, achievements, missions, positions)
     }
 }

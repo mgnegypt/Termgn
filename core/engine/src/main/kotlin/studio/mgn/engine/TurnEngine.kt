@@ -6,6 +6,7 @@ import studio.mgn.model.GameState
 import studio.mgn.model.HistoryEntry
 import studio.mgn.model.HistoryTag
 import studio.mgn.model.LandmarkDef
+import studio.mgn.model.MissionDef
 import studio.mgn.model.Season
 import studio.mgn.model.StateKeys
 import studio.mgn.model.TurnLength
@@ -25,6 +26,7 @@ data class TurnReport(
     val completedLandmarks: List<LandmarkDef>,
     val pendingEvents: List<GameEvent>,
     val newAchievements: List<Achievement>,
+    val newMissions: List<MissionDef>,
     val yearlyReport: YearlyReport?,
     val referendum: ReferendumResult?,
 )
@@ -56,6 +58,7 @@ class TurnEngine(
     private val achievements: List<Achievement>,
     private val diplomacyEngine: DiplomacyEngine = DiplomacyEngine(),
     private val landmarkCatalog: Map<String, LandmarkDef> = emptyMap(),
+    private val missions: List<MissionDef> = emptyList(),
     private val rng: Random = Random.Default,
 ) {
     val diplomacy: DiplomacyEngine get() = diplomacyEngine
@@ -110,6 +113,12 @@ class TurnEngine(
         val achievementOutcome = checkAchievements(next)
         next = achievementOutcome.state
 
+        val (afterMissions, newMissions) =
+            MissionEngine.checkCompletions(next, missions)
+        next = afterMissions.copy(
+            rulerXp = afterMissions.rulerXp + BalanceConfig.RULER_XP_PER_TURN,
+        )
+
         next = next.clamped()
         return TurnReport(
             state = next,
@@ -120,6 +129,7 @@ class TurnEngine(
             completedLandmarks = completed,
             pendingEvents = pending,
             newAchievements = achievementOutcome.unlocked,
+            newMissions = newMissions,
             yearlyReport = yearly,
             referendum = referendum,
         )

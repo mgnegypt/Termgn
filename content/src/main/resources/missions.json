@@ -1,0 +1,50 @@
+[
+  {
+    "id": "m_first_landmark",
+    "titleAr": "حجر الأساس",
+    "descriptionAr": "أكمل بناء أول معلم في الدولة.",
+    "goalKey": "builtLandmarksCount",
+    "goalValue": 1,
+    "gemReward": 5
+  },
+  {
+    "id": "m_full_coffers",
+    "titleAr": "خزائن ممتلئة",
+    "descriptionAr": "اجمع 500 ألف في الخزينة.",
+    "goalKey": "treasuryCash",
+    "goalValue": 500000,
+    "gemReward": 8
+  },
+  {
+    "id": "m_growing_nation",
+    "titleAr": "أمة نامية",
+    "descriptionAr": "اصعد بالسكان إلى 13 مليون نسمة.",
+    "goalKey": "population",
+    "goalValue": 13000000,
+    "gemReward": 8
+  },
+  {
+    "id": "m_strong_economy",
+    "titleAr": "اقتصاد صلب",
+    "descriptionAr": "ارفع مؤشر الاقتصاد إلى 60.",
+    "goalKey": "economy",
+    "goalValue": 60,
+    "gemReward": 10
+  },
+  {
+    "id": "m_digital_leap",
+    "titleAr": "قفزة رقمية",
+    "descriptionAr": "ارفع التقنية إلى 50.",
+    "goalKey": "technology",
+    "goalValue": 50,
+    "gemReward": 10
+  },
+  {
+    "id": "m_open_doors",
+    "titleAr": "أبواب مفتوحة",
+    "descriptionAr": "وقّع معاهدتين تجاريتين.",
+    "goalKey": "tradeDealCount",
+    "goalValue": 2,
+    "gemReward": 10
+  }
+]

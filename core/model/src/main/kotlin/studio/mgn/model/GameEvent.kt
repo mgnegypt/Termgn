@@ -38,3 +38,17 @@ data class Achievement(
     val gemReward: Int = 0,
     val hidden: Boolean = false,
 )
+
+/**
+ * A player-facing mission with measurable progress.
+ * [goalKey] is resolved like a condition key (state key or derived special);
+ * the mission completes when its value reaches [goalValue].
+ */
+data class MissionDef(
+    val id: String,
+    val titleAr: String,
+    val descriptionAr: String,
+    val goalKey: String,
+    val goalValue: Double,
+    val gemReward: Int = 0,
+)

@@ -100,12 +100,44 @@ class ContentValidatorTest {
     }
 
     @Test
-    fun `landmark references resolve`() {
-        val ids = pack.landmarks.map { it.id }.toSet()
+    fun `landmark references resolve`() {        val ids = pack.landmarks.map { it.id }.toSet()
         assertEquals(ids.size, pack.landmarks.size)
         for (landmark in pack.landmarks) {
             assertTrue(landmark.buildTurns > 0, "${landmark.id} buildTurns")
             assertTrue(landmark.costCash > 0, "${landmark.id} costCash")
+        }
+    }
+
+    @Test
+    fun `missions are valid and measurable`() {
+        assertTrue(pack.missions.size in 4..10, "expected a small mission set")
+        val ids = pack.missions.map { it.id }
+        assertEquals(ids.size, ids.toSet().size, "duplicate mission id")
+        for (mission in pack.missions) {
+            assertTrue(mission.titleAr.isNotBlank(), "${mission.id} title")
+            assertTrue(mission.descriptionAr.isNotBlank(), "${mission.id} description")
+            assertTrue(
+                mission.goalKey in StateKeys.KNOWN_CONDITION_KEYS,
+                "${mission.id} goal ${mission.goalKey}",
+            )
+            assertTrue(mission.goalValue > 0, "${mission.id} goal value")
+            assertTrue(mission.gemReward >= 0, "${mission.id} reward")
+        }
+    }
+
+    @Test
+    fun `landmark positions are valid`() {
+        assertTrue(pack.landmarkPositions.isNotEmpty())
+        val landmarkIds = pack.landmarks.map { it.id }.toSet()
+        for (pos in pack.landmarkPositions) {
+            assertTrue(pos.x in 0.0..1.0, "${pos.id} x")
+            assertTrue(pos.y in 0.0..1.0, "${pos.id} y")
+            if (!pos.decor) {
+                assertTrue(
+                    pos.id in landmarkIds,
+                    "${pos.id} has no engine landmark; mark it decor",
+                )
+            }
         }
     }
 

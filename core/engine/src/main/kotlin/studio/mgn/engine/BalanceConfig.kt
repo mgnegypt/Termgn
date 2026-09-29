@@ -317,4 +317,12 @@ object BalanceConfig {
     const val GEMS_PER_CONSTRUCTION_TURN_SKIP = 3
     const val GEMS_PER_DECISION_REROLL = 5
     const val CASH_PER_GEM = 12000.0
+
+    // ── RULER PROGRESSION (cosmetic; never affects simulation balance) ──
+
+    /** XP granted per completed turn. */
+    const val RULER_XP_PER_TURN = 2
+
+    /** XP per ruler level. Must match the divisor in GameState.rulerLevel. */
+    const val RULER_XP_PER_LEVEL = 100
 }

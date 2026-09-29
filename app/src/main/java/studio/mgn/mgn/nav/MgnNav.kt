@@ -15,8 +15,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import studio.mgn.design.MgnTheme
 import studio.mgn.mgn.MgnApp
-import studio.mgn.mgn.game.GameScreen
-import studio.mgn.mgn.game.GameViewModel
+import studio.mgn.command.CommandScreen
+import studio.mgn.command.CommandStrings
+import studio.mgn.command.CommandViewModel
+import studio.mgn.model.GameState
 import studio.mgn.mgn.menu.MenuScreen
 import studio.mgn.mgn.menu.MenuViewModel
 import studio.mgn.mgn.more.AchievementsScreen
@@ -133,12 +135,121 @@ fun MgnNav(app: MgnApp, reduceMotion: Boolean) {
             )
         }
         composable(Routes.GAME) {
-            val vm: GameViewModel = viewModel {
-                GameViewModel(app.repository) { holder ->
-                    app.sessionHolder = holder
-                }
+            val vm: CommandViewModel = viewModel {
+                CommandViewModel(
+                    repository = app.repository,
+                    content = app.content,
+                    registrar = object : CommandViewModel.SessionRegistrar {
+                        override fun registerSession(initial: GameState) {
+                            app.sessionHolder =
+                                studio.mgn.mgn.SessionHolder(app.repository, initial)
+                        }
+
+                        override fun session(): CommandViewModel.SessionHandle? {
+                            val holder = app.sessionHolder ?: return null
+                            return object : CommandViewModel.SessionHandle {
+                                override fun update(state: GameState) {
+                                    holder.update(state)
+                                }
+                            }
+                        }
+                    },
+                )
             }
-            GameScreen(viewModel = vm)
+            CommandScreen(
+                viewModel = vm,
+                content = app.content,
+                strings = rememberCommandStrings(app),
+                reduceMotion = reduceMotion,
+            )
         }
+    }
+}
+
+@Composable
+private fun rememberCommandStrings(app: MgnApp): CommandStrings {
+    val res = app.resources
+    fun s(id: Int): String = res.getString(id)
+    return remember {
+        CommandStrings(
+            rulerTitlePrefix = s(studio.mgn.mgn.R.string.cmd_ruler_prefix),
+            level = s(studio.mgn.mgn.R.string.cmd_level),
+            turn = s(studio.mgn.mgn.R.string.cmd_turn),
+            endTurn = s(studio.mgn.mgn.R.string.cmd_end_turn),
+            processing = s(studio.mgn.mgn.R.string.cmd_processing),
+            decisionsPending = s(studio.mgn.mgn.R.string.cmd_decisions_pending),
+            councilTitle = s(studio.mgn.mgn.R.string.cmd_council),
+            councilOpen = s(studio.mgn.mgn.R.string.cmd_council_open),
+            latestEvents = s(studio.mgn.mgn.R.string.cmd_latest_events),
+            indicatorsTitle = s(studio.mgn.mgn.R.string.cmd_indicators),
+            missionsTitle = s(studio.mgn.mgn.R.string.cmd_missions),
+            showAll = s(studio.mgn.mgn.R.string.cmd_show_all),
+            reportTitle = s(studio.mgn.mgn.R.string.cmd_report),
+            reportClose = s(studio.mgn.mgn.R.string.cmd_report_close),
+            reportTreasury = s(studio.mgn.mgn.R.string.cmd_report_treasury),
+            reportNewEvents = s(studio.mgn.mgn.R.string.cmd_report_new_events),
+            reportAchievements = s(studio.mgn.mgn.R.string.cmd_report_achievements),
+            reportMissions = s(studio.mgn.mgn.R.string.cmd_report_missions),
+            decisionsTitle = s(studio.mgn.mgn.R.string.cmd_decisions),
+            decisionsEmpty = s(studio.mgn.mgn.R.string.cmd_decisions_empty),
+            reroll = s(studio.mgn.mgn.R.string.cmd_reroll),
+            gemsSuffix = s(studio.mgn.mgn.R.string.cmd_gems),
+            notEnoughGems = s(studio.mgn.mgn.R.string.cmd_not_enough_gems),
+            chooseResult = s(studio.mgn.mgn.R.string.cmd_result),
+            continueLabel = s(studio.mgn.mgn.R.string.cmd_continue),
+            buildNow = s(studio.mgn.mgn.R.string.cmd_build),
+            rushLabel = s(studio.mgn.mgn.R.string.cmd_rush),
+            builtLabel = s(studio.mgn.mgn.R.string.cmd_built),
+            underConstructionLabel = s(
+                studio.mgn.mgn.R.string.cmd_under_construction,
+            ),
+            lockedSoon = s(studio.mgn.mgn.R.string.cmd_locked_soon),
+            placeholderSection = s(studio.mgn.mgn.R.string.cmd_placeholder_plan4),
+            relationLabel = s(studio.mgn.mgn.R.string.cmd_relation),
+            treatiesLabel = s(studio.mgn.mgn.R.string.cmd_treaties),
+            noTreaties = s(studio.mgn.mgn.R.string.cmd_no_treaties),
+            remainingTurns = s(studio.mgn.mgn.R.string.cmd_remaining),
+            costLabel = s(studio.mgn.mgn.R.string.cmd_cost),
+            effectsPreview = s(studio.mgn.mgn.R.string.cmd_effects),
+            keyLabels = mapOf(
+                "treasuryCash" to s(studio.mgn.mgn.R.string.key_treasuryCash),
+                "population" to s(studio.mgn.mgn.R.string.key_population),
+                "legitimacy" to s(studio.mgn.mgn.R.string.key_legitimacy),
+                "militarySecurity" to s(studio.mgn.mgn.R.string.key_militarySecurity),
+                "economy" to s(studio.mgn.mgn.R.string.key_economy),
+                "technology" to s(studio.mgn.mgn.R.string.key_technology),
+                "culture" to s(studio.mgn.mgn.R.string.key_culture),
+                "publicSatisfaction" to s(
+                    studio.mgn.mgn.R.string.key_publicSatisfaction,
+                ),
+                "digitalOpinion" to s(studio.mgn.mgn.R.string.key_digitalOpinion),
+                "cyberSecurity" to s(studio.mgn.mgn.R.string.key_cyberSecurity),
+                "environment" to s(studio.mgn.mgn.R.string.key_environment),
+                "foodSecurity" to s(studio.mgn.mgn.R.string.key_foodSecurity),
+                "energy" to s(studio.mgn.mgn.R.string.key_energy),
+                "tourism" to s(studio.mgn.mgn.R.string.key_tourism),
+                "health" to s(studio.mgn.mgn.R.string.key_health),
+                "education" to s(studio.mgn.mgn.R.string.key_education),
+                "agriculture" to s(studio.mgn.mgn.R.string.key_agriculture),
+                "industry" to s(studio.mgn.mgn.R.string.key_industry),
+                "debt" to s(studio.mgn.mgn.R.string.key_debt),
+                "gems" to s(studio.mgn.mgn.R.string.key_gems),
+                "TRADE" to s(studio.mgn.mgn.R.string.treaty_TRADE),
+                "DEFENSIVE" to s(studio.mgn.mgn.R.string.treaty_DEFENSIVE),
+                "NON_AGGRESSION" to s(studio.mgn.mgn.R.string.treaty_NON_AGGRESSION),
+                "EMBASSY" to s(studio.mgn.mgn.R.string.treaty_EMBASSY),
+            ),
+            sectionLabels = mapOf(
+                "DASHBOARD" to s(studio.mgn.mgn.R.string.section_dashboard),
+                "ECONOMY" to s(studio.mgn.mgn.R.string.section_economy),
+                "DIPLOMACY" to s(studio.mgn.mgn.R.string.section_diplomacy),
+                "DEVELOPMENT" to s(studio.mgn.mgn.R.string.section_development),
+                "RESEARCH" to s(studio.mgn.mgn.R.string.section_research),
+                "INTEL" to s(studio.mgn.mgn.R.string.section_intel),
+                "HISTORY" to s(studio.mgn.mgn.R.string.section_history),
+                "ACHIEVEMENTS" to s(studio.mgn.mgn.R.string.section_achievements),
+                "SETTINGS" to s(studio.mgn.mgn.R.string.section_settings),
+            ),
+        )
     }
 }
