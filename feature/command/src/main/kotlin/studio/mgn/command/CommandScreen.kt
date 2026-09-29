@@ -80,13 +80,15 @@ fun CommandScreen(
         reduceMotion = reduceMotion,
         onEvent = viewModel::onEvent,
     )
-    if (ui.showReport && ui.lastReport != null) {
-        TurnReportSheet(
-            report = ui.lastReport,
-            before = ui.previous,
-            strings = strings,
-            onClose = { viewModel.onEvent(CommandEvent.DismissReport) },
-        )
+    if (ui.showReport) {
+        ui.lastReport?.let { report ->
+            TurnReportSheet(
+                report = report,
+                before = ui.previous,
+                strings = strings,
+                onClose = { viewModel.onEvent(CommandEvent.DismissReport) },
+            )
+        }
     }
     ui.selectedIndicator?.let { key ->
         IndicatorSheet(

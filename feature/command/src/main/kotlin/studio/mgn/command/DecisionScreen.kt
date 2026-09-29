@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import studio.mgn.design.AssetPlaceholder
 import studio.mgn.design.GameButton
 import studio.mgn.design.GoldFramePanel
 import studio.mgn.design.MgnBanner
