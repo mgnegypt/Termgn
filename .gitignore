@@ -1,14 +1,15 @@
-.dart_tool/
-.packages
+# Gradle / Android
+.gradle/
 build/
-.flutter-plugins
-.flutter-plugins-dependencies
-pubspec.lock
+local.properties
 *.iml
 .idea/
 .vscode/
-android/.gradle/
-android/local.properties
-android/app/build/
-ios/Pods/
-ios/.symlinks/
+captures/
+
+# Legacy Flutter reference (kept for reading only, never built)
+legacy_flutter/build/
+legacy_flutter/.dart_tool/
+
+# Python tools
+__pycache__/

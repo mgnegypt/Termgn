@@ -1,0 +1,1228 @@
+[
+ {
+  "id": "m_hashtag_wave",
+  "title": "هاشتاج ضد وزير",
+  "description": "حملة إلكترونية واسعة تطالب بإقالة أحد الوزراء بعد تصريح مثير للجدل.",
+  "category": "modern",
+  "weight": 12,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "إقالة الوزير",
+    "resultText": "الشارع الرقمي احتفل بالقرار.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "digitalOpinion": 10.0,
+     "publicSatisfaction": 4.0,
+     "economy": -1.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "اعتذار رسمي بدون إقالة",
+    "resultText": "الغضب خفّ جزئيًا.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "digitalOpinion": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تجاهل الحملة",
+    "resultText": "الحملة تضخمت لأسابيع.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "digitalOpinion": -12.0,
+     "publicSatisfaction": -3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "m_data_leak",
+  "title": "تسريب بيانات حكومية",
+  "description": "تسريب قاعدة بيانات تحتوي معلومات مواطنين على الإنترنت.",
+  "category": "modern",
+  "weight": 11,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "تحقيق شفاف وتحديث أنظمة الحماية",
+    "resultText": "الثقة تضررت لكن النظام أصبح أقوى.",
+    "costCash": 120000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "cyberSecurity": 8.0,
+     "digitalOpinion": -3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "التقليل من حجم الحادث",
+    "resultText": "الغضب الرقمي تصاعد بسرعة.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "digitalOpinion": -14.0,
+     "cyberSecurity": -3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ],
+  "condition": {
+   "key": "cyberSecurity",
+   "op": "<",
+   "value": 70
+  }
+ },
+ {
+  "id": "m_ransomware_hospital",
+  "title": "هجوم فدية على مستشفى",
+  "description": "برمجية فدية عطّلت أنظمة أحد أكبر المستشفيات.",
+  "category": "modern",
+  "weight": 10,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "دفع الفدية لاستعادة الخدمة فورًا",
+    "resultText": "الخدمة عادت بسرعة وسابقة خطيرة تأسست.",
+    "costCash": 140000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "health": 1.0,
+     "cyberSecurity": -4.0,
+     "digitalOpinion": -4.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "رفض الدفع واستعادة الأنظمة يدويًا",
+    "resultText": "أسابيع من التعطل، لكن بلا تنازل.",
+    "costCash": 60000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "health": -6.0,
+     "cyberSecurity": 6.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ],
+  "condition": {
+   "key": "cyberSecurity",
+   "op": "<",
+   "value": 65
+  }
+ },
+ {
+  "id": "m_ai_regulation",
+  "title": "قانون تنظيم الذكاء الاصطناعي",
+  "description": "ضغوط متضاربة: الشركات تريد حرية أوسع، والنقابات تخشى فقدان الوظائف.",
+  "category": "modern",
+  "weight": 12,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "تحرير واسع للاستخدام",
+    "resultText": "قفزة تقنية وقلق اجتماعي.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "technology": 8.0,
+     "economy": 4.0,
+     "publicSatisfaction": -5.0,
+     "axisEconomic": -6.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تنظيم صارم يحمي الوظائف",
+    "resultText": "استقرار اجتماعي ونمو تقني أبطأ.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "technology": -3.0,
+     "publicSatisfaction": 6.0,
+     "axisEconomic": 6.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تنظيم متوازن مع برامج إعادة تأهيل",
+    "resultText": "مسار وسط مكلف لكنه مستقر.",
+    "costCash": 110000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "technology": 4.0,
+     "education": 4.0,
+     "publicSatisfaction": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "m_crypto_decision",
+  "title": "قرار بشأن العملات الرقمية",
+  "description": "انتشار تداول الكريبتو يفرض قرارًا تنظيميًا واضحًا.",
+  "category": "modern",
+  "weight": 11,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "ترخيص منظّم وفرض ضرائب",
+    "resultText": "إيراد جديد وتقلب مالي مقبول.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "treasuryCash": 150000.0,
+     "technology": 4.0,
+     "economy": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": -2.0
+   },
+   {
+    "label": "حظر كامل",
+    "resultText": "استقرار مالي وغضب في مجتمع التقنية.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "digitalOpinion": -7.0,
+     "technology": -3.0,
+     "economy": -1.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تأجيل القرار ومراقبة السوق",
+    "resultText": "الغموض التنظيمي استمر.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "economy": -1.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "m_remote_work_tax",
+  "title": "ضرائب العمل عن بعد",
+  "description": "آلاف يعملون عن بعد لشركات أجنبية بلا إطار ضريبي واضح.",
+  "category": "modern",
+  "weight": 10,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "إطار ضريبي مبسّط",
+    "resultText": "إيراد منتظم وقبول واسع.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "treasuryCash": 90000.0,
+     "technology": 2.0,
+     "digitalOpinion": -2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "إعفاء كامل لجذب الكفاءات",
+    "resultText": "الكفاءات بقيت والخزينة خسرت فرصة.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "migrationBalance": 3.0,
+     "technology": 4.0,
+     "digitalOpinion": 5.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "m_deepfake",
+  "title": "مقطع مفبرك للحاكم",
+  "description": "فيديو مزيف بالذكاء الاصطناعي ينتشر بسرعة على المنصات.",
+  "category": "modern",
+  "weight": 11,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "رد تقني موثّق وسريع",
+    "resultText": "الفبركة انكشفت وزادت الثقة في الدولة.",
+    "costCash": 40000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "digitalOpinion": 8.0,
+     "cyberSecurity": 3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "حجب المنصة مؤقتًا",
+    "resultText": "انتشار أقل وانتقادات أكبر.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "digitalOpinion": -10.0,
+     "axisSocial": 6.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "الصمت",
+    "resultText": "الرواية المزيفة سيطرت على النقاش.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "digitalOpinion": -8.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "m_startup_unicorn",
+  "title": "شركة ناشئة تحقق نجاحًا عالميًا",
+  "description": "شركة محلية تصل لتقييم ضخم وتضع الدولة على الخريطة التقنية.",
+  "category": "modern",
+  "weight": 9,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "دعمها كواجهة وطنية",
+    "resultText": "موجة استثمار واهتمام دولي.",
+    "costCash": 50000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "technology": 6.0,
+     "economy": 5.0,
+     "digitalOpinion": 6.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "الحياد وترك السوق يعمل",
+    "resultText": "نجاح خاص بأثر عام محدود.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "economy": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ],
+  "condition": {
+   "key": "technology",
+   "op": ">=",
+   "value": 40
+  }
+ },
+ {
+  "id": "m_platform_ban_demand",
+  "title": "مطالب بحجب منصة",
+  "description": "تيار محافظ يطالب بحجب منصة اجتماعية واسعة الانتشار.",
+  "category": "modern",
+  "weight": 10,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "الحجب",
+    "resultText": "رضا فئة ورفض فئة أكبر رقميًا.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "digitalOpinion": -12.0,
+     "axisSocial": 10.0,
+     "publicSatisfaction": -2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تنظيم المحتوى بدل الحجب",
+    "resultText": "حل وسط هدّأ الجدل.",
+    "costCash": 30000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "digitalOpinion": 2.0,
+     "cyberSecurity": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "m_climate_summit",
+  "title": "قمة مناخية دولية",
+  "description": "ضغط دولي لتقديم التزامات بخفض الانبعاثات.",
+  "category": "modern",
+  "weight": 11,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "التزام طموح",
+    "resultText": "إشادة دولية وتكلفة صناعية.",
+    "costCash": 120000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "environment": 7.0,
+     "cleanEnergyRatio": 0.06,
+     "industry": -3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 6.0
+   },
+   {
+    "label": "التزام رمزي",
+    "resultText": "موقف محسوب بلا مكاسب كبيرة.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "environment": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 1.0
+   },
+   {
+    "label": "رفض أي التزام",
+    "resultText": "حرية صناعية وعزلة أكبر.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "industry": 3.0,
+     "environment": -4.0,
+     "axisForeign": 5.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": -7.0
+   }
+  ]
+ },
+ {
+  "id": "m_carbon_tax",
+  "title": "ضريبة الكربون",
+  "description": "مقترح بفرض ضريبة على الانبعاثات الصناعية.",
+  "category": "modern",
+  "weight": 10,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "إقرار الضريبة",
+    "resultText": "إيراد جديد وضغط على الصناعة.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "treasuryCash": 110000.0,
+     "environment": 5.0,
+     "industry": -4.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تأجيلها",
+    "resultText": "الصناعة ارتاحت والانبعاثات مستمرة.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "environment": -2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ],
+  "condition": {
+   "key": "industry",
+   "op": ">=",
+   "value": 40
+  }
+ },
+ {
+  "id": "m_solar_offer",
+  "title": "عرض مشروع شمسي",
+  "description": "تحالف دولي يعرض تمويل مشروع طاقة شمسية كبير.",
+  "category": "modern",
+  "weight": 10,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "القبول بشراكة",
+    "resultText": "طاقة نظيفة أسرع بتنازل عن حصة أرباح.",
+    "costCash": 80000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "energy": 7.0,
+     "cleanEnergyRatio": 0.1,
+     "environment": 4.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 3.0
+   },
+   {
+    "label": "تنفيذ وطني كامل",
+    "resultText": "تكلفة أعلى وسيادة كاملة على المشروع.",
+    "costCash": 200000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "energy": 8.0,
+     "cleanEnergyRatio": 0.12,
+     "axisEconomic": 5.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "m_ev_mandate",
+  "title": "إلزام السيارات الكهربائية",
+  "description": "مقترح لإلزام تحويل أسطول النقل إلى كهربائي تدريجيًا.",
+  "category": "modern",
+  "weight": 9,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "إقرار خطة تحول",
+    "resultText": "بيئة أفضل وتكلفة انتقالية.",
+    "costCash": 130000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "environment": 6.0,
+     "technology": 3.0,
+     "publicSatisfaction": -2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تحفيز طوعي فقط",
+    "resultText": "تحول أبطأ بلا صدام.",
+    "costCash": 40000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "environment": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ],
+  "condition": {
+   "key": "energy",
+   "op": ">=",
+   "value": 45
+  }
+ },
+ {
+  "id": "m_gig_protest",
+  "title": "احتجاج عمال التطبيقات",
+  "description": "سائقو ومندوبو التطبيقات يطالبون بحقوق وتأمين صحي.",
+  "category": "modern",
+  "weight": 10,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "قانون يمنحهم حقوقًا كاملة",
+    "resultText": "عدالة اجتماعية بتكلفة على الشركات.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": 7.0,
+     "digitalOpinion": 5.0,
+     "economy": -3.0,
+     "axisEconomic": 6.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تسوية مع الشركات",
+    "resultText": "تحسن جزئي في الظروف.",
+    "costCash": 50000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": 3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "ترك الأمر للسوق",
+    "resultText": "الاحتجاجات استمرت رقميًا.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "digitalOpinion": -7.0,
+     "publicSatisfaction": -4.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "m_smart_city",
+  "title": "مشروع مدينة ذكية",
+  "description": "خطة لبناء حي ذكي بالكامل كنموذج تقني.",
+  "category": "modern",
+  "weight": 9,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "إطلاق المشروع",
+    "resultText": "واجهة تقنية للدولة وعائد طويل المدى.",
+    "costCash": 230000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "technology": 8.0,
+     "economy": 4.0,
+     "digitalOpinion": 5.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "الاكتفاء بمشروع تجريبي صغير",
+    "resultText": "تجربة محدودة بمخاطر أقل.",
+    "costCash": 70000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "technology": 3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ],
+  "condition": {
+   "all": [
+    {
+     "key": "technology",
+     "op": ">=",
+     "value": 45
+    },
+    {
+     "key": "treasuryCash",
+     "op": ">",
+     "value": 250000
+    }
+   ]
+  }
+ },
+ {
+  "id": "m_egov",
+  "title": "تحول رقمي في الخدمات الحكومية",
+  "description": "خطة لنقل كل الخدمات الحكومية إلى منصة واحدة.",
+  "category": "modern",
+  "weight": 11,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "تنفيذ شامل",
+    "resultText": "كفاءة أعلى ورضا رقمي واضح.",
+    "costCash": 150000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "technology": 6.0,
+     "digitalOpinion": 8.0,
+     "economy": 3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تنفيذ تدريجي",
+    "resultText": "تقدم بطيء لكنه آمن.",
+    "costCash": 60000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "technology": 3.0,
+     "digitalOpinion": 3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "m_cable_cut",
+  "title": "انقطاع كابل بحري",
+  "description": "تلف كابل إنترنت بحري يبطئ الاتصال في البلاد.",
+  "category": "modern",
+  "weight": 9,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "إصلاح عاجل وتنويع المسارات",
+    "resultText": "الشبكة أصبحت أكثر مرونة.",
+    "costCash": 100000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "technology": 4.0,
+     "cyberSecurity": 4.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "إصلاح الحد الأدنى",
+    "resultText": "الخدمة عادت بهشاشة كما كانت.",
+    "costCash": 35000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "digitalOpinion": -4.0,
+     "economy": -2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "m_chip_shortage",
+  "title": "نقص عالمي في الرقائق",
+  "description": "أزمة إمداد عالمية تعطل خطوط الإنتاج التقني.",
+  "category": "modern",
+  "weight": 9,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "شراء بأسعار مرتفعة",
+    "resultText": "الإنتاج استمر بتكلفة عالية.",
+    "costCash": 140000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "industry": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "استثمار في تصنيع محلي",
+    "resultText": "بداية سلسلة إمداد وطنية.",
+    "costCash": 200000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "technology": 6.0,
+     "industry": 5.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تقليص الإنتاج مؤقتًا",
+    "resultText": "توفير مالي بخسارة اقتصادية.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "industry": -5.0,
+     "economy": -3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "m_tech_giant_office",
+  "title": "شركة تقنية عالمية تطلب مقرًا",
+  "description": "عملاق تقني يريد مقرًا إقليميًا مقابل حوافز وبيانات.",
+  "category": "modern",
+  "weight": 10,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "الموافقة بشروط سيادة البيانات",
+    "resultText": "وظائف واستثمار مع حفظ البيانات محليًا.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "economy": 5.0,
+     "technology": 5.0,
+     "cyberSecurity": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 2.0
+   },
+   {
+    "label": "الموافقة بحوافز سخية",
+    "resultText": "استثمار أكبر بتنازلات تنظيمية.",
+    "costCash": 90000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "economy": 7.0,
+     "technology": 6.0,
+     "cyberSecurity": -4.0,
+     "axisEconomic": -6.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "الرفض",
+    "resultText": "سيادة أعلى وفرصة اقتصادية ضائعة.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "axisEconomic": 5.0,
+     "technology": -2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "m_cbdc",
+  "title": "عملة رقمية للبنك المركزي",
+  "description": "مقترح بإصدار نسخة رقمية رسمية من عملة الدولة.",
+  "category": "modern",
+  "weight": 9,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "الإصدار",
+    "resultText": "كفاءة مالية أعلى وجدل حول الخصوصية.",
+    "costCash": 120000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "economy": 5.0,
+     "technology": 4.0,
+     "digitalOpinion": -3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "دراسة وتأجيل",
+    "resultText": "قرار محافظ بلا مخاطر.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {},
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ],
+  "condition": {
+   "key": "technology",
+   "op": ">=",
+   "value": 40
+  }
+ },
+ {
+  "id": "m_misinformation",
+  "title": "موجة تضليل إعلامي",
+  "description": "حسابات منظمة تنشر أخبارًا مزيفة عن أزمة داخلية.",
+  "category": "modern",
+  "weight": 11,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "غرفة تحقق ووعي رقمي",
+    "resultText": "الرواية الرسمية استعادت الثقة.",
+    "costCash": 60000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "digitalOpinion": 7.0,
+     "cyberSecurity": 3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "ملاحقة قانونية للحسابات",
+    "resultText": "ردع فعّال بثمن على صورة الحريات.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "digitalOpinion": -4.0,
+     "cyberSecurity": 4.0,
+     "axisSocial": 5.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "m_ai_job_loss",
+  "title": "أتمتة تهدد وظائف",
+  "description": "شركات كبرى تستبدل آلاف الوظائف بأنظمة ذكية.",
+  "category": "modern",
+  "weight": 11,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "برنامج وطني لإعادة التأهيل",
+    "resultText": "انتقال أهدأ لسوق العمل.",
+    "costCash": 140000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "education": 6.0,
+     "publicSatisfaction": 5.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "ضريبة على الأتمتة",
+    "resultText": "إيراد وحماية جزئية للوظائف.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "treasuryCash": 100000.0,
+     "technology": -3.0,
+     "publicSatisfaction": 3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "ترك السوق يتكيّف",
+    "resultText": "نمو تقني سريع وتوتر اجتماعي.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "technology": 5.0,
+     "publicSatisfaction": -7.0,
+     "digitalOpinion": -5.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ],
+  "condition": {
+   "key": "technology",
+   "op": ">=",
+   "value": 50
+  }
+ },
+ {
+  "id": "m_green_bonds",
+  "title": "سندات خضراء",
+  "description": "فرصة لإصدار سندات مخصصة لمشاريع بيئية.",
+  "category": "modern",
+  "weight": 9,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "الإصدار",
+    "resultText": "تمويل بيئي فوري مقابل دين إضافي.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "treasuryCash": 200000.0,
+     "debt": 200000.0,
+     "environment": 4.0,
+     "cleanEnergyRatio": 0.05
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 3.0
+   },
+   {
+    "label": "الاعتذار",
+    "resultText": "لا دين جديد ولا تمويل بيئي.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {},
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "m_data_sovereignty",
+  "title": "قانون سيادة البيانات",
+  "description": "مقترح بإلزام تخزين بيانات المواطنين داخل الدولة.",
+  "category": "modern",
+  "weight": 10,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "الإقرار",
+    "resultText": "حماية أعلى وتكلفة على الشركات الأجنبية.",
+    "costCash": 80000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "cyberSecurity": 8.0,
+     "technology": 2.0,
+     "economy": -2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": -3.0
+   },
+   {
+    "label": "إطار مرن",
+    "resultText": "توازن بين الحماية وجذب الاستثمار.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "cyberSecurity": 3.0,
+     "economy": 1.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "m_drone_incursion",
+  "title": "اختراق بطائرة مسيّرة",
+  "description": "مسيّرة مجهولة تحلق فوق منشأة حساسة.",
+  "category": "modern",
+  "weight": 9,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "منظومة مضادة للمسيّرات",
+    "resultText": "الأجواء الحساسة أصبحت محمية.",
+    "costCash": 130000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "militarySecurity": 6.0,
+     "cyberSecurity": 3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تحقيق أمني فقط",
+    "resultText": "معلومات أكثر بلا حماية جديدة.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "militarySecurity": 1.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "m_satellite_program",
+  "title": "برنامج أقمار صناعية",
+  "description": "مقترح لإطلاق أول قمر صناعي وطني للاتصالات والرصد.",
+  "category": "modern",
+  "weight": 8,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "إطلاق البرنامج",
+    "resultText": "قفزة رمزية وتقنية للدولة.",
+    "costCash": 260000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "technology": 9.0,
+     "militarySecurity": 4.0,
+     "digitalOpinion": 6.0,
+     "culture": 3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "استئجار خدمات أقمار أجنبية",
+    "resultText": "حل عملي أرخص بلا سيادة تقنية.",
+    "costCash": 70000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "technology": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ],
+  "condition": {
+   "key": "technology",
+   "op": ">=",
+   "value": 55
+  }
+ },
+ {
+  "id": "m_viral_tourism",
+  "title": "لحظة سياحية فيروسية",
+  "description": "مقطع لأحد معالم الدولة يحقق انتشارًا عالميًا هائلًا.",
+  "category": "modern",
+  "weight": 9,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "حملة تسويق سياحي فورية",
+    "resultText": "موجة زوار غير مسبوقة.",
+    "costCash": 70000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "tourism": 8.0,
+     "digitalOpinion": 6.0,
+     "culture": 3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "الاستفادة المجانية من الزخم",
+    "resultText": "ارتفاع محدود لكنه بلا تكلفة.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "tourism": 3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ],
+  "condition": {
+   "key": "builtLandmarksCount",
+   "op": ">=",
+   "value": 1
+  }
+ },
+ {
+  "id": "m_influencer_scandal",
+  "title": "جدل حول مؤثر مدعوم حكوميًا",
+  "description": "حملة دعائية رسمية عبر مؤثرين تتحول إلى مادة للسخرية.",
+  "category": "modern",
+  "weight": 9,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "وقف الحملة والاعتراف بالخطأ",
+    "resultText": "شفافية أعادت جزءًا من الثقة.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "digitalOpinion": 4.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "مضاعفة الميزانية الدعائية",
+    "resultText": "ضجيج أكثر ومصداقية أقل.",
+    "costCash": 60000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "digitalOpinion": -8.0,
+     "publicSatisfaction": -2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "m_open_data",
+  "title": "مبادرة البيانات المفتوحة",
+  "description": "مقترح بنشر بيانات الدولة غير الحساسة للعامة والباحثين.",
+  "category": "modern",
+  "weight": 8,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "الإطلاق",
+    "resultText": "شفافية وبيئة بحثية أنشط.",
+    "costCash": 45000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "digitalOpinion": 6.0,
+     "education": 3.0,
+     "technology": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "الاكتفاء بتقارير رسمية",
+    "resultText": "سيطرة أكبر على المعلومة.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "digitalOpinion": -3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ }
+]

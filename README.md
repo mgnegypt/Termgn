@@ -1,114 +1,64 @@
-# MGN
+# MGN — Kotlin rebuild (PLAN 1 of 5)
 
-محاكاة إدارة دولة وبناء حضارة — **إنتاج MGN STUDIO**.
+محاكاة إدارة دولة وبناء حضارة — **إنتاج MGN STUDIO** — معاد بناؤها بـ
+**Kotlin + Jetpack Compose** من الصفر.
 
-لعبة أندرويد (Flutter) تعمل **بلا إنترنت بالكامل**: لا سيرفر، لا صلاحيات شبكة،
-تخزين محلي فقط. الرسومات مكتوبة كـ كود بلا أي ملفات صور خارجية.
+> **الحالة:** PLAN 1 — الأساس + الـ Engine + المحتوى.
+> التطبيق يفتح على شاشة فارغة داكنة ("MGN"). الشاشات الحقيقية في الخطط اللاحقة.
 
-> الأجهزة المستهدفة: **Android 15+ فقط (minSdk 35)**. لا دعم للإصدارات الأقدم.
-
----
-
-## Current Status (v0.2.0)
-
-| المرحلة | المحتوى | الحالة |
-|---|---|---|
-| 1 | Models + Hive | ✅ مكتملة |
-| 2 | Economy + Event + Diplomacy + Turn engines | ✅ مكتملة |
-| 3 | Theme (ألوان/خطوط) | ✅ أساسي يعمل (SVG/Painters لاحقًا) |
-| 4 | المحتوى (68 حدث، 15 معلم، 10 دول، 18 إنجاز) | ✅ مكتملة |
-| 5 | شاشات اللعبة | ✅ مكتملة وظيفيًا: الرئيسية، القرارات، القطاعات، الدبلوماسية، المعالم |
-| 6 | إعداد الدولة + Settings | ✅ مكتملة |
-| 7 | حفظ/تحميل + توازن | ✅ حفظ متين + 25 اختبارًا + محاكاة 120 دورًا |
-| 8 | تلميع وانيميشن | ⏳ أساسي فقط (الأولوية للوظيفة) |
-| 9 | نشر Google Play | ⏳ لاحقًا (التوقيع الإنتاجي عند الحاجة) |
-
-اللعبة **قابلة للعب فعليًا**: تأسيس دولة ← دور ← قرارات ← قطاعات ←
-دبلوماسية ← معالم ← تقارير سنوية ← استفتاء ← نصر/انهيار/استمرار.
-
----
+- المنصة: **Android 15+ فقط** (`minSdk = targetSdk = compileSdk = 35`).
+- **أوفلاين بالكامل**: لا `INTERNET` في الـ release (يُتحقق منه في CI عبر `aapt`).
+- الاتجاه: Landscape. اللغة: عربي RTL.
+- الكود القديم (Flutter) محفوظ للمرجع فقط في `legacy_flutter/` — لا يُعدَّل ولا يُبنى منه.
 
 ## البنية
 
 ```
-lib/
-  main.dart                    # Hive + Riverpod + RTL → AppShell
-  models/                      # GameState (+isCollapsed/hasWon), GameEvent, Landmark, ...
-  engine/                      # balance_config, economy, event, diplomacy, construction, turn
-  data/                        # أحداث، معالم، دول، إنجازات
-  storage/hive_boxes.dart      # تخزين محلي متين (معالجة save فاسد + history محدود 400)
-  graphics/theme/              # palette + typography (هوية MGN)
-  state/game_provider.dart     # الواجهة الوحيدة بين الشاشات والمحركات
-  screens/
-    app_shell.dart             # تبويب سفلي: رئيسية/قرارات/قطاعات/دبلوماسية/معالم/المزيد
-    setup_screen.dart          # تأسيس الدولة (اسم، لقب، طول الدور، راية، توجهات)
-    dashboard_screen.dart      # نظرة عامة + الدور القادم + التقارير + المؤشرات
-    decision_screen.dart       # القرارات المعلقة + استبدال بالجواهر
-    sectors_screen.dart        # ضرائب/عسكر/دعم + استثمار + قروض
-    diplomacy_screen.dart      # علاقات + معاهدات + حرب + مواقف
-    landmarks_screen.dart      # كتالوج + قيد البناء + تسريع بالجواهر
-    settings_screen.dart       # إعدادات + إنجازات + سجل + حذف الحفظ
-  widgets/common.dart          # Panel/IndicatorBar/StatChip مشتركة
-test/                          # 25 اختبارًا
-tool/balance_sim.dart          # محاكاة التوازن
-.github/workflows/android-build.yml  # بناء APK على GitHub
+app/                  # Android app: شاشة Compose فارغة + Manifest
+core/model/           # Kotlin JVM صافي: GameState غير قابل للتعديل + كل الموديلات
+core/engine/          # Kotlin JVM صافي: BalanceConfig + Economy/Event/Diplomacy/
+                      #   Construction/Turn engines (دوال نقية، Random قابل للحقن)
+core/data/            # هيكل فقط (يُملأ في خطط لاحقة)
+design/               # هيكل فقط (نظام التصميم في خطط لاحقة)
+content/              # JSON: أحداث/معالم/دول/إنجازات + المحمّل + Content Validator
+tools/balance-sim/    # محاكاة التوازن JVM (120 دور، seed 42)
+tools/convert_content.py  # مولّد JSON من legacy (يُشغَّل عند تغيّر المرجع)
+legacy_flutter/       # مرجع القراءة فقط
 ```
 
-### قواعد ثابتة
-
-- كل رقم توازن في `engine/balance_config.dart` فقط.
-- صفر ملفات صور (PNG/JPG).
-- صفر شبكة: الـ release manifest يحذف `INTERNET` عبر `tools:node="remove"`.
-- الحفظ بخرائط عادية بلا `build_runner`.
-- `minSdk = 35` صريح، Java 17، Flutter stable حديث.
-
----
+قاعدة ثابتة: **كل أرقام التوازن في `BalanceConfig` فقط** — لا أرقام سحرية elsewhere.
 
 ## التشغيل
 
 ```bash
-flutter pub get
-flutter run
-flutter test                      # 25 اختبارًا
-flutter analyze
-dart run tool/balance_sim.dart 120 42
+./gradlew :core:model:test :core:engine:test :content:test   # اختبارات JVM
+./gradlew :tools:balance-sim:run --args="120 42"             # المحاكاة
+./gradlew :app:assembleRelease                                # APK (يحتاج Android SDK)
 ```
-
-## بناء APK
-
-```bash
-flutter build apk --release
-# build/app/outputs/flutter-apk/app-release.apk
-```
-
-**البناء الرسمي يتم على GitHub Actions** (انظر أدناه). لا يُبنى APK محليًا
-ثم يُرفع — GitHub نفسه هو بيئة البناء.
 
 ## GitHub Actions
 
-- الملف: `.github/workflows/android-build.yml`
-- Runner: `ubuntu-latest` (GitHub-hosted)
-- Flutter: `3.47.5` stable — Java: Temurin `17`
-- الخطوات: checkout ← setup-java ← setup-flutter ← pub get ← analyze ←
-  test ← build apk --release ← verify ← upload artifact ← release عند tag
-- Artifact: **Termgn-Android-APK** (`app-release.apk`)
-- Release: يُنشأ تلقائيًا عند push tag `v*` ويُرفق به الـ APK (عبر `GITHUB_TOKEN`)
-- التشغيل: push على `main` / pull request / تشغيل يدوي / tag
+`.github/workflows/android-build.yml` على `ubuntu-latest`:
+checkout ← Temurin 17 ← Gradle cache ← JVM tests ← `lintRelease` ←
+balance-sim ← `assembleRelease` ← فحص `aapt` (min/target=35، بلا INTERNET) ←
+رفع **Termgn-Android-APK** ← Release عند tag `v*`.
 
-الحصول على الـ APK: صفحة Actions ← آخر run أخضر ← Artifacts ←
-`Termgn-Android-APK`، أو صفحة Releases عند وجود tag.
+الحصول على الـ APK: صفحة Actions ← آخر run أخضر ← Artifacts، أو صفحة Releases.
 
----
+## المحتوى
 
-## التوازن (محاكاة 120 دورًا، بذرة 42)
+| العنصر | العدد |
+|---|---|
+| أحداث (30 كلاسيكية + 29 حديثة + 10 أزمات) | 69 |
+| معالم (7 ثقافية + 8 حديثة) | 15 |
+| دول AI | 10 |
+| إنجازات | 18 |
 
-- التقييم ~43 → ~82 مع لعب معقول، بلا انهيار وبلا تشبّع مبكر.
-- الخزينة موجبة والدين صفر مع إدارة معقولة (فائض ~14.8M/دور في المحاكاة).
-- الجواهر نادرة: فقط التقارير السنوية والإنجازات.
+ملاحظة: المرجع القديم ذكر 68 حدثًا (29+29+10) لكن العدّ الفعلي لملفاته
+30 كلاسيكية — الإجمالي الحقيقي **69**. أسماء الدول القديمة محفوظة كما هي.
 
-## Known Limitations
+## التوازن المرجعي (محاكاة 120 دورًا، seed 42)
 
-- الأيقونة لا تزال قالب Flutter الافتراضي.
-- توقيع الـ Release بمفاتيح debug (تجريبي — التوقيع الإنتاجي عند مرحلة Play).
-- لا SVG/Painters مخصصة بعد — الرايات presets لونية.
-- لا طبقة ترجمة منفصلة — النصوص عربية داخل الشاشات.
+التقييم ~43 → ~82–87 مع لعب معقول، خزينة موجبة، دين صفر،
+فائض ~150–165K/دور، جواهر نادرة (تقارير سنوية وإنجازات فقط).
+الأرقام الدقيقة للقديم/الجديد في تقرير PLAN 1 (commit message).

@@ -1,0 +1,503 @@
+[
+ {
+  "id": "x_pandemic",
+  "title": "تفشي وباء",
+  "description": "مرض معدٍ ينتشر بسرعة والمستشفيات تحذر من انهيار المنظومة الصحية.",
+  "category": "crisis",
+  "weight": 12,
+  "minTurn": 8,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "إغلاق شامل",
+    "resultText": "الانتشار توقف والاقتصاد تلقى ضربة قوية.",
+    "costCash": 120000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "health": 6.0,
+     "economy": -10.0,
+     "industry": -5.0,
+     "publicSatisfaction": -5.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "إغلاق جزئي مع دعم طبي مكثف",
+    "resultText": "توازن بين الصحة والاقتصاد.",
+    "costCash": 180000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "health": 3.0,
+     "economy": -4.0,
+     "publicSatisfaction": -2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "إبقاء الحياة طبيعية",
+    "resultText": "الاقتصاد نجا والخسائر البشرية ثقيلة.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "health": -14.0,
+     "publicSatisfaction": -12.0,
+     "population": -60000.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "x_global_recession",
+  "title": "كساد عالمي",
+  "description": "انهيار في الأسواق العالمية يضرب التصدير والاستثمار.",
+  "category": "crisis",
+  "weight": 11,
+  "minTurn": 10,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "حزمة تحفيز كبيرة",
+    "resultText": "الاقتصاد صمد جزئيًا بثمن مالي كبير.",
+    "costCash": 220000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "economy": -4.0,
+     "publicSatisfaction": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تقشف وحماية الاحتياطي",
+    "resultText": "الخزينة محفوظة والشارع غاضب.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "economy": -8.0,
+     "publicSatisfaction": -8.0,
+     "industry": -4.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "الاقتراض من الصندوق الدولي",
+    "resultText": "سيولة فورية ودين طويل الأجل.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "treasuryCash": 300000.0,
+     "debt": 330000.0,
+     "economy": -3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": -2.0
+   }
+  ]
+ },
+ {
+  "id": "x_earthquake",
+  "title": "زلزال مدمر",
+  "description": "زلزال قوي يضرب منطقة مأهولة ويخلف دمارًا واسعًا.",
+  "category": "crisis",
+  "weight": 10,
+  "minTurn": 6,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "استجابة طارئة واسعة",
+    "resultText": "الإنقاذ كان سريعًا والشعب قدّر الموقف.",
+    "costCash": 200000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": 6.0,
+     "health": -3.0,
+     "population": -15000.0,
+     "industry": -3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "استجابة محدودة وطلب مساعدة دولية",
+    "resultText": "المساعدات وصلت متأخرة.",
+    "costCash": 60000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": -6.0,
+     "health": -6.0,
+     "population": -35000.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 3.0
+   }
+  ]
+ },
+ {
+  "id": "x_flood",
+  "title": "فيضانات مناخية",
+  "description": "أمطار غير مسبوقة تغرق مناطق زراعية وسكنية.",
+  "category": "crisis",
+  "weight": 10,
+  "minTurn": 6,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "تعويضات وبنية تصريف جديدة",
+    "resultText": "استثمار وقائي طويل المدى.",
+    "costCash": 170000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "agriculture": -4.0,
+     "environment": 3.0,
+     "publicSatisfaction": 3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "إغاثة عاجلة فقط",
+    "resultText": "الأزمة احتُويت والمشكلة قابلة للتكرار.",
+    "costCash": 60000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "agriculture": -8.0,
+     "foodSecurity": -6.0,
+     "publicSatisfaction": -4.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "x_blackout",
+  "title": "انقطاع كهرباء وطني",
+  "description": "انهيار في الشبكة يوقف الحياة في معظم المدن.",
+  "category": "crisis",
+  "weight": 10,
+  "minTurn": 6,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "إصلاح شامل وتحديث الشبكة",
+    "resultText": "الشبكة أصبحت أكثر استقرارًا.",
+    "costCash": 190000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "energy": 8.0,
+     "economy": -3.0,
+     "publicSatisfaction": -3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "إعادة تشغيل سريعة بأقل تكلفة",
+    "resultText": "الكهرباء عادت والهشاشة باقية.",
+    "costCash": 50000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "economy": -6.0,
+     "industry": -4.0,
+     "publicSatisfaction": -8.0,
+     "digitalOpinion": -6.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ],
+  "condition": {
+   "key": "energy",
+   "op": "<",
+   "value": 65
+  }
+ },
+ {
+  "id": "x_food_crisis",
+  "title": "أزمة غذاء حادة",
+  "description": "نقص حاد في السلع الأساسية وطوابير في الأسواق.",
+  "category": "crisis",
+  "weight": 11,
+  "minTurn": 5,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "استيراد طارئ واسع",
+    "resultText": "الأسواق استقرت بتكلفة كبيرة.",
+    "costCash": 210000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "foodSecurity": 10.0,
+     "publicSatisfaction": 4.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "بطاقات تقنين",
+    "resultText": "التوزيع صار عادلًا والغضب مستمر.",
+    "costCash": 70000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "foodSecurity": 4.0,
+     "publicSatisfaction": -5.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "الاعتماد على المساعدات الدولية",
+    "resultText": "الأزمة خفّت والاعتماد على الخارج زاد.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "foodSecurity": 6.0,
+     "axisForeign": -6.0,
+     "publicSatisfaction": -2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 4.0
+   }
+  ],
+  "condition": {
+   "key": "foodSecurity",
+   "op": "<",
+   "value": 45
+  }
+ },
+ {
+  "id": "x_cyber_attack",
+  "title": "هجوم سيبراني على البنية التحتية",
+  "description": "هجوم منسق يستهدف شبكات الكهرباء والمصارف في وقت واحد.",
+  "category": "crisis",
+  "weight": 11,
+  "minTurn": 8,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "استجابة طارئة وبناء قدرات دفاعية",
+    "resultText": "الهجوم صُد وارتفعت جاهزية الدولة.",
+    "costCash": 180000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "cyberSecurity": 12.0,
+     "economy": -3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "عزل الأنظمة مؤقتًا",
+    "resultText": "الخسائر احتُويت بتعطل واسع للخدمات.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "economy": -7.0,
+     "digitalOpinion": -8.0,
+     "cyberSecurity": 3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "الاستعانة بشركة أمن أجنبية",
+    "resultText": "حل سريع بثمن سيادي.",
+    "costCash": 120000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "cyberSecurity": 8.0,
+     "axisEconomic": -5.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ],
+  "condition": {
+   "key": "cyberSecurity",
+   "op": "<",
+   "value": 75
+  }
+ },
+ {
+  "id": "x_mass_protests",
+  "title": "احتجاجات شعبية واسعة",
+  "description": "مظاهرات كبرى في العاصمة تطالب بإصلاح سياسي واقتصادي شامل.",
+  "category": "crisis",
+  "weight": 12,
+  "minTurn": 6,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "حزمة إصلاح واستجابة للمطالب",
+    "resultText": "الشارع هدأ وبدأت الثقة تعود.",
+    "costCash": 200000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": 14.0,
+     "digitalOpinion": 10.0,
+     "economy": -2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "حوار وطني بلا تنازلات كبيرة",
+    "resultText": "تهدئة مؤقتة.",
+    "costCash": 60000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": 5.0,
+     "digitalOpinion": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تفريق الاحتجاجات أمنيًا",
+    "resultText": "الهدوء فُرض والشرعية اهتزت.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": -10.0,
+     "digitalOpinion": -15.0,
+     "militarySecurity": 2.0,
+     "axisSocial": 8.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": -5.0
+   }
+  ],
+  "condition": {
+   "key": "publicSatisfaction",
+   "op": "<",
+   "value": 35
+  }
+ },
+ {
+  "id": "x_war_ultimatum",
+  "title": "إنذار حربي",
+  "description": "دولة معادية تقدم إنذارًا نهائيًا بمطالب حدودية واقتصادية.",
+  "category": "crisis",
+  "weight": 10,
+  "minTurn": 12,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "الرفض والتعبئة العامة",
+    "resultText": "الدولة في حالة استعداد قتالي.",
+    "costCash": 150000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "militarySecurity": 8.0,
+     "publicSatisfaction": 3.0,
+     "economy": -3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": -4.0
+   },
+   {
+    "label": "تنازلات اقتصادية لتجنب الحرب",
+    "resultText": "الحرب تأجلت بثمن سيادي.",
+    "costCash": 180000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": -8.0,
+     "axisForeign": -8.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 5.0
+   },
+   {
+    "label": "وساطة دولية",
+    "resultText": "الوسطاء دخلوا والملف بات دوليًا.",
+    "costCash": 70000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "militarySecurity": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 6.0
+   }
+  ],
+  "condition": {
+   "all": [
+    {
+     "key": "isAtWar",
+     "op": "==",
+     "value": 0
+    },
+    {
+     "key": "minRelation",
+     "op": "<",
+     "value": -50
+    }
+   ]
+  }
+ },
+ {
+  "id": "x_currency_collapse",
+  "title": "انهيار في قيمة العملة",
+  "description": "هبوط حاد في سعر العملة يضرب القدرة الشرائية.",
+  "category": "crisis",
+  "weight": 10,
+  "minTurn": 10,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "تدخل نقدي حاد",
+    "resultText": "العملة استقرت باستهلاك الاحتياطي.",
+    "costCash": 250000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "economy": 4.0,
+     "publicSatisfaction": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تعويم مُدار",
+    "resultText": "ألم قصير المدى وتصدير أكثر تنافسية.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "economy": -3.0,
+     "industry": 4.0,
+     "publicSatisfaction": -9.0,
+     "foodSecurity": -3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ],
+  "condition": {
+   "any": [
+    {
+     "key": "economy",
+     "op": "<",
+     "value": 45
+    },
+    {
+     "key": "debt",
+     "op": ">",
+     "value": 400000
+    }
+   ]
+  }
+ }
+]

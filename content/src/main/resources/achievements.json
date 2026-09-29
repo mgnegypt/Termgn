@@ -1,0 +1,253 @@
+[
+ {
+  "id": "first_landmark",
+  "titleAr": "أول معلم",
+  "descriptionAr": "أكمل بناء أول معلم في الدولة.",
+  "gemReward": 5,
+  "hidden": false,
+  "condition": {
+   "key": "builtLandmarksCount",
+   "op": ">=",
+   "value": 1
+  }
+ },
+ {
+  "id": "five_landmarks",
+  "titleAr": "عصر البناء",
+  "descriptionAr": "أكمل بناء 5 معالم.",
+  "gemReward": 12,
+  "hidden": false,
+  "condition": {
+   "key": "builtLandmarksCount",
+   "op": ">=",
+   "value": 5
+  }
+ },
+ {
+  "id": "ten_landmarks",
+  "titleAr": "حضارة راسخة",
+  "descriptionAr": "أكمل بناء 10 معالم.",
+  "gemReward": 25,
+  "hidden": false,
+  "condition": {
+   "key": "builtLandmarksCount",
+   "op": ">=",
+   "value": 10
+  }
+ },
+ {
+  "id": "strong_economy",
+  "titleAr": "اقتصاد قوي",
+  "descriptionAr": "ارفع مؤشر الاقتصاد إلى 80.",
+  "gemReward": 10,
+  "hidden": false,
+  "condition": {
+   "key": "economy",
+   "op": ">=",
+   "value": 80
+  }
+ },
+ {
+  "id": "beloved_ruler",
+  "titleAr": "حاكم محبوب",
+  "descriptionAr": "ارفع رضا الشعب إلى 85.",
+  "gemReward": 12,
+  "hidden": false,
+  "condition": {
+   "key": "publicSatisfaction",
+   "op": ">=",
+   "value": 85
+  }
+ },
+ {
+  "id": "digital_darling",
+  "titleAr": "نجم الترند",
+  "descriptionAr": "ارفع الرأي العام الرقمي إلى 85.",
+  "gemReward": 10,
+  "hidden": false,
+  "condition": {
+   "key": "digitalOpinion",
+   "op": ">=",
+   "value": 85
+  }
+ },
+ {
+  "id": "cyber_fortress",
+  "titleAr": "حصن سيبراني",
+  "descriptionAr": "ارفع الأمن السيبراني إلى 80.",
+  "gemReward": 12,
+  "hidden": false,
+  "condition": {
+   "key": "cyberSecurity",
+   "op": ">=",
+   "value": 80
+  }
+ },
+ {
+  "id": "green_transition",
+  "titleAr": "التحول الأخضر",
+  "descriptionAr": "اجعل 60% من الطاقة نظيفة.",
+  "gemReward": 15,
+  "hidden": false,
+  "condition": {
+   "key": "cleanEnergyRatio",
+   "op": ">=",
+   "value": 0.6
+  }
+ },
+ {
+  "id": "food_independence",
+  "titleAr": "اكتفاء غذائي",
+  "descriptionAr": "ارفع الأمن الغذائي إلى 85.",
+  "gemReward": 12,
+  "hidden": false,
+  "condition": {
+   "key": "foodSecurity",
+   "op": ">=",
+   "value": 85
+  }
+ },
+ {
+  "id": "knowledge_nation",
+  "titleAr": "دولة المعرفة",
+  "descriptionAr": "ارفع التعليم والتقنية إلى 75 معًا.",
+  "gemReward": 15,
+  "hidden": false,
+  "condition": {
+   "all": [
+    {
+     "key": "education",
+     "op": ">=",
+     "value": 75
+    },
+    {
+     "key": "technology",
+     "op": ">=",
+     "value": 75
+    }
+   ]
+  }
+ },
+ {
+  "id": "cultural_capital",
+  "titleAr": "عاصمة ثقافية",
+  "descriptionAr": "ارفع مؤشر الثقافة إلى 80.",
+  "gemReward": 12,
+  "hidden": false,
+  "condition": {
+   "key": "culture",
+   "op": ">=",
+   "value": 80
+  }
+ },
+ {
+  "id": "tourism_hub",
+  "titleAr": "قِبلة السياح",
+  "descriptionAr": "ارفع السياحة إلى 75.",
+  "gemReward": 10,
+  "hidden": false,
+  "condition": {
+   "key": "tourism",
+   "op": ">=",
+   "value": 75
+  }
+ },
+ {
+  "id": "debt_free",
+  "titleAr": "خزينة نظيفة",
+  "descriptionAr": "اسدد كل الديون بعد أن تجاوزت 200 ألف.",
+  "gemReward": 12,
+  "hidden": false,
+  "condition": {
+   "all": [
+    {
+     "key": "debt",
+     "op": "<=",
+     "value": 0
+    },
+    {
+     "key": "treasuryCash",
+     "op": ">=",
+     "value": 500000
+    },
+    {
+     "key": "turnNumber",
+     "op": ">",
+     "value": 24
+    }
+   ]
+  }
+ },
+ {
+  "id": "treaty_network",
+  "titleAr": "شبكة معاهدات",
+  "descriptionAr": "وقّع معاهدات تجارية مع 4 دول.",
+  "gemReward": 15,
+  "hidden": false,
+  "condition": {
+   "key": "tradeDealCount",
+   "op": ">=",
+   "value": 4
+  }
+ },
+ {
+  "id": "alliance_builder",
+  "titleAr": "صانع التحالفات",
+  "descriptionAr": "أسّس تحالفين دفاعيين.",
+  "gemReward": 15,
+  "hidden": false,
+  "condition": {
+   "key": "allyCount",
+   "op": ">=",
+   "value": 2
+  }
+ },
+ {
+  "id": "war_survivor",
+  "titleAr": "صمود",
+  "descriptionAr": "انتهِ من حرب واحفظ رضا الشعب فوق 50.",
+  "gemReward": 18,
+  "hidden": false,
+  "condition": {
+   "all": [
+    {
+     "key": "isAtWar",
+     "op": "==",
+     "value": 0
+    },
+    {
+     "key": "publicSatisfaction",
+     "op": ">=",
+     "value": 50
+    },
+    {
+     "historyContains": "نهاية الحرب"
+    }
+   ]
+  }
+ },
+ {
+  "id": "decade_of_rule",
+  "titleAr": "عقد من الحكم",
+  "descriptionAr": "احكم 10 سنوات داخل اللعبة.",
+  "gemReward": 20,
+  "hidden": false,
+  "condition": {
+   "key": "inGameYear",
+   "op": ">=",
+   "value": 2035
+  }
+ },
+ {
+  "id": "golden_age",
+  "titleAr": "العصر الذهبي",
+  "descriptionAr": "ارفع تقييم الدولة العام إلى 85.",
+  "gemReward": 30,
+  "hidden": true,
+  "condition": {
+   "key": "nationScore",
+   "op": ">=",
+   "value": 85
+  }
+ }
+]

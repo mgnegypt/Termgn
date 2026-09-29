@@ -1,0 +1,1252 @@
+[
+ {
+  "id": "c_drought",
+  "title": "موجة جفاف",
+  "description": "تقرير وزارة الزراعة يحذر من انخفاض منسوب المياه وتأثيره على المحاصيل هذا الموسم.",
+  "category": "classic",
+  "weight": 12,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "ضخ استثمار طارئ في الري",
+    "resultText": "أنقذت جزءًا كبيرًا من الموسم، لكن الخزينة تحمّلت الفاتورة.",
+    "costCash": 90000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "agriculture": 4.0,
+     "foodSecurity": 3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "استيراد الغذاء مؤقتًا",
+    "resultText": "الأسواق استقرت، لكن الاكتفاء الذاتي تراجع.",
+    "costCash": 55000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "foodSecurity": -4.0,
+     "publicSatisfaction": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "لا تدخّل — ترشيد الاستهلاك",
+    "resultText": "وفّرت المال لكن الشعب شعر بالإهمال.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "agriculture": -6.0,
+     "foodSecurity": -6.0,
+     "publicSatisfaction": -5.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ],
+  "condition": {
+   "key": "agriculture",
+   "op": "<",
+   "value": 70
+  }
+ },
+ {
+  "id": "c_bumper_harvest",
+  "title": "موسم زراعي وفير",
+  "description": "المحاصيل تجاوزت التوقعات وهناك فائض قابل للتصدير.",
+  "category": "classic",
+  "weight": 10,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "تصدير الفائض",
+    "resultText": "دخل إضافي دخل الخزينة فورًا.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "treasuryCash": 120000.0,
+     "economy": 2.0,
+     "foodSecurity": -2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تخزين احتياطي استراتيجي",
+    "resultText": "مخازن الدولة امتلأت وارتفع الأمن الغذائي.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "foodSecurity": 7.0,
+     "publicSatisfaction": 3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ],
+  "condition": {
+   "key": "agriculture",
+   "op": ">=",
+   "value": 45
+  }
+ },
+ {
+  "id": "c_labor_strike",
+  "title": "إضراب عمالي",
+  "description": "عمال القطاع الصناعي يطالبون بزيادة الأجور ويهددون بتوقف الإنتاج.",
+  "category": "classic",
+  "weight": 11,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "زيادة الأجور",
+    "resultText": "الإضراب انتهى والعمال راضون، والميزانية تحمّلت العبء.",
+    "costCash": 110000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": 6.0,
+     "industry": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "التفاوض مع تنازلات جزئية",
+    "resultText": "حل وسط: لا أحد سعيد تمامًا، لكن العمل عاد.",
+    "costCash": 40000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": 1.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "رفض المطالب",
+    "resultText": "الإنتاج تعطل والغضب اتسع.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "industry": -5.0,
+     "publicSatisfaction": -8.0,
+     "digitalOpinion": -5.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ],
+  "condition": {
+   "key": "workersSatisfaction",
+   "op": "<",
+   "value": 55
+  }
+ },
+ {
+  "id": "c_corruption_scandal",
+  "title": "فضيحة فساد",
+  "description": "تحقيق صحفي يكشف تلاعبًا في عقود حكومية كبرى داخل إحدى الوزارات.",
+  "category": "classic",
+  "weight": 10,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "محاكمة علنية وإقالة المسؤولين",
+    "resultText": "الشعب رأى جدية في المحاسبة.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": 7.0,
+     "digitalOpinion": 8.0,
+     "economy": -2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تسوية هادئة بعيدًا عن الإعلام",
+    "resultText": "الملف أُغلق، لكن الثقة تأثرت.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": -4.0,
+     "digitalOpinion": -7.0,
+     "treasuryCash": 60000.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "إنكار التقرير",
+    "resultText": "الاتهامات تضخمت على المنصات.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "digitalOpinion": -12.0,
+     "publicSatisfaction": -6.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "c_tax_protest",
+  "title": "احتجاج على الضرائب",
+  "description": "تجمعات في المدن الكبرى ضد مستوى الضرائب الحالي.",
+  "category": "classic",
+  "weight": 12,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "تخفيض الضرائب فورًا",
+    "resultText": "الغضب هدأ وتراجع الدخل.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "taxRate": -0.05,
+     "publicSatisfaction": 8.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "إعفاءات للفئات الأكثر تأثرًا",
+    "resultText": "حل مُوازن استقبله الشارع بهدوء.",
+    "costCash": 70000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": 4.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "التمسك بالسياسة الحالية",
+    "resultText": "الاحتجاجات استمرت أسابيع.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": -7.0,
+     "digitalOpinion": -6.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ],
+  "condition": {
+   "key": "taxRate",
+   "op": ">",
+   "value": 0.3
+  }
+ },
+ {
+  "id": "c_border_tension",
+  "title": "توتر حدودي",
+  "description": "حادث حدودي محدود مع دولة مجاورة يثير قلق الرأي العام.",
+  "category": "classic",
+  "weight": 9,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "تعزيز الحدود عسكريًا",
+    "resultText": "الحدود أصبحت آمنة، والجوار غير مرتاح.",
+    "costCash": 95000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "militarySecurity": 6.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": -3.0
+   },
+   {
+    "label": "قناة تفاوض هادئة",
+    "resultText": "الحادث احتُوى دبلوماسيًا.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "militarySecurity": -1.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 4.0
+   }
+  ]
+ },
+ {
+  "id": "c_merchant_delegation",
+  "title": "وفد تجاري",
+  "description": "وفد من رجال أعمال أجانب يطلب تسهيلات للاستثمار.",
+  "category": "classic",
+  "weight": 10,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "منح تسهيلات ضريبية",
+    "resultText": "استثمارات جديدة دخلت السوق.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "economy": 5.0,
+     "industry": 3.0,
+     "axisEconomic": -6.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 3.0
+   },
+   {
+    "label": "شروط صارمة لحماية السوق المحلي",
+    "resultText": "الصناعة المحلية ارتاحت، والمستثمرون تحفّظوا.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "industry": 2.0,
+     "axisEconomic": 6.0,
+     "economy": -1.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "c_university_demands",
+  "title": "مطالب جامعية",
+  "description": "اتحادات الطلاب تطالب بتوسيع المنح وتحديث المعامل.",
+  "category": "classic",
+  "weight": 10,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "تمويل التوسع",
+    "resultText": "التعليم تقدم خطوة ملموسة.",
+    "costCash": 85000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "education": 5.0,
+     "publicSatisfaction": 3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تأجيل للعام القادم",
+    "resultText": "الطلاب غاضبون على المنصات.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "digitalOpinion": -5.0,
+     "education": -2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "c_infrastructure_collapse",
+  "title": "انهيار جزئي في جسر رئيسي",
+  "description": "إهمال الصيانة تسبب في حادث أوقف شريان مروري مهم.",
+  "category": "classic",
+  "weight": 9,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "إصلاح عاجل وخطة صيانة شاملة",
+    "resultText": "الثقة عادت وتحسّنت البنية التحتية.",
+    "costCash": 130000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "industry": 4.0,
+     "publicSatisfaction": 4.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "ترميم سطحي سريع",
+    "resultText": "الطريق فُتح، والمشكلة مؤجلة.",
+    "costCash": 45000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": -2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ],
+  "condition": {
+   "key": "industry",
+   "op": "<",
+   "value": 65
+  }
+ },
+ {
+  "id": "c_energy_shortage",
+  "title": "نقص في الطاقة",
+  "description": "الطلب تجاوز قدرة الشبكة وبدأت انقطاعات متفرقة.",
+  "category": "classic",
+  "weight": 11,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "تشغيل محطات تقليدية إضافية",
+    "resultText": "الكهرباء استقرت على حساب البيئة.",
+    "costCash": 75000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "energy": 6.0,
+     "environment": -5.0,
+     "cleanEnergyRatio": -0.04
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تسريع مشروع طاقة نظيفة",
+    "resultText": "استثمار أغلى لكنه يبني المستقبل.",
+    "costCash": 140000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "energy": 4.0,
+     "cleanEnergyRatio": 0.06,
+     "environment": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "ترشيد إجباري للاستهلاك",
+    "resultText": "الأزمة احتُويت بغضب شعبي.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": -6.0,
+     "industry": -3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ],
+  "condition": {
+   "key": "energy",
+   "op": "<",
+   "value": 55
+  }
+ },
+ {
+  "id": "c_national_festival",
+  "title": "مهرجان وطني",
+  "description": "اقتراح بتنظيم مهرجان ثقافي كبير يجمع الفنون والتراث.",
+  "category": "classic",
+  "weight": 9,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "تنظيم مهرجان ضخم",
+    "resultText": "الثقافة والسياحة انتعشتا.",
+    "costCash": 80000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "culture": 6.0,
+     "tourism": 4.0,
+     "publicSatisfaction": 4.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "نسخة مصغرة بميزانية محدودة",
+    "resultText": "حدث لطيف بأثر محدود.",
+    "costCash": 25000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "culture": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "c_military_parade",
+  "title": "طلب استعراض عسكري",
+  "description": "القيادة العسكرية تقترح استعراضًا لرفع الروح الوطنية.",
+  "category": "classic",
+  "weight": 8,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "الموافقة",
+    "resultText": "الروح الوطنية ارتفعت، والجوار راقب بحذر.",
+    "costCash": 60000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": 4.0,
+     "militarySecurity": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": -2.0
+   },
+   {
+    "label": "الرفض وتوجيه المبلغ للتسليح",
+    "resultText": "الجيش تعزز بهدوء.",
+    "costCash": 60000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "militarySecurity": 5.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "c_smuggling_network",
+  "title": "شبكة تهريب",
+  "description": "الأجهزة الأمنية تكشف شبكة تهريب كبيرة عبر الحدود.",
+  "category": "classic",
+  "weight": 9,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "حملة أمنية واسعة",
+    "resultText": "الشبكة تفككت وزادت هيبة الدولة.",
+    "costCash": 70000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "militarySecurity": 5.0,
+     "economy": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "اكتفاء بمراقبة استخباراتية",
+    "resultText": "معلومات أكثر، لكن التهريب مستمر.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "economy": -2.0,
+     "militarySecurity": 1.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "c_foreign_investment",
+  "title": "عرض استثمار أجنبي كبير",
+  "description": "صندوق أجنبي يعرض تمويل مشروع صناعي ضخم مقابل حصة أرباح.",
+  "category": "classic",
+  "weight": 10,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "القبول",
+    "resultText": "ضخ مالي فوري ونمو صناعي.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "treasuryCash": 220000.0,
+     "industry": 6.0,
+     "environment": -3.0,
+     "axisEconomic": -8.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "الرفض والاعتماد على التمويل المحلي",
+    "resultText": "سيادة اقتصادية أعلى ونمو أبطأ.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "axisEconomic": 8.0,
+     "publicSatisfaction": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "c_brain_drain",
+  "title": "هجرة الكفاءات",
+  "description": "تقارير عن مغادرة أعداد من الأطباء والمهندسين للخارج.",
+  "category": "classic",
+  "weight": 10,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "حزمة تحفيز للكفاءات",
+    "resultText": "جزء كبير قرر البقاء.",
+    "costCash": 120000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "technology": 3.0,
+     "health": 3.0,
+     "migrationBalance": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تجاهل الظاهرة",
+    "resultText": "الخسارة في رأس المال البشري تفاقمت.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "technology": -4.0,
+     "health": -3.0,
+     "education": -2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ],
+  "condition": {
+   "any": [
+    {
+     "key": "publicSatisfaction",
+     "op": "<",
+     "value": 55
+    },
+    {
+     "key": "economy",
+     "op": "<",
+     "value": 45
+    }
+   ]
+  }
+ },
+ {
+  "id": "c_hospital_overload",
+  "title": "ضغط على المستشفيات",
+  "description": "أقسام الطوارئ تعمل فوق طاقتها في المدن الكبرى.",
+  "category": "classic",
+  "weight": 10,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "توسيع الطاقة الاستيعابية",
+    "resultText": "الخدمة الصحية تحسنت.",
+    "costCash": 100000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "health": 6.0,
+     "publicSatisfaction": 4.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "إعادة توزيع الكوادر فقط",
+    "resultText": "حل إداري بأثر محدود.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "health": 1.0,
+     "publicSatisfaction": -1.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ],
+  "condition": {
+   "key": "health",
+   "op": "<",
+   "value": 60
+  }
+ },
+ {
+  "id": "c_housing_shortage",
+  "title": "أزمة إسكان",
+  "description": "ارتفاع الإيجارات يثقل الطبقة الوسطى في المدن.",
+  "category": "classic",
+  "weight": 10,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "مشروع إسكان وطني",
+    "resultText": "الأسعار بدأت تستقر تدريجيًا.",
+    "costCash": 160000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": 7.0,
+     "industry": 3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تحفيز القطاع الخاص",
+    "resultText": "حركة عمرانية بلا أثر فوري على الأسعار.",
+    "costCash": 50000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "economy": 3.0,
+     "publicSatisfaction": 1.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تجميد الإيجارات بقرار إداري",
+    "resultText": "ارتياح شعبي وتراجع في الاستثمار العقاري.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": 5.0,
+     "economy": -4.0,
+     "axisEconomic": 8.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "c_water_dispute",
+  "title": "خلاف على المياه",
+  "description": "دولة مجاورة تبني سدًا يؤثر على حصة الدولة من المياه.",
+  "category": "classic",
+  "weight": 9,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "مفاوضات دولية",
+    "resultText": "اتفاق جزئي على الحصص.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "agriculture": -1.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 3.0
+   },
+   {
+    "label": "تصعيد سياسي حاد",
+    "resultText": "الموقف الوطني قوي والعلاقات متوترة.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": 4.0,
+     "axisForeign": 6.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": -8.0
+   },
+   {
+    "label": "استثمار في تحلية وترشيد",
+    "resultText": "حل تقني طويل المدى.",
+    "costCash": 150000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "agriculture": 4.0,
+     "technology": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "c_archaeology",
+  "title": "كشف أثري",
+  "description": "بعثة محلية تكتشف موقعًا أثريًا نادرًا.",
+  "category": "classic",
+  "weight": 8,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "تحويله لموقع سياحي",
+    "resultText": "الموقع أصبح وجهة زوار.",
+    "costCash": 65000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "tourism": 6.0,
+     "culture": 5.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "حماية علمية بلا استثمار سياحي",
+    "resultText": "قيمة ثقافية عالية بلا عائد مباشر.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "culture": 7.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "c_inflation_pressure",
+  "title": "ضغوط تضخمية",
+  "description": "أسعار السلع الأساسية ترتفع بوتيرة تقلق الأسواق.",
+  "category": "classic",
+  "weight": 11,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "زيادة الدعم مؤقتًا",
+    "resultText": "الأسعار هدأت والميزانية تحملت.",
+    "costCash": 130000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": 6.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تشديد نقدي وتقليل الإنفاق",
+    "resultText": "التضخم تراجع والنمو تباطأ.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "economy": -3.0,
+     "publicSatisfaction": -3.0,
+     "treasuryCash": 60000.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "c_regional_unrest",
+  "title": "توتر في إقليم طرفي",
+  "description": "مطالب تنموية في إقليم يشعر بالإهمال.",
+  "category": "classic",
+  "weight": 9,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "خطة تنمية للإقليم",
+    "resultText": "التوتر هدأ والثقة عادت.",
+    "costCash": 110000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": 6.0,
+     "economy": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "حل أمني",
+    "resultText": "الهدوء فُرض والغضب كُتم.",
+    "costCash": 40000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "militarySecurity": 2.0,
+     "publicSatisfaction": -6.0,
+     "digitalOpinion": -7.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "c_press_debate",
+  "title": "جدل حول حرية الصحافة",
+  "description": "قانون جديد للإعلام يثير نقاشًا واسعًا.",
+  "category": "classic",
+  "weight": 9,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "توسيع هامش الحرية",
+    "resultText": "صورة الدولة تحسنت داخليًا وخارجيًا.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "digitalOpinion": 8.0,
+     "publicSatisfaction": 3.0,
+     "axisSocial": -8.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 2.0
+   },
+   {
+    "label": "تشديد الرقابة",
+    "resultText": "سيطرة أكبر على الخطاب العام وثمن سُمعي.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "digitalOpinion": -10.0,
+     "axisSocial": 8.0,
+     "militarySecurity": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "c_transport_demands",
+  "title": "مطالب بتحسين المواصلات",
+  "description": "سكان المدن يطالبون بشبكة نقل عام أفضل.",
+  "category": "classic",
+  "weight": 9,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "توسيع النقل العام",
+    "resultText": "الزحام تراجع وارتاح الناس.",
+    "costCash": 120000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": 6.0,
+     "environment": 3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تأجيل المشروع",
+    "resultText": "التذمر استمر.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": -4.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "c_army_modernization",
+  "title": "عرض تحديث الجيش",
+  "description": "عرض لشراء منظومات دفاعية حديثة بشروط ميسّرة.",
+  "category": "classic",
+  "weight": 9,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "الشراء",
+    "resultText": "القدرات الدفاعية تحسّنت بشكل ملموس.",
+    "costCash": 190000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "militarySecurity": 10.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "الاعتماد على التصنيع المحلي",
+    "resultText": "استثمار أبطأ لكنه يبني صناعة وطنية.",
+    "costCash": 100000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "militarySecurity": 4.0,
+     "industry": 4.0,
+     "technology": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "الاعتذار عن العرض",
+    "resultText": "وفّرت المال وتأجل التحديث.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "militarySecurity": -2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "c_refugee_inflow",
+  "title": "تدفق لاجئين",
+  "description": "أزمة في دولة مجاورة تدفع آلافًا إلى الحدود.",
+  "category": "classic",
+  "weight": 9,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "استقبال منظم مع دعم دولي",
+    "resultText": "موقف إنساني رفع سمعة الدولة.",
+    "costCash": 90000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "migrationBalance": 4.0,
+     "publicSatisfaction": -2.0,
+     "culture": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 5.0
+   },
+   {
+    "label": "إغلاق الحدود",
+    "resultText": "ضغط داخلي أقل وانتقادات خارجية أكثر.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "publicSatisfaction": 2.0,
+     "axisSocial": 6.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": -6.0
+   }
+  ]
+ },
+ {
+  "id": "c_irrigation_project",
+  "title": "مشروع ري كبير",
+  "description": "خطة لتحويل مساحات صحراوية إلى أراضٍ زراعية.",
+  "category": "classic",
+  "weight": 9,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "إطلاق المشروع",
+    "resultText": "رقعة زراعية جديدة وأمن غذائي أعلى.",
+    "costCash": 180000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "agriculture": 8.0,
+     "foodSecurity": 6.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "دراسة إضافية قبل التنفيذ",
+    "resultText": "قرار حذر أجّل الفائدة.",
+    "costCash": 20000.0,
+    "costGems": 0,
+    "stateEffects": {},
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ],
+  "condition": {
+   "key": "treasuryCash",
+   "op": ">",
+   "value": 200000
+  }
+ },
+ {
+  "id": "c_mining_concession",
+  "title": "امتياز تعديني",
+  "description": "شركة دولية تطلب امتياز تعدين في منطقة غنية بالمعادن.",
+  "category": "classic",
+  "weight": 9,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "منح الامتياز",
+    "resultText": "عائد مالي كبير وثمن بيئي.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "treasuryCash": 200000.0,
+     "industry": 4.0,
+     "environment": -8.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تشغيل وطني بشراكة محدودة",
+    "resultText": "عائد أقل وسيادة أعلى.",
+    "costCash": 60000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "industry": 5.0,
+     "axisEconomic": 6.0,
+     "environment": -3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "الرفض لأسباب بيئية",
+    "resultText": "البيئة محمية والفرصة ضاعت.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "environment": 4.0,
+     "publicSatisfaction": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "c_teacher_salaries",
+  "title": "مطالب المعلمين",
+  "description": "نقابة المعلمين تطالب بتحسين الأجور وظروف العمل.",
+  "category": "classic",
+  "weight": 10,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "زيادة الأجور",
+    "resultText": "استقرار في قطاع التعليم.",
+    "costCash": 95000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "education": 5.0,
+     "publicSatisfaction": 4.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "حوافز أداء بدلًا من زيادة عامة",
+    "resultText": "حل جزئي أثار جدلًا.",
+    "costCash": 45000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "education": 2.0,
+     "publicSatisfaction": -1.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "c_census",
+  "title": "تعداد سكاني شامل",
+  "description": "اقتراح بإجراء تعداد وطني لتحديث بيانات التخطيط.",
+  "category": "classic",
+  "weight": 7,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "إجراء التعداد",
+    "resultText": "بيانات أدق حسّنت كفاءة الخدمات.",
+    "costCash": 70000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "economy": 2.0,
+     "health": 2.0,
+     "education": 2.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "تأجيله",
+    "resultText": "التخطيط استمر ببيانات قديمة.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "economy": -1.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ },
+ {
+  "id": "c_heritage_restoration",
+  "title": "ترميم حي تاريخي",
+  "description": "حي تاريخي مهدد بالتدهور يحتاج خطة ترميم.",
+  "category": "classic",
+  "weight": 8,
+  "minTurn": 0,
+  "oncePerGame": false,
+  "imageKey": "",
+  "choices": [
+   {
+    "label": "ترميم شامل",
+    "resultText": "الحي عاد للحياة وصار مقصدًا للزوار.",
+    "costCash": 100000.0,
+    "costGems": 0,
+    "stateEffects": {
+     "culture": 6.0,
+     "tourism": 5.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   },
+   {
+    "label": "إزالته وبناء مشروع حديث",
+    "resultText": "عائد اقتصادي مقابل خسارة ثقافية.",
+    "costCash": 0,
+    "costGems": 0,
+    "stateEffects": {
+     "economy": 4.0,
+     "culture": -6.0,
+     "publicSatisfaction": -3.0
+    },
+    "relationEffects": {},
+    "allRelationsDelta": 0
+   }
+  ]
+ }
+]

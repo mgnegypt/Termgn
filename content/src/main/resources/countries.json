@@ -1,0 +1,82 @@
+[
+ {
+  "id": "arzan",
+  "nameAr": "أرزان",
+  "behavior": "trader",
+  "relation": 25.0,
+  "economicPower": 72.0,
+  "militaryPower": 48.0
+ },
+ {
+  "id": "norvane",
+  "nameAr": "نورفان",
+  "behavior": "trader",
+  "relation": 15.0,
+  "economicPower": 84.0,
+  "militaryPower": 55.0
+ },
+ {
+  "id": "khalidia",
+  "nameAr": "خالدية",
+  "behavior": "neutral",
+  "relation": 10.0,
+  "economicPower": 58.0,
+  "militaryPower": 52.0
+ },
+ {
+  "id": "sahran",
+  "nameAr": "سهران",
+  "behavior": "hostile",
+  "relation": -20.0,
+  "economicPower": 55.0,
+  "militaryPower": 78.0
+ },
+ {
+  "id": "tavros",
+  "nameAr": "تافروس",
+  "behavior": "hostile",
+  "relation": -10.0,
+  "economicPower": 66.0,
+  "militaryPower": 82.0
+ },
+ {
+  "id": "meridan",
+  "nameAr": "ميريدان",
+  "behavior": "neutral",
+  "relation": 5.0,
+  "economicPower": 62.0,
+  "militaryPower": 44.0
+ },
+ {
+  "id": "qasira",
+  "nameAr": "قصيرة",
+  "behavior": "isolationist",
+  "relation": 0.0,
+  "economicPower": 40.0,
+  "militaryPower": 38.0
+ },
+ {
+  "id": "velmor",
+  "nameAr": "فيلمور",
+  "behavior": "isolationist",
+  "relation": -5.0,
+  "economicPower": 49.0,
+  "militaryPower": 60.0
+ },
+ {
+  "id": "azmara",
+  "nameAr": "أزمارا",
+  "behavior": "trader",
+  "relation": 18.0,
+  "economicPower": 69.0,
+  "militaryPower": 41.0
+ },
+ {
+  "id": "dranov",
+  "nameAr": "درانوف",
+  "behavior": "neutral",
+  "relation": -2.0,
+  "economicPower": 75.0,
+  "militaryPower": 71.0
+ }
+]

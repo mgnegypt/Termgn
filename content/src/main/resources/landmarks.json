@@ -1,0 +1,278 @@
+[
+ {
+  "id": "national_museum",
+  "nameAr": "المتحف الوطني",
+  "descriptionAr": "متحف يحفظ ذاكرة الدولة ويعرض تاريخها للأجيال والزوار.",
+  "kind": "cultural",
+  "costCash": 320000.0,
+  "buildTurns": 6,
+  "onCompleteEffects": {
+   "culture": 8.0,
+   "tourism": 5.0
+  },
+  "perTurnEffects": {},
+  "tourismIncomePerTurn": 14000.0,
+  "maintenancePerTurn": 4200.0,
+  "requirements": {},
+  "era": "modern"
+ },
+ {
+  "id": "grand_library",
+  "nameAr": "المكتبة الكبرى",
+  "descriptionAr": "مكتبة وطنية ضخمة ترفع مستوى التعليم والثقافة.",
+  "kind": "cultural",
+  "costCash": 280000.0,
+  "buildTurns": 5,
+  "onCompleteEffects": {
+   "culture": 6.0,
+   "education": 6.0
+  },
+  "perTurnEffects": {},
+  "tourismIncomePerTurn": 6000.0,
+  "maintenancePerTurn": 3400.0,
+  "requirements": {},
+  "era": "modern"
+ },
+ {
+  "id": "national_university",
+  "nameAr": "الجامعة الوطنية الكبرى",
+  "descriptionAr": "جامعة بحثية تخرّج كوادر الدولة وترفع سقف التطور طويل المدى.",
+  "kind": "cultural",
+  "costCash": 520000.0,
+  "buildTurns": 9,
+  "onCompleteEffects": {
+   "education": 12.0,
+   "technology": 5.0,
+   "culture": 4.0
+  },
+  "perTurnEffects": {},
+  "tourismIncomePerTurn": 0,
+  "maintenancePerTurn": 9800.0,
+  "requirements": {
+   "education": 35.0
+  },
+  "era": "modern"
+ },
+ {
+  "id": "heritage_tower",
+  "nameAr": "برج التراث",
+  "descriptionAr": "معلم معماري يرمز لهوية الدولة ويجذب السياح.",
+  "kind": "cultural",
+  "costCash": 400000.0,
+  "buildTurns": 7,
+  "onCompleteEffects": {
+   "culture": 9.0,
+   "tourism": 8.0
+  },
+  "perTurnEffects": {},
+  "tourismIncomePerTurn": 22000.0,
+  "maintenancePerTurn": 5600.0,
+  "requirements": {
+   "culture": 30.0
+  },
+  "era": "modern"
+ },
+ {
+  "id": "grand_opera",
+  "nameAr": "دار الفنون الكبرى",
+  "descriptionAr": "مسرح ودار فنون ترفع الرضا الشعبي والحياة الثقافية.",
+  "kind": "cultural",
+  "costCash": 350000.0,
+  "buildTurns": 6,
+  "onCompleteEffects": {
+   "culture": 7.0,
+   "publicSatisfaction": 5.0
+  },
+  "perTurnEffects": {},
+  "tourismIncomePerTurn": 11000.0,
+  "maintenancePerTurn": 5200.0,
+  "requirements": {},
+  "era": "modern"
+ },
+ {
+  "id": "central_hospital",
+  "nameAr": "المدينة الطبية المركزية",
+  "descriptionAr": "مجمع طبي وطني يرفع مستوى الصحة العامة بشكل دائم.",
+  "kind": "cultural",
+  "costCash": 480000.0,
+  "buildTurns": 8,
+  "onCompleteEffects": {
+   "health": 14.0,
+   "publicSatisfaction": 6.0
+  },
+  "perTurnEffects": {},
+  "tourismIncomePerTurn": 0,
+  "maintenancePerTurn": 11000.0,
+  "requirements": {},
+  "era": "modern"
+ },
+ {
+  "id": "grand_mosque_plaza",
+  "nameAr": "الساحة الكبرى",
+  "descriptionAr": "ساحة وطنية للمناسبات والتجمعات، رمز للتماسك الاجتماعي.",
+  "kind": "cultural",
+  "costCash": 240000.0,
+  "buildTurns": 4,
+  "onCompleteEffects": {
+   "culture": 5.0,
+   "publicSatisfaction": 7.0
+  },
+  "perTurnEffects": {},
+  "tourismIncomePerTurn": 5000.0,
+  "maintenancePerTurn": 2600.0,
+  "requirements": {},
+  "era": "modern"
+ },
+ {
+  "id": "smart_tower",
+  "nameAr": "برج الاتصالات الذكي",
+  "descriptionAr": "بنية اتصالات متقدمة ترفع التقنية والأمن السيبراني معًا.",
+  "kind": "modern",
+  "costCash": 450000.0,
+  "buildTurns": 7,
+  "onCompleteEffects": {
+   "technology": 10.0,
+   "cyberSecurity": 8.0
+  },
+  "perTurnEffects": {},
+  "tourismIncomePerTurn": 0,
+  "maintenancePerTurn": 8200.0,
+  "requirements": {
+   "technology": 35.0
+  },
+  "era": "modern"
+ },
+ {
+  "id": "data_center",
+  "nameAr": "مركز البيانات الوطني",
+  "descriptionAr": "مركز سيادي لبيانات الدولة، يقوي الاقتصاد الرقمي والحماية.",
+  "kind": "modern",
+  "costCash": 560000.0,
+  "buildTurns": 8,
+  "onCompleteEffects": {
+   "technology": 12.0,
+   "cyberSecurity": 12.0,
+   "economy": 4.0
+  },
+  "perTurnEffects": {},
+  "tourismIncomePerTurn": 0,
+  "maintenancePerTurn": 13500.0,
+  "requirements": {
+   "technology": 45.0,
+   "energy": 40.0
+  },
+  "era": "modern"
+ },
+ {
+  "id": "solar_farm",
+  "nameAr": "محطة الطاقة الشمسية الضخمة",
+  "descriptionAr": "مجمع شمسي يرفع الطاقة ونسبة الطاقة النظيفة ويحسن البيئة.",
+  "kind": "modern",
+  "costCash": 520000.0,
+  "buildTurns": 8,
+  "onCompleteEffects": {
+   "energy": 12.0,
+   "cleanEnergyRatio": 0.15,
+   "environment": 6.0
+  },
+  "perTurnEffects": {},
+  "tourismIncomePerTurn": 0,
+  "maintenancePerTurn": 7400.0,
+  "requirements": {},
+  "era": "modern"
+ },
+ {
+  "id": "metro_network",
+  "nameAr": "شبكة المترو الوطنية",
+  "descriptionAr": "نقل جماعي حديث يخفض التلوث ويرفع الرضا الشعبي والاقتصاد.",
+  "kind": "modern",
+  "costCash": 700000.0,
+  "buildTurns": 11,
+  "onCompleteEffects": {
+   "economy": 8.0,
+   "publicSatisfaction": 9.0,
+   "environment": 5.0
+  },
+  "perTurnEffects": {},
+  "tourismIncomePerTurn": 0,
+  "maintenancePerTurn": 16000.0,
+  "requirements": {
+   "industry": 45.0
+  },
+  "era": "modern"
+ },
+ {
+  "id": "agri_research",
+  "nameAr": "مركز أبحاث الزراعة الحديثة",
+  "descriptionAr": "مركز يطور المحاصيل ويرفع الأمن الغذائي على المدى الطويل.",
+  "kind": "modern",
+  "costCash": 330000.0,
+  "buildTurns": 6,
+  "onCompleteEffects": {
+   "agriculture": 10.0,
+   "foodSecurity": 8.0
+  },
+  "perTurnEffects": {
+   "foodSecurity": 0.05
+  },
+  "tourismIncomePerTurn": 0,
+  "maintenancePerTurn": 5800.0,
+  "requirements": {},
+  "era": "modern"
+ },
+ {
+  "id": "industrial_park",
+  "nameAr": "المدينة الصناعية الكبرى",
+  "descriptionAr": "مجمع صناعي يرفع الصناعة والتوظيف، لكنه يضغط على البيئة.",
+  "kind": "modern",
+  "costCash": 600000.0,
+  "buildTurns": 9,
+  "onCompleteEffects": {
+   "industry": 14.0,
+   "economy": 6.0,
+   "environment": -6.0
+  },
+  "perTurnEffects": {},
+  "tourismIncomePerTurn": 0,
+  "maintenancePerTurn": 12500.0,
+  "requirements": {
+   "energy": 45.0
+  },
+  "era": "modern"
+ },
+ {
+  "id": "cyber_command",
+  "nameAr": "قيادة الأمن السيبراني",
+  "descriptionAr": "جهاز وطني لحماية البنية الرقمية من الهجمات والتسريبات.",
+  "kind": "modern",
+  "costCash": 420000.0,
+  "buildTurns": 6,
+  "onCompleteEffects": {
+   "cyberSecurity": 16.0,
+   "digitalOpinion": 4.0
+  },
+  "perTurnEffects": {},
+  "tourismIncomePerTurn": 0,
+  "maintenancePerTurn": 9200.0,
+  "requirements": {
+   "technology": 40.0
+  },
+  "era": "modern"
+ },
+ {
+  "id": "defense_academy",
+  "nameAr": "الأكاديمية الدفاعية",
+  "descriptionAr": "مؤسسة تدريب عسكري ترفع جاهزية الدولة الأمنية.",
+  "kind": "modern",
+  "costCash": 390000.0,
+  "buildTurns": 7,
+  "onCompleteEffects": {
+   "militarySecurity": 14.0
+  },
+  "perTurnEffects": {},
+  "tourismIncomePerTurn": 0,
+  "maintenancePerTurn": 10500.0,
+  "requirements": {},
+  "era": "modern"
+ }
+]
