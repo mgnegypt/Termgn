@@ -3,6 +3,7 @@ package studio.mgn.mgn
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
@@ -47,7 +48,7 @@ class CommandUiTest {
                 )
             }
         }
-        compose.onNodeWithText("المجد").assertExists()
+        compose.onAllNodesWithText("المجد")[0].assertExists()
         compose.onNodeWithText("إنهاء الدور").assertExists()
         compose.onNodeWithText("القيادة").assertExists()
     }
@@ -120,8 +121,8 @@ class CommandUiTest {
                 )
             }
         }
-        compose.onNodeWithText("خيار أول").assertExists()
-        compose.onNodeWithText("خيار أول").performClick()
+        compose.onAllNodesWithText("خيار أول")[1].assertExists()
+        compose.onAllNodesWithText("خيار أول")[1].performClick()
         assert(chosen == "preview_event" to 0) { "choice not routed: $chosen" }
     }
 
@@ -168,14 +169,10 @@ class CommandUiTest {
             compose.onNodeWithText("التالي").performClick()
         }
         compose.waitUntil(10000) {
-            try {
-                compose.onNodeWithText("إعلان قيام الدولة").assertExists()
-                true
-            } catch (_: AssertionError) {
-                false
-            }
+            compose.onAllNodesWithText("إعلان قيام الدولة")
+                .fetchSemanticsNodes().isNotEmpty()
         }
-        compose.onNodeWithText("إعلان قيام الدولة").performClick()
+        compose.onAllNodesWithText("إعلان قيام الدولة")[1].performClick()
         compose.waitUntil(15000) {
             try {
                 compose.onNodeWithText("إنهاء الدور").assertExists()
