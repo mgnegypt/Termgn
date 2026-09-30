@@ -181,6 +181,6 @@ class CommandUiTest {
                 false
             }
         }
-        compose.onNodeWithText("المجد").assertExists()
+        compose.onAllNodesWithText("المجد")[0].assertExists()
     }
 }

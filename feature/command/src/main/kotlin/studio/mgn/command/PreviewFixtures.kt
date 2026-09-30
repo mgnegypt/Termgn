@@ -117,7 +117,17 @@ fun previewStrings(): CommandStrings {
             "population",
         )
         ).associateWith { it }
-    val sections = CommandSection.entries.associate { it.name to it.name }
+    val sections = mapOf(
+        "DASHBOARD" to "القيادة",
+        "ECONOMY" to "الاقتصاد",
+        "DIPLOMACY" to "الدبلوماسية",
+        "DEVELOPMENT" to "التطوير",
+        "RESEARCH" to "البحث",
+        "INTEL" to "المخابرات",
+        "HISTORY" to "السجل",
+        "ACHIEVEMENTS" to "الإنجازات",
+        "SETTINGS" to "الإعدادات",
+    )
     return CommandStrings(
         rulerTitlePrefix = "رئيس",
         level = "مستوى",
