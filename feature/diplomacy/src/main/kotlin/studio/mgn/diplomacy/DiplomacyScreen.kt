@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import studio.mgn.command.WorldMap
+import studio.mgn.command.color
 import studio.mgn.command.relationStatusOf
 import studio.mgn.design.GameButton
 import studio.mgn.design.GoldFramePanel
@@ -86,7 +87,6 @@ fun DiplomacyScreen(
         CountryPanel(
             ui = ui,
             strings = strings,
-            keyLabels = keyLabels,
             onEvent = viewModel::onEvent,
             modifier = Modifier
                 .weight(1f)
@@ -101,7 +101,6 @@ fun DiplomacyScreen(
 private fun CountryPanel(
     ui: studio.mgn.diplomacy.DiplomacyUiState,
     strings: DiplomacyStrings,
-    keyLabels: Map<String, String>,
     onEvent: (DiplomacyEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
