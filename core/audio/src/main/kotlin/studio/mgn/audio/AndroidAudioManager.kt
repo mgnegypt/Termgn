@@ -3,7 +3,7 @@ package studio.mgn.audio
 import android.content.Context
 import android.media.AudioAttributes
 import android.media.AudioFocusRequest
-import android.media.AudioManager
+import android.media.AudioManager as SystemAudioManager
 import android.media.SoundPool
 import android.os.Build
 import android.os.VibrationEffect
@@ -69,12 +69,12 @@ class AndroidAudioManager(
     private var fadeJob: kotlinx.coroutines.Job? = null
 
     private val systemAudio =
-        appContext.getSystemService(AudioManager::class.java)
+        appContext.getSystemService(SystemAudioManager::class.java)
 
     private val focusListener =
-        AudioManager.OnAudioFocusChangeListener { change ->
-            if (change == AudioManager.AUDIOFOCUS_LOSS ||
-                change == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT
+        SystemAudioManager.OnAudioFocusChangeListener { change ->
+            if (change == SystemAudioManager.AUDIOFOCUS_LOSS ||
+                change == SystemAudioManager.AUDIOFOCUS_LOSS_TRANSIENT
             ) {
                 scope.launch(Dispatchers.Main.immediate) {
                     try {
@@ -86,7 +86,7 @@ class AndroidAudioManager(
         }
 
     private val focusRequest: AudioFocusRequest by lazy {
-        AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
+        AudioFocusRequest.Builder(SystemAudioManager.AUDIOFOCUS_GAIN)
             .setAudioAttributes(
                 AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_GAME)
@@ -129,7 +129,7 @@ class AndroidAudioManager(
         scope.launch(Dispatchers.Main.immediate) {
             try {
                 val focus = systemAudio.requestAudioFocus(focusRequest)
-                if (focus != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) return@launch
+                if (focus != SystemAudioManager.AUDIOFOCUS_REQUEST_GRANTED) return@launch
                 player.setMediaItem(
                     MediaItem.fromUri("asset:///audio/music/${key.file}.ogg"),
                 )
