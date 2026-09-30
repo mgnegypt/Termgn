@@ -50,7 +50,7 @@ class CommandUiTest {
         }
         compose.onAllNodesWithText("المجد")[0].assertExists()
         compose.onNodeWithText("إنهاء الدور").assertExists()
-        compose.onNodeWithText("القيادة").assertExists()
+        compose.onNodeWithText("مؤشرات الدولة").assertExists()
     }
 
     @Test
