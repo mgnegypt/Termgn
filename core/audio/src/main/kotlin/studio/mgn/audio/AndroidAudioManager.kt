@@ -98,7 +98,7 @@ class AndroidAudioManager(
                 scope.launch(Dispatchers.Main.immediate) {
                     try {
                         playerOrNull?.pause()
-                    } catch (_: Exception) {
+                    } catch (_: Throwable) {
                     }
                 }
             }
@@ -129,7 +129,7 @@ class AndroidAudioManager(
                     soundPool.load(fd, 1).also { fd.close() }
                 }
                 if (id != 0) soundPool.play(id, sfxVolume, sfxVolume, 1, 0, 1f)
-            } catch (_: Exception) {
+            } catch (_: Throwable) {
                 // Missing asset: stay silent.
             }
         }
@@ -162,7 +162,7 @@ class AndroidAudioManager(
                         } else {
                             crossfade()
                         }
-                    } catch (_: Exception) {
+                    } catch (_: Throwable) {
                         // Missing asset: stay silent.
                     }
                 }
@@ -238,7 +238,7 @@ class AndroidAudioManager(
                 @Suppress("DEPRECATION")
                 vibrator.vibrate(abs(timings.sum()))
             }
-        } catch (_: Exception) {
+        } catch (_: Throwable) {
             // No vibrator: ignore.
         }
     }
@@ -247,15 +247,15 @@ class AndroidAudioManager(
         fadeJob?.cancel()
         try {
             systemAudio.abandonAudioFocusRequest(focusRequest)
-        } catch (_: Exception) {
+        } catch (_: Throwable) {
         }
         try {
             playerOrNull?.release()
-        } catch (_: Exception) {
+        } catch (_: Throwable) {
         }
         try {
             soundPool.release()
-        } catch (_: Exception) {
+        } catch (_: Throwable) {
         }
     }
 }
