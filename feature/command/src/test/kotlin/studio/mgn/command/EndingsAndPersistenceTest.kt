@@ -178,6 +178,34 @@ class EndingsAndPersistenceTest {
     }
 
     @Test
+    fun `continuation ending appears after a decade and allows play`() = runTest {
+        var state = repo.newGame(GameSetup("المجد", "رئيس"))
+        state = state.copy(
+            turnNumber = 121,
+            inGameDate = java.time.LocalDate.of(2035, 2, 1),
+        )
+        assertFalse(state.isCollapsed)
+        repo.save(state)
+
+        val vm = CommandViewModel(repo, pack, TestRegistrar(), rng = Random(1))
+        val ui = awaitValue(vm.state) { !it.isLoading && !it.missing }
+        // Either continuation (decade reached) or victory (great play) is shown.
+        assertTrue(
+            ui.ending == GameEndingScreen.CONTINUATION ||
+                ui.ending == GameEndingScreen.VICTORY,
+        )
+
+        // Continuation never blocks play.
+        if (ui.ending == GameEndingScreen.CONTINUATION) {
+            vm.onEvent(CommandEvent.DismissEnding)
+            awaitValue(vm.state) { it.ending == null }
+            vm.onEvent(CommandEvent.EndTurn)
+            val advanced = awaitValue(vm.state) { it.showReport || it.showDecisions }
+            assertTrue(advanced.state!!.turnNumber >= 121)
+        }
+    }
+
+    @Test
     fun `missions advance on real actions`() = runTest {
         var state = repo.newGame(GameSetup("المجد", "رئيس"))
         // A trade treaty must move the trade-deal mission.
