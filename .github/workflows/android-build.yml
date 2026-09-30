@@ -59,10 +59,14 @@ jobs:
           echo "versionCode=$((MAJOR * 10000 + MINOR * 100 + PATCH))" >> "$GITHUB_OUTPUT"
 
       - name: Restore release keystore
-        if: startsWith(github.ref, 'refs/tags/v') && secrets.MGN_KEYSTORE_B64 != ''
+        if: startsWith(github.ref, 'refs/tags/v')
         run: |
-          echo "$MGN_KEYSTORE_B64" | base64 -d > /tmp/mgn-release.jks
-          echo "MGN_KEYSTORE_PATH=/tmp/mgn-release.jks" >> "$GITHUB_ENV"
+          if [ -n "$MGN_KEYSTORE_B64" ]; then
+            echo "$MGN_KEYSTORE_B64" | base64 -d > /tmp/mgn-release.jks
+            echo "MGN_KEYSTORE_PATH=/tmp/mgn-release.jks" >> "$GITHUB_ENV"
+          else
+            echo "No release keystore secret; release will use debug keys."
+          fi
         env:
           MGN_KEYSTORE_B64: ${{ secrets.MGN_KEYSTORE_B64 }}
 
