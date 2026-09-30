@@ -22,6 +22,7 @@ import studio.mgn.engine.TurnEngine
 import studio.mgn.engine.TurnReport
 import studio.mgn.model.GameEvent
 import studio.mgn.model.GameState
+import studio.mgn.model.GameEnding
 import studio.mgn.model.LandmarkDef
 import kotlin.random.Random
 

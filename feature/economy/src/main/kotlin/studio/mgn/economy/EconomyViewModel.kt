@@ -102,7 +102,9 @@ class EconomyViewModel(
                 if (next == null) {
                     _state.value = _state.value.copy(investError = true)
                 } else {
-                    persist(next)
+                    viewModelScope.launch {
+                        persist(next)
+                    }
                 }
             }
             is EconomyEvent.Loan -> mutate { state ->

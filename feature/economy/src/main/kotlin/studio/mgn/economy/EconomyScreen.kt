@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.Stroke
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -310,7 +311,7 @@ fun TreasuryChart(
                     val y = size.height - size.height * ((v - min) / span).toFloat() * 0.9f - 4f
                     if (i == 0) path.moveTo(x, y) else path.lineTo(x, y)
                 }
-                drawPath(path, color, style = androidx.compose.ui.graphics.Stroke(width = 3f))
+                drawPath(path, color, style = Stroke(width = 3f))
                 // End dot.
                 val last = values.last()
                 val lx = size.width

@@ -9,8 +9,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -46,7 +46,7 @@ fun DevelopmentScreen(
             color = MgnTheme.colors.goldPrimary,
             modifier = Modifier.padding(start = 16.dp, top = 12.dp),
         )
-        TabRow(selectedTabIndex = ui.tab.ordinal) {
+        PrimaryTabRow(selectedTabIndex = ui.tab.ordinal) {
             Tab(
                 selected = ui.tab == LandmarkTab.AVAILABLE,
                 onClick = { viewModel.onEvent(DevelopmentEvent.Tab(LandmarkTab.AVAILABLE)) },
