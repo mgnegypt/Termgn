@@ -43,7 +43,7 @@ class Probe3Test {
                 )
             }
         }
-        compose.onNodeWithText("city_night").assertExists()
+        compose.onNodeWithText("city_sunset").assertExists()
     }
 
     @Test
