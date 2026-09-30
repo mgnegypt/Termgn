@@ -93,6 +93,7 @@ class CommandUiTest {
                         filterEconomy = "اقتصاد",
                         filterDiplomacy = "دبلوماسية",
                         filterEvents = "أحداث",
+                        turnBadge = { turn -> "د$turn" },
                     ),
                     onBack = {},
                 )

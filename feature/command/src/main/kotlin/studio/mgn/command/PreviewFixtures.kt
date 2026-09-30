@@ -179,6 +179,7 @@ fun previewStrings(): CommandStrings {
             filterEconomy = "اقتصاد",
             filterDiplomacy = "دبلوماسية",
             filterEvents = "أحداث",
+            turnBadge = { turn -> "د$turn" },
         ),
         achievementsGrid = AchievementsGridStrings(
             title = "الإنجازات",

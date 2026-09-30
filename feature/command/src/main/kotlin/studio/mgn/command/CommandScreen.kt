@@ -218,9 +218,9 @@ fun CommandContent(
     val state = ui.state ?: return
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         if (maxWidth < 900.dp) {
-            CompactCommand(ui, content, strings, reduceMotion, onEvent)
+            CompactCommand(ui, content, strings, reduceMotion, audio, onEvent)
         } else {
-            WideCommand(ui, content, strings, reduceMotion, onEvent)
+            WideCommand(ui, content, strings, reduceMotion, audio, onEvent)
         }
     }
 }
@@ -231,6 +231,7 @@ private fun WideCommand(
     content: ContentPack,
     strings: CommandStrings,
     reduceMotion: Boolean,
+    audio: AudioManager,
     onEvent: (CommandEvent) -> Unit,
 ) {
     val state = ui.state ?: return
@@ -387,6 +388,7 @@ private fun CompactCommand(
     content: ContentPack,
     strings: CommandStrings,
     reduceMotion: Boolean,
+    audio: AudioManager,
     onEvent: (CommandEvent) -> Unit,
 ) {
     val state = ui.state ?: return

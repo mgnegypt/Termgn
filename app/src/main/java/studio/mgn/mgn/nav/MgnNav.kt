@@ -327,6 +327,9 @@ private fun rememberCommandStrings(app: MgnApp): CommandStrings {
                 filterEconomy = s(studio.mgn.mgn.R.string.hist_economy),
                 filterDiplomacy = s(studio.mgn.mgn.R.string.hist_diplomacy),
                 filterEvents = s(studio.mgn.mgn.R.string.hist_events),
+                turnBadge = { turn ->
+                    res.getString(studio.mgn.mgn.R.string.cmd_turn_badge, turn)
+                },
             ),
             achievementsGrid = studio.mgn.command.AchievementsGridStrings(
                 title = s(studio.mgn.mgn.R.string.section_achievements),

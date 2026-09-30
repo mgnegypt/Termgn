@@ -84,7 +84,11 @@ fun HistoryScreen(
                     }
                 }
                 item(key = "${entry.turnNumber}-${entry.title}-${entry.detail}") {
-                    EventRow(entry = entry, imageKey = "")
+                    EventRow(
+                        entry = entry,
+                        imageKey = "",
+                        turnBadge = strings.turnBadge,
+                    )
                 }
             }
         }
@@ -100,6 +104,7 @@ data class HistoryStrings(
     val filterEconomy: String,
     val filterDiplomacy: String,
     val filterEvents: String,
+    val turnBadge: (Int) -> String,
 )
 
 private fun HistoryStrings.filterName(filter: HistoryFilter): String = when (filter) {
@@ -145,6 +150,7 @@ private fun HistoryPreview() {
                 filterEconomy = "اقتصاد",
                 filterDiplomacy = "دبلوماسية",
                 filterEvents = "أحداث",
+                turnBadge = { turn -> "د$turn" },
             ),
             onBack = {},
         )

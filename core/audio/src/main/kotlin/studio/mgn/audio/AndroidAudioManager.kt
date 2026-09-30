@@ -39,13 +39,32 @@ class AndroidAudioManager(
     private val appContext = context.applicationContext
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
-    private val player: ExoPlayer by lazy {
-        ExoPlayer.Builder(appContext)
-            .setMediaSourceFactory(
-                DefaultMediaSourceFactory(DefaultDataSource.Factory(appContext)),
-            )
-            .build()
-            .also { it.repeatMode = Player.REPEAT_MODE_ONE }
+    /**
+     * The player is created on first use and remembered as unavailable if
+     * construction fails (e.g. stripped test runtimes): music then stays
+     * silent instead of crashing. Throwable (not just Exception) is caught
+     * on purpose — linkage failures are Errors.
+     */
+    private var playerOrNull: ExoPlayer? = null
+    private var playerFailed = false
+
+    private fun player(): ExoPlayer? {
+        playerOrNull?.let { return it }
+        if (playerFailed) return null
+        return try {
+            ExoPlayer.Builder(appContext)
+                .setMediaSourceFactory(
+                    DefaultMediaSourceFactory(DefaultDataSource.Factory(appContext)),
+                )
+                .build()
+                .also {
+                    it.repeatMode = Player.REPEAT_MODE_ONE
+                    playerOrNull = it
+                }
+        } catch (_: Throwable) {
+            playerFailed = true
+            null
+        }
     }
 
     private val soundPool: SoundPool by lazy {
@@ -78,7 +97,7 @@ class AndroidAudioManager(
             ) {
                 scope.launch(Dispatchers.Main.immediate) {
                     try {
-                        player.pause()
+                        playerOrNull?.pause()
                     } catch (_: Exception) {
                     }
                 }
@@ -126,47 +145,52 @@ class AndroidAudioManager(
             fadeOutAndPause()
             return
         }
-        scope.launch(Dispatchers.Main.immediate) {
-            try {
-                val focus = systemAudio.requestAudioFocus(focusRequest)
-                if (focus != SystemAudioManager.AUDIOFOCUS_REQUEST_GRANTED) return@launch
-                player.setMediaItem(
-                    MediaItem.fromUri("asset:///audio/music/${key.file}.ogg"),
-                )
-                player.prepare()
-                if (previous == null) {
-                    player.volume = musicVolume
-                    player.play()
-                } else {
-                    crossfade()
+                scope.launch(Dispatchers.Main.immediate) {
+                    try {
+                        val focus = systemAudio.requestAudioFocus(focusRequest)
+                        if (focus != SystemAudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                            return@launch
+                        }
+                        val exo = player() ?: return@launch
+                        exo.setMediaItem(
+                            MediaItem.fromUri("asset:///audio/music/${key.file}.ogg"),
+                        )
+                        exo.prepare()
+                        if (previous == null) {
+                            exo.volume = musicVolume
+                            exo.play()
+                        } else {
+                            crossfade()
+                        }
+                    } catch (_: Exception) {
+                        // Missing asset: stay silent.
+                    }
                 }
-            } catch (_: Exception) {
-                // Missing asset: stay silent.
-            }
-        }
     }
 
     private fun fadeOutAndPause() {
         fadeJob = scope.launch {
-            val start = player.volume
+            val exo = player() ?: return@launch
+            val start = exo.volume
             repeat(FADE_STEPS) { step ->
-                player.volume = start * (1 - (step + 1) / FADE_STEPS.toFloat())
+                exo.volume = start * (1 - (step + 1) / FADE_STEPS.toFloat())
                 delay(CROSSFADE_MS / FADE_STEPS)
             }
-            player.pause()
-            player.volume = musicVolume
+            exo.pause()
+            exo.volume = musicVolume
         }
     }
 
     private fun crossfade() {
         fadeJob = scope.launch {
-            player.volume = 0f
-            player.play()
+            val exo = player() ?: return@launch
+            exo.volume = 0f
+            exo.play()
             repeat(FADE_STEPS) { step ->
-                player.volume = musicVolume * ((step + 1) / FADE_STEPS.toFloat())
+                exo.volume = musicVolume * ((step + 1) / FADE_STEPS.toFloat())
                 delay(CROSSFADE_MS / FADE_STEPS)
             }
-            player.volume = musicVolume
+            exo.volume = musicVolume
         }
     }
 
@@ -174,7 +198,7 @@ class AndroidAudioManager(
         musicEnabled = enabled
         if (!enabled) {
             fadeJob?.cancel()
-            player.pause()
+            playerOrNull?.pause()
         } else if (currentMusic != null) {
             setMusic(currentMusic)
         }
@@ -186,7 +210,7 @@ class AndroidAudioManager(
 
     override fun setMusicVolume(level: Float) {
         musicVolume = level.coerceIn(0f, 1f)
-        if (fadeJob?.isActive != true) player.volume = musicVolume
+        if (fadeJob?.isActive != true) playerOrNull?.volume = musicVolume
     }
 
     override fun setSfxVolume(level: Float) {
@@ -226,7 +250,7 @@ class AndroidAudioManager(
         } catch (_: Exception) {
         }
         try {
-            player.release()
+            playerOrNull?.release()
         } catch (_: Exception) {
         }
         try {

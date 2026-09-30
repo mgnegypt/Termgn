@@ -23,6 +23,7 @@ import studio.mgn.design.GoldFramePanel
 import studio.mgn.audio.AudioManager
 import studio.mgn.audio.NoopAudioManager
 import studio.mgn.audio.SoundKey
+import studio.mgn.audio.AudioManager
 import studio.mgn.design.MgnTheme
 import studio.mgn.model.LandmarkDef
 
@@ -75,11 +76,13 @@ fun DevelopmentScreen(
             LandmarkTab.AVAILABLE -> AvailableList(
                 ui = ui,
                 strings = strings,
+                audio = audio,
                 onBuild = { viewModel.onEvent(DevelopmentEvent.Build(it)) },
             )
             LandmarkTab.BUILDING -> BuildingList(
                 ui = ui,
                 strings = strings,
+                audio = audio,
                 onRush = { viewModel.onEvent(DevelopmentEvent.Rush(it)) },
             )
             LandmarkTab.BUILT -> BuiltList(ui = ui, strings = strings)
@@ -91,6 +94,7 @@ fun DevelopmentScreen(
 private fun AvailableList(
     ui: DevelopmentUiState,
     strings: DevelopmentStrings,
+    audio: AudioManager,
     onBuild: (String) -> Unit,
 ) {
     if (ui.available.isEmpty()) {
@@ -123,6 +127,7 @@ private fun AvailableList(
 private fun BuildingList(
     ui: DevelopmentUiState,
     strings: DevelopmentStrings,
+    audio: AudioManager,
     onRush: (String) -> Unit,
 ) {
     val queue = ui.state?.underConstruction ?: emptyList()

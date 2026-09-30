@@ -35,6 +35,7 @@ fun historyDotColor(tag: HistoryTag): Color = when (tag) {
 fun EventRow(
     entry: HistoryEntry,
     imageKey: String,
+    turnBadge: (Int) -> String,
     modifier: Modifier = Modifier,
 ) {
     val colors = MgnTheme.colors
@@ -110,7 +111,11 @@ fun EventsPanel(
                 )
             }
             for (entry in recent) {
-                EventRow(entry = entry, imageKey = imageKeyOf(entry))
+                EventRow(
+                    entry = entry,
+                    imageKey = imageKeyOf(entry),
+                    turnBadge = turnBadge,
+                )
             }
             if (pendingCount > 0) {
                 GameButton(
