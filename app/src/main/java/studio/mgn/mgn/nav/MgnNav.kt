@@ -19,11 +19,6 @@ import studio.mgn.command.CommandScreen
 import studio.mgn.command.CommandStrings
 import studio.mgn.command.CommandViewModel
 import studio.mgn.model.GameState
-
-private fun playMood(app: MgnApp, mood: studio.mgn.audio.MusicKey?) {
-    app.musicMood = mood
-    app.audio.setMusic(mood)
-}
 import studio.mgn.mgn.menu.MenuScreen
 import studio.mgn.mgn.menu.MenuViewModel
 import studio.mgn.mgn.more.AchievementsScreen
@@ -35,6 +30,11 @@ import studio.mgn.mgn.splash.SplashViewModel
 import studio.mgn.setup.SetupStrings
 import studio.mgn.setup.SetupViewModel
 import studio.mgn.setup.SetupWizardScreen
+
+private fun playMood(app: MgnApp, mood: studio.mgn.audio.MusicKey?) {
+    app.musicMood = mood
+    app.audio.setMusic(mood)
+}
 
 private const val TRANSITION_MS = 300
 
