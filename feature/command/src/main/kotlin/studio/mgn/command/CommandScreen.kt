@@ -491,7 +491,7 @@ private fun SectionPlaceholder(
 }
 
 @Composable
-private fun EndTurnBar(
+fun EndTurnBar(
     processing: Boolean,
     pendingCount: Int,
     strings: CommandStrings,
