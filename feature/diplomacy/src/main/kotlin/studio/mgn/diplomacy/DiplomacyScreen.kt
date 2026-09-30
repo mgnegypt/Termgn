@@ -40,6 +40,7 @@ import studio.mgn.audio.AudioManager
 import studio.mgn.audio.HapticStrength
 import studio.mgn.audio.NoopAudioManager
 import studio.mgn.audio.SoundKey
+import studio.mgn.audio.AudioManager
 import studio.mgn.design.MgnTheme
 import studio.mgn.model.DiplomacyState
 import studio.mgn.model.TreatyType
@@ -92,6 +93,7 @@ fun DiplomacyScreen(
         CountryPanel(
             ui = ui,
             strings = strings,
+            audio = audio,
             onEvent = viewModel::onEvent,
             modifier = Modifier
                 .weight(1f)
@@ -106,6 +108,7 @@ fun DiplomacyScreen(
 private fun CountryPanel(
     ui: studio.mgn.diplomacy.DiplomacyUiState,
     strings: DiplomacyStrings,
+    audio: AudioManager,
     onEvent: (DiplomacyEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {

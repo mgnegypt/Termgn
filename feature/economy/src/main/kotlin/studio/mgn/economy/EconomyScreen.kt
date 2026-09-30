@@ -79,6 +79,7 @@ fun EconomyScreen(
             options = ui.investOptions,
             strings = strings,
             investError = ui.investError,
+            audio = audio,
             onEvent = viewModel::onEvent,
         )
         LoanPanel(
@@ -86,6 +87,7 @@ fun EconomyScreen(
             debtRatio = ui.debtRatio,
             financeInterest = ui.finance?.debtInterest ?: 0.0,
             strings = strings,
+            audio = audio,
             onEvent = viewModel::onEvent,
         )
         ChartPanel(
@@ -188,6 +190,7 @@ private fun InvestPanel(
     options: List<InvestOption>,
     strings: EconomyStrings,
     investError: Boolean,
+    audio: AudioManager,
     onEvent: (EconomyEvent) -> Unit,
 ) {
     GoldFramePanel {
@@ -238,6 +241,7 @@ private fun LoanPanel(
     debtRatio: Double,
     financeInterest: Double,
     strings: EconomyStrings,
+    audio: AudioManager,
     onEvent: (EconomyEvent) -> Unit,
 ) {
     var amount by remember { mutableStateOf("50000") }
