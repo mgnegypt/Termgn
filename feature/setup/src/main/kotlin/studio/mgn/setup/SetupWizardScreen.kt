@@ -97,6 +97,7 @@ data class SetupStrings(
     val axisSocial: String = "اجتماعي",
     val axisForeign: String = "خارجي",
     val stepReview: String = "إعلان قيام الدولة",
+    val reviewLine: (String, String) -> String = { name, title -> "دولة $name — $title" },
     val emptyError: String = "أدخل قيمة أولًا للمتابعة",
 )
 
