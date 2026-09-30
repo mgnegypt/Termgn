@@ -30,6 +30,7 @@ dependencies {
     implementation(project(":core:model"))
     implementation(project(":core:data"))
     implementation(project(":design"))
+    implementation(project(":core:audio"))
 
     val composeBom = platform(libs.compose.bom)
     implementation(composeBom)

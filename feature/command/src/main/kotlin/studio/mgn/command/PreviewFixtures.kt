@@ -167,6 +167,7 @@ fun previewStrings(): CommandStrings {
         remainingTurns = "دور متبقٍ",
         costLabel = "التكلفة",
         effectsPreview = "الأثر المتوقع",
+        turnBadge = { turn -> "د$turn" },
         keyLabels = keys,
         sectionLabels = sections,
         history = HistoryStrings(

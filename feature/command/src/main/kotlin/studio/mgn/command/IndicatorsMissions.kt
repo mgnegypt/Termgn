@@ -1,5 +1,6 @@
 package studio.mgn.command
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -90,7 +91,7 @@ fun MissionsPanel(
     modifier: Modifier = Modifier,
 ) {
     val colors = MgnTheme.colors
-    GoldFramePanel(modifier = modifier) {
+    GoldFramePanel(modifier = modifier.animateContentSize()) {
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Row(
                 modifier = Modifier.fillMaxWidth(),

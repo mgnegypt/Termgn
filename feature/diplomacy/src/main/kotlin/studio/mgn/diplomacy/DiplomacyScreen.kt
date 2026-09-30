@@ -36,6 +36,10 @@ import studio.mgn.command.color
 import studio.mgn.command.relationStatusOf
 import studio.mgn.design.GameButton
 import studio.mgn.design.GoldFramePanel
+import studio.mgn.audio.AudioManager
+import studio.mgn.audio.HapticStrength
+import studio.mgn.audio.NoopAudioManager
+import studio.mgn.audio.SoundKey
 import studio.mgn.design.MgnTheme
 import studio.mgn.model.DiplomacyState
 import studio.mgn.model.TreatyType
@@ -49,6 +53,7 @@ import studio.mgn.model.WarStance
 fun DiplomacyScreen(
     viewModel: DiplomacyViewModel,
     strings: DiplomacyStrings,
+    audio: AudioManager = NoopAudioManager(),
 ) {
     val ui by viewModel.state.collectAsState()
     val state = ui.state
@@ -178,7 +183,10 @@ private fun CountryPanel(
                 } else if (!row.atWar) {
                     GameButton(
                         text = "${strings.signTreaty}: ${treatyName(type, strings)}",
-                        onClick = { onEvent(DiplomacyEvent.SignTreaty(row.id, type)) },
+                        onClick = {
+                            audio.play(SoundKey.REWARD)
+                            onEvent(DiplomacyEvent.SignTreaty(row.id, type))
+                        },
                         enabled = row.signable[type] == true,
                         primary = false,
                         modifier = Modifier.fillMaxWidth(),
@@ -214,6 +222,8 @@ private fun CountryPanel(
                 TextButton(
                     onClick = {
                         confirmWar = false
+                        audio.play(SoundKey.DANGER)
+                        audio.vibrate(HapticStrength.MEDIUM)
                         onEvent(DiplomacyEvent.DeclareWar(row.id))
                     },
                 ) {

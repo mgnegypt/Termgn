@@ -34,6 +34,7 @@ dependencies {
     implementation(project(":core:engine"))
     implementation(project(":core:data"))
     implementation(project(":design"))
+    implementation(project(":core:audio"))
     implementation(project(":content"))
     implementation(project(":feature:command"))
 

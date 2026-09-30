@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -41,6 +42,9 @@ import studio.mgn.design.GameButton
 import studio.mgn.design.GoldFramePanel
 import studio.mgn.design.MgnBanner
 import studio.mgn.design.BannerKind
+import studio.mgn.audio.AudioManager
+import studio.mgn.audio.NoopAudioManager
+import studio.mgn.audio.SoundKey
 import studio.mgn.design.MgnTheme
 import studio.mgn.model.TurnLength
 
@@ -55,6 +59,7 @@ fun SetupWizardScreen(
     onBack: () -> Unit,
     reduceMotion: Boolean = false,
     strings: SetupStrings,
+    audio: AudioManager = NoopAudioManager(),
 ) {
     val state by viewModel.state.collectAsState()
 
@@ -145,6 +150,7 @@ fun SetupWizardContent(
             GameButton(
                 text = strings.back,
                 onClick = {
+                    audio.play(SoundKey.BUTTON)
                     if (state.step == SetupStep.NAME) onBack() else onEvent(SetupEvent.Back)
                 },
                 primary = false,
@@ -154,7 +160,10 @@ fun SetupWizardContent(
             if (state.step == SetupStep.REVIEW) {
                 GameButton(
                     text = if (state.isCreating) "…" else strings.confirm,
-                    onClick = { onEvent(SetupEvent.Confirm) },
+                    onClick = {
+                        audio.play(SoundKey.REWARD)
+                        onEvent(SetupEvent.Confirm)
+                    },
                     enabled = !state.isCreating,
                     reduceMotion = reduceMotion,
                     modifier = Modifier.weight(2f),
@@ -162,7 +171,10 @@ fun SetupWizardContent(
             } else {
                 GameButton(
                     text = strings.next,
-                    onClick = { onEvent(SetupEvent.Next) },
+                    onClick = {
+                        audio.play(SoundKey.BUTTON)
+                        onEvent(SetupEvent.Next)
+                    },
                     reduceMotion = reduceMotion,
                     modifier = Modifier.weight(2f),
                 )
@@ -249,6 +261,7 @@ private fun FlagStep(
                     FilterChip(
                         selected = state.flagPreset == i,
                         onClick = { onEvent(SetupEvent.FlagSelected(i)) },
+                        modifier = Modifier.heightIn(min = 48.dp),
                         label = { Text("راية ${i + 1}") },
                     )
                 }
@@ -325,6 +338,7 @@ private fun TurnChip(
     FilterChip(
         selected = state.turnLength == length,
         onClick = { onEvent(SetupEvent.TurnSelected(length)) },
+        modifier = Modifier.heightIn(min = 48.dp),
         label = { Text(label) },
     )
 }
@@ -382,7 +396,7 @@ private fun ReviewStep(state: SetupUiState, strings: SetupStrings) {
             Text(strings.stepReview, style = MgnTheme.typography.displayLarge)
             FlagPreview(preset = preset, modifier = Modifier.size(200.dp, 130.dp))
             Text(
-                text = "دولة ${state.countryName} — ${state.rulerTitle}",
+                text = strings.reviewLine(state.countryName, state.rulerTitle),
                 style = MgnTheme.typography.titleLarge,
             )
             Spacer(Modifier.height(4.dp))

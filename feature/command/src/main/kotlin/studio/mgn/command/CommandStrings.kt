@@ -40,6 +40,7 @@ data class CommandStrings(
     val remainingTurns: String,
     val costLabel: String,
     val effectsPreview: String,
+    val turnBadge: (Int) -> String,
     /** Arabic label per state key / section / cell. */
     val keyLabels: Map<String, String>,
     val sectionLabels: Map<String, String>,

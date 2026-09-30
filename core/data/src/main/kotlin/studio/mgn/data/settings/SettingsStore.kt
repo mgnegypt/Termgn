@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
@@ -26,6 +27,8 @@ class SettingsStore(private val context: Context) {
         val VIBRATION = booleanPreferencesKey("vibration_enabled")
         val REDUCE_MOTION = booleanPreferencesKey("reduce_motion")
         val GRAPHICS = stringPreferencesKey("graphics_quality")
+        val MUSIC_VOLUME = floatPreferencesKey("music_volume")
+        val SFX_VOLUME = floatPreferencesKey("sfx_volume")
     }
 
     val musicEnabled: Flow<Boolean> = context.settingsStore.data
@@ -44,6 +47,10 @@ class SettingsStore(private val context: Context) {
                 GraphicsQuality.MEDIUM
             }
         }
+    val musicVolume: Flow<Float> = context.settingsStore.data
+        .map { (it[Keys.MUSIC_VOLUME] ?: 0.8f).coerceIn(0f, 1f) }
+    val sfxVolume: Flow<Float> = context.settingsStore.data
+        .map { (it[Keys.SFX_VOLUME] ?: 0.8f).coerceIn(0f, 1f) }
 
     suspend fun setMusicEnabled(value: Boolean) {
         context.settingsStore.edit { it[Keys.MUSIC] = value }
@@ -63,5 +70,13 @@ class SettingsStore(private val context: Context) {
 
     suspend fun setGraphicsQuality(value: GraphicsQuality) {
         context.settingsStore.edit { it[Keys.GRAPHICS] = value.name }
+    }
+
+    suspend fun setMusicVolume(value: Float) {
+        context.settingsStore.edit { it[Keys.MUSIC_VOLUME] = value.coerceIn(0f, 1f) }
+    }
+
+    suspend fun setSfxVolume(value: Float) {
+        context.settingsStore.edit { it[Keys.SFX_VOLUME] = value.coerceIn(0f, 1f) }
     }
 }

@@ -21,6 +21,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -168,6 +172,10 @@ fun BuildingSign(
     Column(
         modifier = modifier
             .clip(androidx.compose.foundation.shape.RoundedCornerShape(8.dp))
+            .semantics {
+                contentDescription = label
+                role = Role.Button
+            }
             .clickable(onClick = onClick)
             .padding(6.dp),
         horizontalAlignment = Alignment.CenterHorizontally,

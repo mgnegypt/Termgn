@@ -1,7 +1,9 @@
 package studio.mgn.design
 
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.animateIntAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -52,7 +54,10 @@ fun GameButton(
     val scaleTarget = if (pressed && !reduceMotion) 0.96f else 1f
     val scale by animateFloatAsState(
         targetValue = scaleTarget,
-        animationSpec = tween(120),
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessMedium,
+        ),
         label = "press",
     )
     val colors = MgnTheme.colors

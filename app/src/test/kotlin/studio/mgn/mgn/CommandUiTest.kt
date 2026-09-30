@@ -7,6 +7,11 @@ import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Density
+import studio.mgn.mgn.splash.SplashScreen
+import studio.mgn.mgn.splash.SplashViewModel
 import androidx.test.core.app.ApplicationProvider
 import org.junit.Rule
 import org.junit.Test
@@ -182,5 +187,55 @@ class CommandUiTest {
             }
         }
         compose.onAllNodesWithText("المجد")[0].assertExists()
+    }
+}
+
+@RunWith(RobolectricTestRunner::class)
+@Config(sdk = [35])
+class AccessibilityUiTest {
+    @get:Rule
+    val compose = createComposeRule()
+
+    private fun strings(): CommandStrings = previewStrings()
+
+    @Test
+    fun `dashboard survives 130 percent font scale`() {
+        compose.setContent {
+            CompositionLocalProvider(
+                LocalDensity provides Density(
+                    density = LocalDensity.current.density,
+                    fontScale = 1.3f,
+                ),
+            ) {
+                MgnTheme {
+                    CommandContent(
+                        ui = CommandUiState(isLoading = false, state = previewState()),
+                        content = previewPack(),
+                        strings = strings(),
+                        reduceMotion = true,
+                        onEvent = {},
+                    )
+                }
+            }
+        }
+        compose.onAllNodesWithText("المجد")[0].assertExists()
+        compose.onNodeWithText("إنهاء الدور").assertExists()
+    }
+
+    @Test
+    fun `splash error state offers retry`() {
+        val vm = SplashViewModel(
+            loadContent = { throw IllegalStateException("no content") },
+            minDelayMs = 0,
+        )
+        compose.setContent {
+            MgnTheme {
+                SplashScreen(viewModel = vm, onReady = {}, reduceMotion = true)
+            }
+        }
+        compose.waitUntil(8000) {
+            compose.onAllNodesWithText("إعادة المحاولة")
+                .fetchSemanticsNodes().isNotEmpty()
+        }
     }
 }

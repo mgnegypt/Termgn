@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -80,6 +81,16 @@ fun SettingsContent(
         }
         GoldFramePanel {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                VolumeRow(
+                    label = stringResource(R.string.settings_music_volume),
+                    value = state.musicVolume,
+                    onChange = { onEvent(SettingsEvent.MusicVolume(it)) },
+                )
+                VolumeRow(
+                    label = stringResource(R.string.settings_sfx_volume),
+                    value = state.sfxVolume,
+                    onChange = { onEvent(SettingsEvent.SfxVolume(it)) },
+                )
                 Text(
                     text = stringResource(R.string.settings_graphics),
                     style = MgnTheme.typography.titleMedium,
@@ -171,6 +182,28 @@ fun SettingsContent(
 }
 
 @Composable
+private fun VolumeRow(label: String, value: Float, onChange: (Float) -> Unit) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Text(
+            text = label,
+            style = MgnTheme.typography.bodyLarge,
+            color = MgnTheme.colors.textPrimary,
+            modifier = Modifier.weight(1f),
+        )
+        androidx.compose.material3.Slider(
+            value = value,
+            onValueChange = onChange,
+            valueRange = 0f..1f,
+            modifier = Modifier.weight(1f),
+        )
+    }
+}
+
+@Composable
 private fun SettingRow(label: String, checked: Boolean, onChange: (Boolean) -> Unit) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -188,7 +221,8 @@ private fun SettingRow(label: String, checked: Boolean, onChange: (Boolean) -> U
 
 @Composable
 private fun GraphicsChip(label: String, selected: Boolean, onClick: () -> Unit) {
-    FilterChip(selected = selected, onClick = onClick, label = { Text(label) })
+    FilterChip(selected = selected, onClick = onClick, label = { Text(label) },
+        modifier = Modifier.heightIn(min = 48.dp))
 }
 
 @Preview(name = "Settings", widthDp = 900, heightDp = 400)

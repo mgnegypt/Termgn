@@ -16,6 +16,8 @@ data class SettingsUiState(
     val vibration: Boolean = true,
     val reduceMotion: Boolean = false,
     val graphics: GraphicsQuality = GraphicsQuality.MEDIUM,
+    val musicVolume: Float = 0.8f,
+    val sfxVolume: Float = 0.8f,
     val hasSave: Boolean = false,
     val showDeleteFirst: Boolean = false,
     val showDeleteSecond: Boolean = false,
@@ -27,6 +29,8 @@ sealed interface SettingsEvent {
     data class Vibration(val enabled: Boolean) : SettingsEvent
     data class ReduceMotion(val enabled: Boolean) : SettingsEvent
     data class Graphics(val quality: GraphicsQuality) : SettingsEvent
+    data class MusicVolume(val level: Float) : SettingsEvent
+    data class SfxVolume(val level: Float) : SettingsEvent
     data object DeleteRequested : SettingsEvent
     data object DeleteConfirmedFirst : SettingsEvent
     data object DeleteConfirmedSecond : SettingsEvent
@@ -71,6 +75,16 @@ class SettingsViewModel(
             }
         }
         viewModelScope.launch {
+            settings.musicVolume.collect {
+                _state.value = _state.value.copy(musicVolume = it)
+            }
+        }
+        viewModelScope.launch {
+            settings.sfxVolume.collect {
+                _state.value = _state.value.copy(sfxVolume = it)
+            }
+        }
+        viewModelScope.launch {
             dialogs.collect {
                 _state.value = _state.value.copy(
                     showDeleteFirst = it.first,
@@ -99,6 +113,12 @@ class SettingsViewModel(
             }
             is SettingsEvent.Graphics -> viewModelScope.launch {
                 settings.setGraphicsQuality(event.quality)
+            }
+            is SettingsEvent.MusicVolume -> viewModelScope.launch {
+                settings.setMusicVolume(event.level)
+            }
+            is SettingsEvent.SfxVolume -> viewModelScope.launch {
+                settings.setSfxVolume(event.level)
             }
             SettingsEvent.DeleteRequested ->
                 dialogs.value = Dialogs(first = true)

@@ -14,7 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import studio.mgn.design.AssetPlaceholder
+import studio.mgn.design.GameAnimationSpot
+import studio.mgn.design.AnimationKeys
 import studio.mgn.design.GameButton
 import studio.mgn.design.MgnTheme
 import studio.mgn.model.GameState
@@ -39,6 +40,7 @@ fun EndingScreen(
     summary: ReignSummary,
     strings: EndingStrings,
     canContinue: Boolean,
+    animate: Boolean,
     onMenu: () -> Unit,
     onNewGame: () -> Unit,
     onContinue: () -> Unit,
@@ -58,13 +60,13 @@ fun EndingScreen(
         verticalArrangement = Arrangement.spacedBy(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        AssetPlaceholder(
-            assetName = when (ending) {
-                GameEndingScreen.VICTORY -> "art/ending_victory.png"
-                GameEndingScreen.COLLAPSE -> "art/ending_collapse.png"
-                GameEndingScreen.CONTINUATION -> "art/ending_continuation.png"
+        GameAnimationSpot(
+            key = when (ending) {
+                GameEndingScreen.VICTORY -> AnimationKeys.ENDING_VICTORY
+                GameEndingScreen.COLLAPSE -> AnimationKeys.ENDING_COLLAPSE
+                GameEndingScreen.CONTINUATION -> AnimationKeys.ENDING_CONTINUATION
             },
-            modifier = Modifier.fillMaxWidth(),
+            animate = animate,
         )
         Text(
             text = when (ending) {
@@ -188,6 +190,7 @@ private fun EndingPreview() {
                 continuePlaying = "متابعة اللعب",
             ),
             canContinue = true,
+            animate = false,
             onMenu = {},
             onNewGame = {},
             onContinue = {},

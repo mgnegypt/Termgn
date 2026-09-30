@@ -21,12 +21,26 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MgnTheme {
-                val reduceMotion by app.settings.reduceMotion.collectAsState(
-                    initial = false,
-                )
-                MgnNav(app = app, reduceMotion = reduceMotion)
+                androidx.compose.runtime.CompositionLocalProvider(
+                    LocalAudio provides app.audio,
+                ) {
+                    val reduceMotion by app.settings.reduceMotion.collectAsState(
+                        initial = false,
+                    )
+                    MgnNav(app = app, reduceMotion = reduceMotion)
+                }
             }
         }
+    }
+
+    override fun onPause() {
+        app.audio.setMusic(null)
+        super.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        app.audio.setMusic(app.musicMood)
     }
 
     override fun onStop() {

@@ -19,6 +19,11 @@ import studio.mgn.command.CommandScreen
 import studio.mgn.command.CommandStrings
 import studio.mgn.command.CommandViewModel
 import studio.mgn.model.GameState
+
+private fun playMood(app: MgnApp, mood: studio.mgn.audio.MusicKey?) {
+    app.musicMood = mood
+    app.audio.setMusic(mood)
+}
 import studio.mgn.mgn.menu.MenuScreen
 import studio.mgn.mgn.menu.MenuViewModel
 import studio.mgn.mgn.more.AchievementsScreen
@@ -75,6 +80,9 @@ fun MgnNav(app: MgnApp, reduceMotion: Boolean) {
             )
         }
         composable(Routes.MENU) {
+            androidx.compose.runtime.LaunchedEffect(Unit) {
+                playMood(app, studio.mgn.audio.MusicKey.MENU)
+            }
             val vm: MenuViewModel = viewModel { MenuViewModel(app.repository) }
             MenuScreen(
                 viewModel = vm,
@@ -119,6 +127,11 @@ fun MgnNav(app: MgnApp, reduceMotion: Boolean) {
                     axisSocial = app.getString(studio.mgn.mgn.R.string.setup_axis_social),
                     axisForeign = app.getString(studio.mgn.mgn.R.string.setup_axis_foreign),
                     stepReview = app.getString(studio.mgn.mgn.R.string.setup_step_review),
+                    reviewLine = { name, title ->
+                        app.getString(
+                            studio.mgn.mgn.R.string.setup_review_line, name, title,
+                        )
+                    },
                     emptyError = app.getString(studio.mgn.mgn.R.string.setup_empty_error),
                 )
             }
@@ -135,6 +148,9 @@ fun MgnNav(app: MgnApp, reduceMotion: Boolean) {
             )
         }
         composable(Routes.GAME) {
+            androidx.compose.runtime.LaunchedEffect(Unit) {
+                playMood(app, studio.mgn.audio.MusicKey.CALM)
+            }
             val vm: CommandViewModel = viewModel {
                 CommandViewModel(
                     repository = app.repository,
@@ -260,6 +276,9 @@ private fun rememberCommandStrings(app: MgnApp): CommandStrings {
             remainingTurns = s(studio.mgn.mgn.R.string.cmd_remaining),
             costLabel = s(studio.mgn.mgn.R.string.cmd_cost),
             effectsPreview = s(studio.mgn.mgn.R.string.cmd_effects),
+            turnBadge = { turn ->
+                res.getString(studio.mgn.mgn.R.string.cmd_turn_badge, turn)
+            },
             keyLabels = mapOf(
                 "treasuryCash" to s(studio.mgn.mgn.R.string.key_treasuryCash),
                 "population" to s(studio.mgn.mgn.R.string.key_population),
@@ -392,6 +411,7 @@ private fun rememberEconomyStrings(app: MgnApp): studio.mgn.economy.EconomyStrin
             debtWarning = s(studio.mgn.mgn.R.string.eco_debt_warning),
             chartTitle = s(studio.mgn.mgn.R.string.eco_chart),
             chartEmpty = s(studio.mgn.mgn.R.string.eco_chart_empty),
+            percentSuffix = s(studio.mgn.mgn.R.string.eco_percent_suffix),
             keyLabels = keyLabels,
         )
     }

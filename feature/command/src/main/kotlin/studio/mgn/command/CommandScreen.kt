@@ -25,7 +25,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import studio.mgn.audio.AudioManager
+import studio.mgn.audio.HapticStrength
+import studio.mgn.audio.NoopAudioManager
+import studio.mgn.audio.SoundKey
 import studio.mgn.content.ContentPack
+import studio.mgn.design.AnimationKeys
+import studio.mgn.design.GameAnimationSpot
 import studio.mgn.design.GameButton
 import studio.mgn.design.GoldFramePanel
 import studio.mgn.design.MgnTheme
@@ -42,6 +48,7 @@ fun CommandScreen(
     content: ContentPack,
     strings: CommandStrings,
     reduceMotion: Boolean,
+    audio: AudioManager = NoopAudioManager(),
 ) {
     val ui by viewModel.state.collectAsState()
     val state = ui.state
@@ -67,13 +74,24 @@ fun CommandScreen(
             choiceStates = ui.choiceStates,
             lastResolution = ui.lastResolution,
             strings = strings,
-            onChoose = { id, index -> viewModel.onEvent(CommandEvent.Choose(id, index)) },
-            onReroll = { viewModel.onEvent(CommandEvent.Reroll) },
+            onChoose = { id, index ->
+                audio.play(SoundKey.BUTTON)
+                viewModel.onEvent(CommandEvent.Choose(id, index))
+            },
+            onReroll = {
+                audio.play(SoundKey.REWARD)
+                viewModel.onEvent(CommandEvent.Reroll)
+            },
             onClose = { viewModel.onEvent(CommandEvent.ShowDecisions(false)) },
         )
         return
     }
     ui.ending?.let { ending ->
+        androidx.compose.runtime.LaunchedEffect(ending) {
+            if (ending == GameEndingScreen.COLLAPSE) {
+                audio.vibrate(HapticStrength.HEAVY)
+            }
+        }
         EndingScreen(
             ending = ending,
             state = state,
@@ -89,6 +107,7 @@ fun CommandScreen(
             ),
             strings = strings.ending,
             canContinue = ending != GameEndingScreen.COLLAPSE,
+            animate = !reduceMotion,
             onMenu = { viewModel.onEvent(CommandEvent.GoToMenu) },
             onNewGame = { viewModel.onEvent(CommandEvent.GoToMenu) },
             onContinue = { viewModel.onEvent(CommandEvent.DismissEnding) },
@@ -100,6 +119,7 @@ fun CommandScreen(
         content = content,
         strings = strings,
         reduceMotion = reduceMotion,
+        audio = audio,
         onEvent = viewModel::onEvent,
     )
     when (ui.overlays.firstOrNull()) {
@@ -156,8 +176,14 @@ fun CommandScreen(
             canRush = state.gems >= BalanceConfig.GEMS_PER_CONSTRUCTION_TURN_SKIP,
             rushCost = BalanceConfig.GEMS_PER_CONSTRUCTION_TURN_SKIP,
             strings = strings,
-            onBuild = { viewModel.onEvent(CommandEvent.StartConstruction(id)) },
-            onRush = { viewModel.onEvent(CommandEvent.RushConstruction(id)) },
+            onBuild = {
+                audio.play(SoundKey.BUILD)
+                viewModel.onEvent(CommandEvent.StartConstruction(id))
+            },
+            onRush = {
+                audio.play(SoundKey.REWARD)
+                viewModel.onEvent(CommandEvent.RushConstruction(id))
+            },
             onDismiss = { viewModel.onEvent(CommandEvent.ShowLandmark(null)) },
         )
     }
@@ -180,8 +206,15 @@ fun CommandContent(
     content: ContentPack,
     strings: CommandStrings,
     reduceMotion: Boolean,
+    audio: AudioManager = NoopAudioManager(),
     onEvent: (CommandEvent) -> Unit,
 ) {
+    if (ui.showUnlockToast && ui.overlays.isEmpty()) {
+        androidx.compose.runtime.LaunchedEffect(ui.lastReport) {
+            audio.play(SoundKey.ACHIEVEMENT)
+            audio.vibrate(HapticStrength.LIGHT)
+        }
+    }
     val state = ui.state ?: return
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         if (maxWidth < 900.dp) {
@@ -208,7 +241,10 @@ private fun WideCommand(
             strings = strings,
             animate = !reduceMotion,
             onCellClick = { onEvent(CommandEvent.ShowIndicator(it)) },
-            onEndTurn = { onEvent(CommandEvent.EndTurn) },
+            onEndTurn = {
+                audio.play(SoundKey.TURN_END)
+                onEvent(CommandEvent.EndTurn)
+            },
             modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
         )
         Row(
@@ -235,6 +271,7 @@ private fun WideCommand(
                             count = (ui.lastReport?.newAchievements?.size ?: 0) +
                                 (ui.lastReport?.newMissions?.size ?: 0),
                             strings = strings,
+                            animate = !reduceMotion,
                         )
                     }
                     CityScene(
@@ -300,6 +337,7 @@ private fun WideCommand(
                         pendingCount = ui.pending.size,
                         imageKeyOf = { "" },
                         strings = strings,
+                        turnBadge = strings.turnBadge,
                         onOpenDecisions = {
                             onEvent(CommandEvent.ShowDecisions(true))
                         },
@@ -333,7 +371,10 @@ private fun WideCommand(
             pendingCount = ui.pending.size,
             strings = strings,
             reduceMotion = reduceMotion,
-            onEndTurn = { onEvent(CommandEvent.EndTurn) },
+            onEndTurn = {
+                audio.play(SoundKey.TURN_END)
+                onEvent(CommandEvent.EndTurn)
+            },
         )
     }
 }
@@ -356,7 +397,10 @@ private fun CompactCommand(
             strings = strings,
             animate = !reduceMotion,
             onCellClick = { onEvent(CommandEvent.ShowIndicator(it)) },
-            onEndTurn = { onEvent(CommandEvent.EndTurn) },
+            onEndTurn = {
+                audio.play(SoundKey.TURN_END)
+                onEvent(CommandEvent.EndTurn)
+            },
             modifier = Modifier.padding(8.dp),
         )
         if (ui.section == CommandSection.DASHBOARD) {
@@ -414,6 +458,7 @@ private fun CompactCommand(
                         pendingCount = ui.pending.size,
                         imageKeyOf = { "" },
                         strings = strings,
+                        turnBadge = strings.turnBadge,
                         onOpenDecisions = {
                             onEvent(CommandEvent.ShowDecisions(true))
                         },
@@ -447,20 +492,30 @@ private fun CompactCommand(
             pendingCount = ui.pending.size,
             strings = strings,
             reduceMotion = reduceMotion,
-            onEndTurn = { onEvent(CommandEvent.EndTurn) },
+            onEndTurn = {
+                audio.play(SoundKey.TURN_END)
+                onEvent(CommandEvent.EndTurn)
+            },
         )
     }
 }
 
 @Composable
-private fun UnlockToast(count: Int, strings: CommandStrings) {
+private fun UnlockToast(count: Int, strings: CommandStrings, animate: Boolean) {
     if (count <= 0) return
     GoldFramePanel(elevated = true) {
-        Text(
-            text = "◆ ${strings.unlocksLabel} (+$count)",
-            style = MgnTheme.typography.titleMedium,
-            color = MgnTheme.colors.goldPrimary,
-        )
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            GameAnimationSpot(
+                key = AnimationKeys.ACHIEVEMENT_UNLOCK,
+                animate = animate,
+                sizeDp = 96,
+            )
+            Text(
+                text = "◆ ${strings.unlocksLabel} (+$count)",
+                style = MgnTheme.typography.titleMedium,
+                color = MgnTheme.colors.goldPrimary,
+            )
+        }
     }
 }
 

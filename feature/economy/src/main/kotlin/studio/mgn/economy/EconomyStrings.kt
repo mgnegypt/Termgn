@@ -23,5 +23,6 @@ data class EconomyStrings(
     val debtWarning: String,
     val chartTitle: String,
     val chartEmpty: String,
+    val percentSuffix: String,
     val keyLabels: Map<String, String>,
 )

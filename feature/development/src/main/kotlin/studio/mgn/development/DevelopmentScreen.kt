@@ -20,6 +20,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import studio.mgn.design.GameButton
 import studio.mgn.design.GoldFramePanel
+import studio.mgn.audio.AudioManager
+import studio.mgn.audio.NoopAudioManager
+import studio.mgn.audio.SoundKey
 import studio.mgn.design.MgnTheme
 import studio.mgn.model.LandmarkDef
 
@@ -28,6 +31,7 @@ import studio.mgn.model.LandmarkDef
 fun DevelopmentScreen(
     viewModel: DevelopmentViewModel,
     strings: DevelopmentStrings,
+    audio: AudioManager = NoopAudioManager(),
 ) {
     val ui by viewModel.state.collectAsState()
     val state = ui.state
@@ -104,7 +108,10 @@ private fun AvailableList(
                 action = {
                     GameButton(
                         text = "${strings.buildNow} (${fmt(def.costCash)})",
-                        onClick = { onBuild(def.id) },
+                        onClick = {
+                            audio.play(SoundKey.BUILD)
+                            onBuild(def.id)
+                        },
                     )
                 },
             )
@@ -154,7 +161,10 @@ private fun BuildingList(
                     GameButton(
                         text = "${strings.rushLabel} " +
                             "(${ui.rushCostPerTurn} ${strings.gemsSuffix})",
-                        onClick = { onRush(build.id) },
+                        onClick = {
+                            audio.play(SoundKey.REWARD)
+                            onRush(build.id)
+                        },
                         enabled = affordRush,
                         primary = false,
                         modifier = Modifier.fillMaxWidth(),

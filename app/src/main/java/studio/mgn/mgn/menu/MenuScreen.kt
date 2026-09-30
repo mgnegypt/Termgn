@@ -41,6 +41,8 @@ import studio.mgn.design.GoldFramePanel
 import studio.mgn.design.MgnBanner
 import studio.mgn.design.BannerKind
 import studio.mgn.design.MgnTheme
+import studio.mgn.audio.SoundKey
+import studio.mgn.mgn.LocalAudio
 import studio.mgn.mgn.R
 
 /**
@@ -84,6 +86,7 @@ fun MenuContent(
     onOpenAchievements: () -> Unit,
     reduceMotion: Boolean,
 ) {
+    val audio = LocalAudio.current
     Box(modifier = Modifier.fillMaxSize()) {
         MenuBackground(reduceMotion = reduceMotion)
         Column(
@@ -142,7 +145,10 @@ fun MenuContent(
                         Spacer(Modifier.height(8.dp))
                         GameButton(
                             text = stringResource(R.string.menu_continue),
-                            onClick = { onEvent(MenuEvent.ContinueClicked) },
+                            onClick = {
+                                audio.play(SoundKey.BUTTON)
+                                onEvent(MenuEvent.ContinueClicked)
+                            },
                             reduceMotion = reduceMotion,
                         )
                     }
@@ -153,13 +159,19 @@ fun MenuContent(
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 GameButton(
                     text = stringResource(R.string.menu_new_game),
-                    onClick = { onEvent(MenuEvent.NewGameClicked) },
+                    onClick = {
+                            audio.play(SoundKey.BUTTON)
+                            onEvent(MenuEvent.NewGameClicked)
+                        },
                     reduceMotion = reduceMotion,
                     modifier = Modifier.weight(1f),
                 )
                 GameButton(
                     text = stringResource(R.string.menu_achievements),
-                    onClick = onOpenAchievements,
+                    onClick = {
+                            audio.play(SoundKey.BUTTON)
+                            onOpenAchievements()
+                        },
                     primary = false,
                     reduceMotion = reduceMotion,
                     modifier = Modifier.weight(1f),
@@ -168,7 +180,10 @@ fun MenuContent(
             Spacer(Modifier.height(12.dp))
             GameButton(
                 text = stringResource(R.string.menu_settings),
-                onClick = onOpenSettings,
+                onClick = {
+                    audio.play(SoundKey.BUTTON)
+                    onOpenSettings()
+                },
                 primary = false,
                 reduceMotion = reduceMotion,
                 modifier = Modifier.width(220.dp),

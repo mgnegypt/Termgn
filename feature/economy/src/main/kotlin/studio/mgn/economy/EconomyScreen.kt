@@ -37,6 +37,9 @@ import studio.mgn.design.GameButton
 import studio.mgn.design.GoldFramePanel
 import studio.mgn.design.IndicatorBar
 import studio.mgn.design.MgnBanner
+import studio.mgn.audio.AudioManager
+import studio.mgn.audio.NoopAudioManager
+import studio.mgn.audio.SoundKey
 import studio.mgn.design.MgnTheme
 import studio.mgn.model.GameState
 import java.util.Locale
@@ -47,6 +50,7 @@ fun EconomyScreen(
     viewModel: EconomyViewModel,
     strings: EconomyStrings,
     reduceMotion: Boolean,
+    audio: AudioManager = NoopAudioManager(),
 ) {
     val ui by viewModel.state.collectAsState()
     val state = ui.state
@@ -111,11 +115,13 @@ private fun DialsPanel(
             DialRow(
                 label = strings.taxLabel,
                 value = ui.draftTax,
+                suffix = strings.percentSuffix,
                 onChange = { onEvent(EconomyEvent.Draft(tax = it, military = null, subsidy = null)) },
             )
             DialRow(
                 label = strings.militaryLabel,
                 value = ui.draftMilitary,
+                suffix = strings.percentSuffix,
                 onChange = {
                     onEvent(EconomyEvent.Draft(tax = null, military = it, subsidy = null))
                 },
@@ -123,6 +129,7 @@ private fun DialsPanel(
             DialRow(
                 label = strings.subsidyLabel,
                 value = ui.draftSubsidy,
+                suffix = strings.percentSuffix,
                 onChange = {
                     onEvent(EconomyEvent.Draft(tax = null, military = null, subsidy = it))
                 },
@@ -148,7 +155,12 @@ private fun DialsPanel(
 }
 
 @Composable
-private fun DialRow(label: String, value: Float, onChange: (Float) -> Unit) {
+private fun DialRow(
+    label: String,
+    value: Float,
+    suffix: String,
+    onChange: (Float) -> Unit,
+) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text(
             text = label,
@@ -163,7 +175,7 @@ private fun DialRow(label: String, value: Float, onChange: (Float) -> Unit) {
             modifier = Modifier.weight(1f),
         )
         Text(
-            text = "${(value * 100).toInt()}٪",
+            text = "${(value * 100).toInt()}$suffix",
             style = MgnTheme.typography.labelMedium,
             color = MgnTheme.colors.textSecondary,
             modifier = Modifier.width(48.dp),
@@ -186,6 +198,9 @@ private fun InvestPanel(
                 color = MgnTheme.colors.goldPrimary,
             )
             if (investError) {
+                androidx.compose.runtime.LaunchedEffect(Unit) {
+                    audio.play(SoundKey.ERROR)
+                }
                 MgnBanner(
                     message = strings.investBlocked,
                     kind = BannerKind.NEGATIVE,
@@ -204,7 +219,10 @@ private fun InvestPanel(
                     )
                     GameButton(
                         text = "+3 (${fmt(option.cost)})",
-                        onClick = { onEvent(EconomyEvent.Invest(option.sector)) },
+                        onClick = {
+                            audio.play(SoundKey.BUTTON)
+                            onEvent(EconomyEvent.Invest(option.sector))
+                        },
                         enabled = option.affordable,
                         primary = false,
                     )
@@ -257,6 +275,7 @@ private fun LoanPanel(
                 GameButton(
                     text = strings.borrowAction,
                     onClick = {
+                        audio.play(SoundKey.BUTTON)
                         onEvent(EconomyEvent.Loan(amount.toDoubleOrNull() ?: 0.0))
                     },
                     primary = false,
@@ -264,6 +283,7 @@ private fun LoanPanel(
                 GameButton(
                     text = strings.repayAction,
                     onClick = {
+                        audio.play(SoundKey.BUTTON)
                         onEvent(EconomyEvent.Repay(amount.toDoubleOrNull() ?: 0.0))
                     },
                     primary = false,
@@ -383,5 +403,6 @@ private fun previewEconomyStrings(): EconomyStrings = EconomyStrings(
     debtWarning = "الدين يقترب من حد الخطر",
     chartTitle = "تاريخ الخزينة",
     chartEmpty = "بعد أول دورين يظهر المخطط",
+    percentSuffix = "٪",
     keyLabels = emptyMap(),
 )

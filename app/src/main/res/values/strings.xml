@@ -5,6 +5,7 @@
     <!-- Splash -->
     <string name="splash_studio">MGN STUDIO</string>
     <string name="splash_loading">جارٍ تجهيز الدولة…</string>
+    <string name="splash_retry">إعادة المحاولة</string>
 
     <!-- Menu -->
     <string name="menu_new_game">لعبة جديدة</string>
@@ -25,6 +26,8 @@
     <string name="settings_title">الإعدادات</string>
     <string name="settings_music">الموسيقى</string>
     <string name="settings_sfx">المؤثرات الصوتية</string>
+    <string name="settings_music_volume">مستوى الموسيقى</string>
+    <string name="settings_sfx_volume">مستوى المؤثرات</string>
     <string name="settings_vibration">الاهتزاز</string>
     <string name="settings_reduce_motion">تقليل الحركة</string>
     <string name="settings_graphics">جودة الرسوم</string>
@@ -181,6 +184,8 @@
     <string name="eco_debt_warning">الدين يقترب من حد الخطر — سدد قبل تفاقم الفوائد</string>
     <string name="eco_chart">تاريخ الخزينة والتقييم</string>
     <string name="eco_chart_empty">بعد دورين يظهر المخطط هنا</string>
+    <string name="eco_percent_suffix">٪</string>
+    <string name="cmd_turn_badge">د%1$d</string>
 
     <!-- Diplomacy -->
     <string name="dip_title">الدبلوماسية</string>

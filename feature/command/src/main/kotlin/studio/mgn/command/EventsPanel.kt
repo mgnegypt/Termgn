@@ -1,5 +1,6 @@
 package studio.mgn.command
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -74,7 +75,7 @@ fun EventRow(
             }
         }
         Text(
-            text = "د${entry.turnNumber}",
+            text = turnBadge(entry.turnNumber),
             style = MgnTheme.typography.labelMedium,
             color = colors.textSecondary,
         )
@@ -88,11 +89,12 @@ fun EventsPanel(
     pendingCount: Int,
     imageKeyOf: (HistoryEntry) -> String,
     strings: CommandStrings,
+    turnBadge: (Int) -> String,
     onOpenDecisions: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val colors = MgnTheme.colors
-    GoldFramePanel(modifier = modifier) {
+    GoldFramePanel(modifier = modifier.animateContentSize()) {
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(
                 text = strings.latestEvents,
@@ -169,6 +171,7 @@ private fun EventsPreview() {
             pendingCount = 2,
             imageKeyOf = { "" },
             strings = previewStrings(),
+            turnBadge = { turn -> "د$turn" },
             onOpenDecisions = {},
         )
     }

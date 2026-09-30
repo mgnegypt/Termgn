@@ -12,19 +12,52 @@ android {
         applicationId = "studio.mgn.mgn"
         minSdk = 35
         targetSdk = 35
-        versionCode = 1
-        versionName = "0.3.0"
+        // Overridden from the release tag in CI (-PversionCode/-PversionName).
+        versionCode = (project.findProperty("versionCode") as String?)?.toIntOrNull() ?: 1
+        versionName = (project.findProperty("versionName") as String?) ?: "0.3.0"
     }
 
     testOptions {
         unitTests.isIncludeAndroidResources = true
     }
 
+    // Production signing comes ONLY from environment/GitHub Secrets
+    // (see RELEASE.md). Without them the build falls back to debug keys
+    // and prints a warning — no keystore ever lives in the repo.
+    val releaseKeystore = System.getenv("MGN_KEYSTORE_PATH")
+    val releaseStorePassword = System.getenv("MGN_STORE_PASSWORD")
+    val releaseKeyAlias = System.getenv("MGN_KEY_ALIAS")
+    val releaseKeyPassword = System.getenv("MGN_KEY_PASSWORD")
+    val hasReleaseKeys = !releaseKeystore.isNullOrBlank() &&
+        !releaseStorePassword.isNullOrBlank() &&
+        !releaseKeyAlias.isNullOrBlank() &&
+        !releaseKeyPassword.isNullOrBlank()
+
+    signingConfigs {
+        if (hasReleaseKeys) {
+            create("release") {
+                storeFile = file(releaseKeystore!!)
+                storePassword = releaseStorePassword
+                keyAlias = releaseKeyAlias
+                keyPassword = releaseKeyPassword
+            }
+        }
+    }
+
     buildTypes {
         release {
-            // Trial builds only: debug keys. Production Play signing later.
-            signingConfig = signingConfigs.getByName("debug")
-            isMinifyEnabled = false
+            signingConfig = if (hasReleaseKeys) {
+                signingConfigs.getByName("release")
+            } else {
+                logger.warn("MGN: no release keys in env; signing with debug keys.")
+                signingConfigs.getByName("debug")
+            }
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
         }
     }
 
@@ -47,6 +80,7 @@ dependencies {
     implementation(project(":core:model"))
     implementation(project(":core:engine"))
     implementation(project(":core:data"))
+    implementation(project(":core:audio"))
     implementation(project(":design"))
     implementation(project(":content"))
     implementation(project(":feature:setup"))
@@ -69,6 +103,7 @@ dependencies {
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.coroutines.android)
     implementation(libs.lottie.compose)
+    implementation(libs.profileinstaller)
 
     testImplementation(libs.kotlin.test)
     testImplementation(libs.junit)

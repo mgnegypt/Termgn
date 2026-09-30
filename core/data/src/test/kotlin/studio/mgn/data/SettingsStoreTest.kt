@@ -28,11 +28,15 @@ class SettingsStoreTest {
         store.setVibrationEnabled(false)
         store.setReduceMotion(true)
         store.setGraphicsQuality(GraphicsQuality.HIGH)
+        store.setMusicVolume(0.3f)
+        store.setSfxVolume(0.4f)
 
         assertEquals(false, store.musicEnabled.first())
         assertEquals(false, store.sfxEnabled.first())
         assertEquals(false, store.vibrationEnabled.first())
         assertEquals(true, store.reduceMotion.first())
         assertEquals(GraphicsQuality.HIGH, store.graphicsQuality.first())
+        assertEquals(0.3f, store.musicVolume.first())
+        assertEquals(0.4f, store.sfxVolume.first())
     }
 }
