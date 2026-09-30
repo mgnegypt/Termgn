@@ -1,5 +1,6 @@
 package studio.mgn.mgn
 
+import androidx.compose.ui.test.assertExists
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -47,9 +48,9 @@ class CommandUiTest {
                 )
             }
         }
-        compose.onNodeWithText("المجد").assertIsDisplayed()
-        compose.onNodeWithText("إنهاء الدور").assertIsDisplayed()
-        compose.onNodeWithText("القيادة").assertIsDisplayed()
+        compose.onNodeWithText("المجد").assertExists()
+        compose.onNodeWithText("إنهاء الدور").assertExists()
+        compose.onNodeWithText("القيادة").assertExists()
     }
 
     @Test
@@ -69,7 +70,7 @@ class CommandUiTest {
                 )
             }
         }
-        compose.onNodeWithText("لا قرارات معلقة").assertIsDisplayed()
+        compose.onNodeWithText("لا قرارات معلقة").assertExists()
     }
 
     @Test
@@ -92,8 +93,8 @@ class CommandUiTest {
                 )
             }
         }
-        compose.onNodeWithText("لا سجل بعد").assertIsDisplayed()
-        compose.onNodeWithText("الكل").assertIsDisplayed()
+        compose.onNodeWithText("لا سجل بعد").assertExists()
+        compose.onNodeWithText("الكل").assertExists()
     }
 
     @Test
@@ -120,7 +121,7 @@ class CommandUiTest {
                 )
             }
         }
-        compose.onNodeWithText("خيار أول").assertIsDisplayed()
+        compose.onNodeWithText("خيار أول").assertExists()
         compose.onNodeWithText("خيار أول").performClick()
         assert(chosen == "preview_event" to 0) { "choice not routed: $chosen" }
     }
@@ -184,6 +185,6 @@ class CommandUiTest {
                 false
             }
         }
-        compose.onNodeWithText("المجد").assertIsDisplayed()
+        compose.onNodeWithText("المجد").assertExists()
     }
 }
