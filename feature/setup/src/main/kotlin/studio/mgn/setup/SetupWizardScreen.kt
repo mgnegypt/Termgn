@@ -73,6 +73,7 @@ fun SetupWizardScreen(
         onBack = onBack,
         reduceMotion = reduceMotion,
         strings = strings,
+        audio = audio,
     )
 }
 
@@ -108,6 +109,7 @@ fun SetupWizardContent(
     onBack: () -> Unit,
     reduceMotion: Boolean,
     strings: SetupStrings,
+    audio: AudioManager = NoopAudioManager(),
 ) {
     val slide = if (reduceMotion) 0 else 60
     Column(
